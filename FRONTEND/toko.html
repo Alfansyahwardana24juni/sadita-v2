@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SADITA Toko - Pilih Gudang</title>
+    <meta name="description" content="Pilih gudang SADITA terdekat sebelum melihat katalog produk." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: "#610000", background: "#fcf9f8", surface: "#f6f3f2", ink: "#1b1c1c", muted: "#5d5f5f", line: "#ead8d5", moss: "#31584a", amber: "#b7791f" },
+                    fontFamily: { sans: ["Inter", "sans-serif"] },
+                    borderRadius: { xl: "0.5rem", "2xl": "0.75rem" }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: Inter, sans-serif; }
+        .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-ink">
+    <div class="mx-auto min-h-screen w-full max-w-[512px] bg-background pb-24 shadow-2xl">
+        <header class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
+            <a href="index.html" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Kembali"><span class="material-symbols-outlined">arrow_back</span></a>
+            <div class="text-center">
+                <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">Toko SADITA</p>
+                <h1 class="text-base font-black text-primary">Pilih Gudang</h1>
+            </div>
+            <a href="checkout.html" class="relative flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Keranjang">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span class="absolute right-1 top-1 rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white">3</span>
+            </a>
+        </header>
+
+        <main>
+            <section class="relative min-h-[250px] overflow-hidden">
+                <img class="absolute inset-0 h-full w-full object-cover" alt="Gudang distribusi produk peternakan" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/35 to-primary/90"></div>
+                <div class="relative flex min-h-[250px] flex-col justify-end px-6 pb-7 text-white">
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-white/80">Stok dari cabang terdekat</p>
+                    <h2 class="mt-2 text-3xl font-black leading-tight">Belanja dari gudang yang melayani area anda</h2>
+                </div>
+            </section>
+
+            <section class="px-5 py-6">
+                <div class="mb-4 rounded-2xl border border-line bg-white p-4">
+                    <div class="flex items-start gap-3">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-primary"><span class="material-symbols-outlined">near_me</span></span>
+                        <div>
+                            <h3 class="text-sm font-bold">Pilih gudang sebelum katalog</h3>
+                            <p class="mt-1 text-xs leading-5 text-muted">Harga, ketersediaan stok, dan estimasi pengiriman akan mengikuti gudang yang dipilih.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid gap-4">
+                    <a href="cabang-bogor.html" class="group overflow-hidden rounded-2xl border border-line bg-white shadow-sm active:scale-[0.99]">
+                        <img class="h-36 w-full object-cover" alt="Gudang Bogor Timur" src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1000&q=80" />
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-moss">Gudang Utama</p>
+                                    <h3 class="mt-1 text-lg font-black text-primary">SADITA Bogor Timur</h3>
+                                </div>
+                                <span class="rounded-full bg-moss/10 px-3 py-1 text-xs font-bold text-moss">1.850+ stok</span>
+                            </div>
+                            <p class="mt-3 text-sm leading-6 text-muted">Jl. Industri Kesehatan No. 45, Bogor Timur. Cocok untuk area Jawa Barat, Jabodetabek, dan sekitarnya.</p>
+                            <div class="mt-4 flex items-center justify-between border-t border-line pt-4">
+                                <span class="text-xs font-semibold text-muted">Estimasi kirim 1-2 hari</span>
+                                <span class="flex items-center gap-1 text-sm font-bold text-primary">Pilih <span class="material-symbols-outlined text-[18px]">arrow_forward</span></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="cabang-surabaya.html" class="group overflow-hidden rounded-2xl border border-line bg-white shadow-sm active:scale-[0.99]">
+                        <img class="h-36 w-full object-cover" alt="Gudang Makassar" src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1?auto=format&fit=crop&w=1000&q=80" />
+                        <div class="p-4">
+                            <div class="flex items-start justify-between gap-3">
+                                <div>
+                                    <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-amber">Indonesia Timur</p>
+                                    <h3 class="mt-1 text-lg font-black text-primary">SADITA Makassar</h3>
+                                </div>
+                                <span class="rounded-full bg-amber/10 px-3 py-1 text-xs font-bold text-amber">920+ stok</span>
+                            </div>
+                            <p class="mt-3 text-sm leading-6 text-muted">Jl. Perintis Distribusi No. 12, Makassar. Melayani Sulawesi, Maluku, Nusa Tenggara, dan Papua.</p>
+                            <div class="mt-4 flex items-center justify-between border-t border-line pt-4">
+                                <span class="text-xs font-semibold text-muted">Estimasi kirim 2-4 hari</span>
+                                <span class="flex items-center gap-1 text-sm font-bold text-primary">Pilih <span class="material-symbols-outlined text-[18px]">arrow_forward</span></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <nav class="fixed bottom-0 left-1/2 z-50 flex h-16 w-full max-w-[512px] -translate-x-1/2 items-center justify-around border-t border-line bg-white">
+            <a href="index.html" class="flex flex-col items-center text-muted"><span class="material-symbols-outlined">home</span><span class="text-[10px] font-semibold">Beranda</span></a>
+            <a href="toko.html" class="flex flex-col items-center text-primary"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">storefront</span><span class="text-[10px] font-semibold">Toko</span></a>
+            <a href="katalog.html" class="flex flex-col items-center text-muted"><span class="material-symbols-outlined">grid_view</span><span class="text-[10px] font-semibold">Katalog</span></a>
+            <a href="checkout.html" class="flex flex-col items-center text-muted"><span class="material-symbols-outlined">receipt_long</span><span class="text-[10px] font-semibold">Order</span></a>
+        </nav>
+    </div>
+</body>
+
+</html>

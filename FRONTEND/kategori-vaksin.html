@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kategori Vaksin - SADITA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { primary: "#610000", background: "#fcf9f8", surface: "#f6f3f2", ink: "#1b1c1c", muted: "#5d5f5f", line: "#ead8d5", moss: "#31584a", amber: "#b7791f" }, fontFamily: { sans: ["Inter", "sans-serif"] }, borderRadius: { xl: "0.5rem", "2xl": "0.75rem" } } } };</script>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-ink">
+    <div class="mx-auto min-h-screen w-full max-w-[512px] bg-background shadow-2xl">
+        <header
+            class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
+            <a href="produk.html" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary"><span
+                    class="material-symbols-outlined">arrow_back</span></a>
+            <div class="text-center">
+                <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">Kategori</p>
+                <h1 class="text-base font-black text-primary">Vaksin</h1>
+            </div>
+            <a href="toko.html"
+                class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white"><span
+                    class="material-symbols-outlined">storefront</span></a>
+        </header>
+        <main class="pb-24">
+            <section class="relative h-64 overflow-hidden">
+                <img class="h-full w-full object-cover" alt="Vaksin dan biosecurity"
+                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80" />
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/50 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white">
+                    <div class="mb-2 flex items-center gap-2">
+                        <span
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur"><span
+                                class="material-symbols-outlined text-[24px]">vaccines</span></span>
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-[0.18em]">Kategori</p>
+                            <h2 class="text-xl font-black">Vaksin & Biosecurity</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="border-b border-line bg-white px-5 py-6">
+                <h3 class="text-lg font-black text-primary">Tentang Kategori</h3>
+                <p class="mt-3 text-sm leading-6 text-muted">Vaksin dan produk biosecurity untuk pencegahan penyakit
+                    ternak. Perlindungan optimal sejak dini untuk kesehatan jangka panjang.</p>
+                <div class="mt-4 flex items-center gap-2"><span
+                        class="flex h-8 w-8 items-center justify-center rounded-lg bg-moss/10 text-moss"><span
+                            class="material-symbols-outlined text-[18px]">check_circle</span></span><span
+                        class="text-sm font-semibold text-moss">22+ produk tersedia</span></div>
+            </section>
+            <section class="px-5 py-6">
+                <div class="mb-4 flex items-center justify-between">
+                    <h3 class="text-lg font-black text-primary">Produk Vaksin</h3><a href="katalog.html"
+                        class="text-xs font-bold uppercase tracking-wide text-primary">Semua Produk</a>
+                </div>
+                <div class="rounded-2xl border border-line bg-surface p-4 text-center"><span
+                        class="material-symbols-outlined text-4xl text-muted">vaccines</span>
+                    <p class="mt-3 text-sm font-semibold text-muted">Produk vaksin tersedia di katalog lengkap</p>
+                </div>
+                <a href="katalog.html"
+                    class="mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-primary bg-white text-sm font-bold text-primary"><span
+                        class="material-symbols-outlined text-[18px]">grid_view</span>Lihat Semua Produk di Katalog</a>
+            </section>
+        </main>
+        <nav
+            class="fixed bottom-0 left-1/2 z-50 flex h-[72px] w-full max-w-[512px] -translate-x-1/2 items-center justify-around border-t border-line bg-white">
+            <a href="index.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400"><span
+                    class="material-symbols-outlined text-[27px]">home</span><span
+                    class="text-[11px] font-semibold">Beranda</span></a>
+            <a href="tentangkami.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400"><span
+                    class="material-symbols-outlined text-[27px]">apartment</span><span
+                    class="text-[11px] font-semibold">Tentang</span></a>
+            <a href="produk.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-primary"><span
+                    class="material-symbols-outlined text-[27px]"
+                    style="font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;">inventory_2</span><span
+                    class="text-[11px] font-semibold">Produk</span></a>
+            <a href="artikel.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400"><span
+                    class="material-symbols-outlined text-[27px]">article</span><span
+                    class="text-[11px] font-semibold">Artikel</span></a>
+            <a href="chat.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400"><span
+                    class="material-symbols-outlined text-[27px]">chat_bubble</span><span
+                    class="text-[11px] font-semibold">Chat</span></a>
+        </nav>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Pesanan Berhasil - SADITA</title>
+    <meta name="description" content="Konfirmasi pesanan SADITA yang menunggu verifikasi admin." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: "#610000", background: "#fcf9f8", surface: "#f6f3f2", ink: "#1b1c1c", muted: "#5d5f5f", line: "#ead8d5", moss: "#31584a", amber: "#b7791f" },
+                    fontFamily: { sans: ["Inter", "sans-serif"] },
+                    borderRadius: { xl: "0.5rem", "2xl": "0.75rem" }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: Inter, sans-serif; }
+        .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-ink">
+    <div class="mx-auto min-h-screen w-full max-w-[512px] bg-background pb-24 shadow-2xl">
+        <header class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
+            <a href="katalog.html" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Kembali ke katalog">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <div class="text-center">
+                <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">Konfirmasi</p>
+                <h1 class="text-base font-black text-primary">Pesanan Berhasil</h1>
+            </div>
+            <a href="index.html" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Beranda">
+                <span class="material-symbols-outlined">home</span>
+            </a>
+        </header>
+
+        <main class="px-5 pt-6">
+            <section class="rounded-2xl border border-line bg-white p-5 text-center shadow-sm">
+                <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-moss text-white">
+                    <span class="material-symbols-outlined text-4xl">check</span>
+                </span>
+                <h2 class="mt-4 text-2xl font-black text-primary">Pesanan menunggu konfirmasi admin</h2>
+                <p class="mt-2 text-sm leading-6 text-muted">Admin SADITA akan cek stok, ongkir, total final, dan instruksi pembayaran.</p>
+            </section>
+
+            <section id="orderContent" class="mt-5 space-y-4"></section>
+
+            <section class="mt-5 grid grid-cols-1 gap-3">
+                <a id="whatsappAdmin" href="#" class="flex h-12 items-center justify-center gap-2 rounded-xl bg-moss px-4 text-sm font-black text-white">
+                    <span class="material-symbols-outlined text-[19px]">chat</span>
+                    Hubungi Admin WhatsApp
+                </a>
+                <a href="katalog.html" class="flex h-12 items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 text-sm font-black text-primary">
+                    <span class="material-symbols-outlined text-[19px]">inventory_2</span>
+                    Kembali ke Katalog
+                </a>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const orderContent = document.getElementById("orderContent");
+        const whatsappAdmin = document.getElementById("whatsappAdmin");
+        const order = JSON.parse(localStorage.getItem("saditaLastOrder") || "null");
+
+        function formatRupiah(value) {
+            return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(value || 0);
+        }
+
+        if (!order) {
+            orderContent.innerHTML = `
+                <div class="rounded-2xl border border-dashed border-line bg-white p-5 text-center">
+                    <h3 class="text-lg font-black text-primary">Belum ada data pesanan</h3>
+                    <p class="mt-2 text-sm leading-6 text-muted">Silakan buat pesanan dari katalog terlebih dahulu.</p>
+                </div>
+            `;
+            whatsappAdmin.classList.add("hidden");
+        } else {
+            const items = order.items || [];
+            const message = encodeURIComponent(`Halo Admin SADITA, saya ingin konfirmasi pesanan ${order.orderId}. Nama: ${order.customerName}. Total sementara: ${formatRupiah(order.subtotal)}.`);
+            whatsappAdmin.href = `https://wa.me/6281234567890?text=${message}`;
+            orderContent.innerHTML = `
+                <div class="rounded-2xl border border-line bg-white p-4 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-[0.16em] text-muted">ID Pesanan</p>
+                    <h3 class="mt-1 text-xl font-black text-primary">${order.orderId}</h3>
+                    <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
+                        <div class="rounded-xl bg-surface p-3"><p class="font-bold text-muted">Tanggal</p><p class="mt-1 font-black">${order.orderDate}</p></div>
+                        <div class="rounded-xl bg-surface p-3"><p class="font-bold text-muted">Status</p><p class="mt-1 font-black text-moss">${order.status}</p></div>
+                    </div>
+                </div>
+                <div class="rounded-2xl border border-line bg-white p-4 shadow-sm">
+                    <h3 class="text-base font-black text-primary">Data Pemesan</h3>
+                    <dl class="mt-3 space-y-3 text-sm">
+                        <div><dt class="font-bold text-muted">Nama</dt><dd class="mt-1">${order.customerName}</dd></div>
+                        <div><dt class="font-bold text-muted">WhatsApp</dt><dd class="mt-1">${order.customerWhatsapp}</dd></div>
+                        <div><dt class="font-bold text-muted">Alamat</dt><dd class="mt-1 leading-6">${order.shippingAddress}</dd></div>
+                        <div><dt class="font-bold text-muted">Sales</dt><dd class="mt-1">${order.salesInfo}</dd></div>
+                        <div><dt class="font-bold text-muted">Pembayaran</dt><dd class="mt-1">${order.paymentMethod}</dd></div>
+                    </dl>
+                </div>
+                <div class="rounded-2xl border border-line bg-white p-4 shadow-sm">
+                    <h3 class="text-base font-black text-primary">Ringkasan Produk</h3>
+                    <div class="mt-3 space-y-3">
+                        ${items.map((item) => `
+                            <div class="flex justify-between gap-3 rounded-xl bg-surface p-3 text-sm">
+                                <div><p class="font-black">${item.name}</p><p class="mt-1 text-muted">${item.qty} x ${formatRupiah(item.price)}</p></div>
+                                <p class="font-black text-primary">${formatRupiah(item.qty * item.price)}</p>
+                            </div>
+                        `).join("")}
+                    </div>
+                    <div class="mt-4 flex justify-between border-t border-line pt-4 text-base">
+                        <span class="font-bold text-primary">Total sementara</span>
+                        <span class="font-black text-primary">${formatRupiah(order.subtotal)}</span>
+                    </div>
+                    <p class="mt-3 rounded-xl bg-primary/10 p-3 text-sm leading-6 text-primary">Ongkir dan total final dikonfirmasi admin sebelum pembayaran.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>

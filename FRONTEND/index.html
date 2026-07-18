@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SADITA - Solusi Sehat Ternak Anda</title>
+    <meta name="description" content="Partner produk kesehatan hewan dan peternakan untuk peternak Indonesia." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#610000",
+                        background: "#fcf9f8",
+                        surface: "#f6f3f2",
+                        ink: "#1b1c1c",
+                        muted: "#5d5f5f",
+                        line: "#ead8d5",
+                        moss: "#31584a",
+                        amber: "#b7791f"
+                    },
+                    fontFamily: { sans: ["Inter", "sans-serif"] },
+                    borderRadius: { xl: "0.5rem", "2xl": "0.75rem" }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: Inter, sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .hero-track {
+            animation: heroSlide 24s linear infinite;
+        }
+
+        @keyframes heroSlide {
+
+            0%,
+            20% {
+                transform: translateX(0);
+            }
+
+            25%,
+            45% {
+                transform: translateX(-100%);
+            }
+
+            50%,
+            70% {
+                transform: translateX(-200%);
+            }
+
+            75%,
+            95% {
+                transform: translateX(-300%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-ink">
+    <div class="mx-auto min-h-screen w-full max-w-[512px] bg-background shadow-2xl">
+        <header
+            class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
+            <a href="index.html" class="leading-tight">
+                <span class="block text-lg font-black tracking-tight text-primary">SADITA</span>
+                <span class="block text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Animal
+                    Health</span>
+            </a>
+            <a href="toko.html" class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white"
+                aria-label="Buka toko SADITA">
+                <span class="material-symbols-outlined">storefront</span>
+            </a>
+        </header>
+
+        <main class="pb-24">
+            <section class="relative min-h-[440px] overflow-hidden">
+                <div class="hero-track absolute inset-0 flex h-full w-full">
+                    <img class="h-full w-full shrink-0 object-cover" alt="Anak ayam sehat di kandang peternakan modern"
+                        src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=1200&q=80" />
+                    <img class="h-full w-full shrink-0 object-cover" alt="Peternak memeriksa ayam di kandang"
+                        src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1200&q=80" />
+                    <img class="h-full w-full shrink-0 object-cover" alt="Produk kesehatan hewan dan vitamin ternak"
+                        src="https://images.unsplash.com/photo-1587854692152-cbe660dbde0b?auto=format&fit=crop&w=1200&q=80" />
+                    <img class="h-full w-full shrink-0 object-cover" alt="Area peternakan unggas yang bersih"
+                        src="https://images.unsplash.com/photo-1563460716037-460a3ad24ba9?auto=format&fit=crop&w=1200&q=80" />
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-primary/45 to-primary/95"></div>
+                <div class="relative flex min-h-[440px] flex-col justify-end px-6 pb-8 text-white">
+                    <p
+                        class="mb-3 w-fit rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]">
+                        Sadita Animal Health</p>
+                    <h1 class="max-w-[360px] text-4xl font-black leading-[1.04] tracking-tight">Solusi sehat ternak anda
+                    </h1>
+                    <p class="mt-4 max-w-[330px] text-base leading-7 text-white/90">Cari produk, konsultasi gejala
+                        ternak, dan pilih gudang terdekat sebelum pesan.</p>
+                    <div class="mt-6 grid grid-cols-1 gap-3">
+                        <a href="produk.html"
+                            class="flex h-12 items-center justify-center gap-2 rounded-xl bg-white px-5 text-sm font-bold text-primary shadow-lg">
+                            <span class="material-symbols-outlined text-[19px]">search</span>
+                            Cari Produk
+                        </a>
+                        <div class="grid grid-cols-2 gap-3">
+                            <a href="ai-konsultasi.html"
+                                class="flex h-12 items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-3 text-sm font-bold backdrop-blur">
+                                <span class="material-symbols-outlined text-[19px]">forum</span>
+                                AI Konsultasi
+                            </a>
+                            <a href="toko.html"
+                                class="flex h-12 items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-3 text-sm font-bold backdrop-blur">
+                                <span class="material-symbols-outlined text-[19px]">warehouse</span>
+                                Gudang
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="produk" class="px-5 py-8">
+                <div class="mb-4 flex items-end justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.16em] text-moss">Kebutuhan Lapangan</p>
+                        <h2 class="mt-1 text-2xl font-black text-primary">Mulai dari kondisi ternak</h2>
+                    </div>
+                    <a href="produk.html" class="text-xs font-bold uppercase tracking-wide text-primary">Produk</a>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <a href="ai-konsultasi.html"
+                        class="group rounded-2xl border border-line bg-white p-4 shadow-sm active:scale-[0.99]">
+                        <span
+                            class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary"><span
+                                class="material-symbols-outlined">pulmonology</span></span>
+                        <span class="mt-3 block text-base font-black">Ayam ngorok / CRD</span>
+                        <span class="mt-1 block text-sm leading-5 text-muted">Tanya gejala dan rekomendasi awal.</span>
+                    </a>
+                    <a href="produk.html"
+                        class="group rounded-2xl border border-line bg-white p-4 shadow-sm active:scale-[0.99]">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-moss/10 text-moss"><span
+                                class="material-symbols-outlined">nutrition</span></span>
+                        <span class="mt-3 block text-base font-black">Stamina turun</span>
+                        <span class="mt-1 block text-sm leading-5 text-muted">Vitamin, elektrolit, dan suplemen.</span>
+                    </a>
+                    <a href="produk.html"
+                        class="group rounded-2xl border border-line bg-white p-4 shadow-sm active:scale-[0.99]">
+                        <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-amber/10 text-amber"><span
+                                class="material-symbols-outlined">cleaning_services</span></span>
+                        <span class="mt-3 block text-base font-black">Sanitasi kandang</span>
+                        <span class="mt-1 block text-sm leading-5 text-muted">Desinfektan dan persiapan kandang.</span>
+                    </a>
+                    <a href="produk.html"
+                        class="group rounded-2xl border border-line bg-white p-4 shadow-sm active:scale-[0.99]">
+                        <span
+                            class="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700"><span
+                                class="material-symbols-outlined">scale</span></span>
+                        <span class="mt-3 block text-base font-black">Pakan kurang stabil</span>
+                        <span class="mt-1 block text-sm leading-5 text-muted">Premix dan mineral pendukung.</span>
+                    </a>
+                </div>
+                <div class="mt-5 rounded-2xl border border-line bg-white p-4 shadow-sm">
+                    <div class="flex items-start gap-3">
+                        <span
+                            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-white"><span
+                                class="material-symbols-outlined">support_agent</span></span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-base font-black text-primary">Tidak yakin produk yang cocok?</h3>
+                            <p class="mt-1 text-sm leading-6 text-muted">Kirim gejala, umur ternak, jumlah populasi, dan
+                                lokasi kandang ke tim SADITA.</p>
+                            <a href="ai-konsultasi.html"
+                                class="mt-3 inline-flex h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-white">
+                                Tanya SADITA AI
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tentang" class="border-y border-line bg-white px-5 py-8">
+                <p class="text-xs font-bold uppercase tracking-[0.16em] text-moss">Tentang Kami</p>
+                <h2 class="mt-1 text-2xl font-black text-primary">Mitra kesehatan ternak untuk peternak Indonesia</h2>
+                <p class="mt-4 text-sm leading-6 text-muted">SADITA menyediakan produk kesehatan hewan, nutrisi, dan
+                    sanitasi kandang untuk membantu peternak menjaga performa ternak secara konsisten. Kami fokus pada
+                    produk yang relevan untuk kebutuhan lapangan, distribusi yang jelas, dan layanan konsultasi yang
+                    mudah diakses.</p>
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                    <div class="rounded-2xl bg-surface p-4">
+                        <p class="text-2xl font-black text-primary">10+</p>
+                        <p class="mt-1 text-xs font-semibold text-muted">Tahun pengalaman</p>
+                    </div>
+                    <div class="rounded-2xl bg-surface p-4">
+                        <p class="text-2xl font-black text-moss">200+</p>
+                        <p class="mt-1 text-xs font-semibold text-muted">Produk aktif</p>
+                    </div>
+                    <div class="rounded-2xl bg-surface p-4">
+                        <p class="text-2xl font-black text-amber">500+</p>
+                        <p class="mt-1 text-xs font-semibold text-muted">Mitra peternak</p>
+                    </div>
+                    <div class="rounded-2xl bg-surface p-4">
+                        <p class="text-2xl font-black text-slate-700">2</p>
+                        <p class="mt-1 text-xs font-semibold text-muted">Gudang layanan</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="artikel" class="px-5 py-8">
+                <div class="mb-4 flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-primary">Artikel Terbaru</h2>
+                    <a href="artikel.html" class="text-xs font-bold uppercase tracking-wide text-primary">Baca Semua</a>
+                </div>
+                <div class="space-y-4">
+                    <a href="detailartikel.html"
+                        class="flex gap-4 rounded-2xl border border-line bg-white p-3 shadow-sm">
+                        <img class="h-24 w-24 rounded-xl object-cover" alt="Dokter hewan memeriksa ayam"
+                            src="https://images.unsplash.com/photo-1563460716037-460a3ad24ba9?auto=format&fit=crop&w=600&q=80" />
+                        <div class="min-w-0 flex-1">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-moss">Berita</p>
+                            <h3 class="mt-1 line-clamp-2 text-sm font-bold">Pencegahan CRD kompleks pada ayam broiler
+                            </h3>
+                            <p class="mt-2 line-clamp-2 text-xs leading-5 text-muted">Langkah praktis menjaga kualitas
+                                air minum, sanitasi, dan monitoring gejala awal.</p>
+                        </div>
+                    </a>
+                    <a href="detailartikel.html"
+                        class="flex gap-4 rounded-2xl border border-line bg-white p-3 shadow-sm">
+                        <img class="h-24 w-24 rounded-xl object-cover" alt="Peternakan ayam modern"
+                            src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=600&q=80" />
+                        <div class="min-w-0 flex-1">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-moss">Berita</p>
+                            <h3 class="mt-1 line-clamp-2 text-sm font-bold">Distribusi produk kesehatan ternak makin
+                                dekat</h3>
+                            <p class="mt-2 line-clamp-2 text-xs leading-5 text-muted">Update layanan gudang untuk
+                                membantu peternak mendapatkan produk lebih cepat.</p>
+                        </div>
+                    </a>
+                    <a href="detailartikel.html"
+                        class="flex gap-4 rounded-2xl border border-line bg-white p-3 shadow-sm">
+                        <img class="h-24 w-24 rounded-xl object-cover" alt="Pakan dan suplemen ternak"
+                            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" />
+                        <div class="min-w-0 flex-1">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-amber">Tips</p>
+                            <h3 class="mt-1 line-clamp-2 text-sm font-bold">Premix untuk performa pakan yang stabil</h3>
+                            <p class="mt-2 line-clamp-2 text-xs leading-5 text-muted">Panduan memilih suplemen sesuai
+                                umur, bobot, dan target panen.</p>
+                        </div>
+                    </a>
+                    <a href="detailartikel.html"
+                        class="flex gap-4 rounded-2xl border border-line bg-white p-3 shadow-sm">
+                        <img class="h-24 w-24 rounded-xl object-cover" alt="Kandang unggas bersih"
+                            src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=600&q=80" />
+                        <div class="min-w-0 flex-1">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-amber">Tips</p>
+                            <h3 class="mt-1 line-clamp-2 text-sm font-bold">Sanitasi kandang sebelum periode masuk DOC
+                            </h3>
+                            <p class="mt-2 line-clamp-2 text-xs leading-5 text-muted">Checklist singkat desinfeksi,
+                                istirahat kandang, dan persiapan air minum.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <footer class="bg-primary px-5 py-8 text-white">
+                <h2 class="text-xl font-black">SADITA</h2>
+                <p class="mt-2 max-w-[340px] text-sm leading-6 text-white/80">Solusi produk kesehatan hewan dan
+                    peternakan untuk mendukung performa ternak Indonesia.</p>
+                <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="font-bold">Navigasi</p>
+                        <div class="mt-3 space-y-2 text-white/80">
+                            <a class="block" href="tentangkami.html">Tentang</a>
+                            <a class="block" href="produk.html">Produk</a>
+                            <a class="block" href="artikel.html">Artikel</a>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-bold">Kontak</p>
+                        <div class="mt-3 space-y-2 text-white/80">
+                            <a class="block" href="chat.html">Chat SADITA</a>
+                            <a class="block" href="toko.html">Toko SADITA</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-6 border-t border-white/15 pt-4 text-xs text-white/65">&copy; 2026 SADITA. All rights
+                    reserved.</p>
+            </footer>
+        </main>
+
+        <nav
+            class="fixed bottom-0 left-1/2 z-50 flex h-[72px] w-full max-w-[512px] -translate-x-1/2 items-center justify-around border-t border-line bg-white">
+            <a href="index.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-primary">
+                <span class="material-symbols-outlined text-[27px]"
+                    style="font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;">home</span>
+                <span class="text-[11px] font-semibold">Beranda</span>
+            </a>
+            <a href="tentangkami.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">apartment</span>
+                <span class="text-[11px] font-semibold">Tentang</span>
+            </a>
+            <a href="produk.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">inventory_2</span>
+                <span class="text-[11px] font-semibold">Produk</span>
+            </a>
+            <a href="artikel.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">article</span>
+                <span class="text-[11px] font-semibold">Artikel</span>
+            </a>
+            <a href="chat.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">chat_bubble</span>
+                <span class="text-[11px] font-semibold">Chat</span>
+            </a>
+        </nav>
+    </div>
+</body>
+
+</html>

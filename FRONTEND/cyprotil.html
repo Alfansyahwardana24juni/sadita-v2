@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Cyprotil - SADITA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700,800,900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#dcdddd",
+                        "inverse-on-surface": "#f3f0f0",
+                        "background": "#fcf9f8",
+                        "on-primary-container": "#ff907f",
+                        "primary-container": "#8b0000",
+                        "surface-variant": "#e4e2e1",
+                        "surface-bright": "#fcf9f8",
+                        "primary": "#610000",
+                        "secondary": "#5d5f5f",
+                        "outline": "#8e706b",
+                        "secondary-fixed": "#e2e2e2",
+                        "outline-variant": "#e3beb8",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#414343",
+                        "inverse-primary": "#ffb4a8",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "on-primary-fixed-variant": "#920703",
+                        "inverse-surface": "#303030",
+                        "surface-container": "#f0eded",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-container": "#afafb0",
+                        "tertiary": "#2b2d2d",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eae7e7",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-background": "#1b1c1c",
+                        "on-secondary-container": "#5f6161",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-surface-variant": "#5a403c",
+                        "surface-tint": "#b52619",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#ffdad4",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-primary-fixed": "#410000",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter-grid": "1rem",
+                        "margin-main": "1.25rem",
+                        "stack-md": "1rem",
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2rem",
+                        "container-max": "512px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-sm": ["Inter"],
+                        "label-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-sm": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .tap-highlight-transparent {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface">
+    <div class="max-w-[512px] mx-auto min-h-screen bg-white relative pb-32">
+        <!-- TopNavBar -->
+        <header
+            class="bg-white dark:bg-gray-900 font-['Inter'] antialiased max-w-[512px] mx-auto w-full sticky top-0 border-b border-gray-200 dark:border-gray-800 shadow-sm shadow-black/5 z-50">
+            <div class="flex justify-between items-center h-16 px-5 w-full">
+                <button onclick="window.location.href='katalog.html'"
+                    class="text-red-900 dark:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+                    <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+                </button>
+                <span class="text-lg font-bold tracking-widest text-red-900 dark:text-red-500">SADITA</span>
+                <button onclick="window.location.href='checkout.html'"
+                    class="text-red-900 dark:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors active:scale-95 duration-150 p-2 rounded-full">
+                    <span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                </button>
+            </div>
+        </header>
+        <!-- Product Hero Image -->
+        <div class="w-full aspect-square bg-surface-container overflow-hidden">
+            <img class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7EncpSRaa-IbiPHSiO49mByKK-2o0C6ZT6D1hDn28uQehsv9k57Cn6oH10EoyAnoBCs6nJJercIuszb1b_-L5ko7Gl2XjI59QUxUMClElmKL-IwEVDFt99svUPhtLxspFdPSSH-zfodi9OLMIt2YbruuDCqVcA8bA3U78AV9sCHGye2hTwoeekAE6CBYV-1MIrxbx20oAR6ZTU7umOin8RUBzJhgFFN1xMp8R1U8St2xGFD2cx5_wn2dGFrMjqAQ5-O02D_EkZEpW" />
+        </div>
+        <!-- Product Details Header -->
+        <section class="px-margin-main pt-stack-md">
+            <div class="flex flex-wrap gap-2 mb-2">
+                <span
+                    class="bg-primary-container text-on-primary font-label-lg text-label-lg px-2 py-0.5 rounded-full uppercase tracking-wider">Antibiotik</span>
+                <span
+                    class="bg-surface-container-high text-on-surface-variant font-label-lg text-label-lg px-2 py-0.5 rounded-full">Hewan
+                    Ternak</span>
+            </div>
+            <h1 class="font-display-sm text-display-sm text-on-surface mb-1">Cyprotil</h1>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-amber-500 text-[18px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="font-label-lg text-label-lg text-on-surface">4.9</span>
+                </div>
+                <span class="w-[1px] h-3 bg-outline-variant"></span>
+                <span class="font-label-lg text-label-lg text-secondary">Terjual 2rb+</span>
+            </div>
+            <div class="mb-stack-lg">
+                <p class="font-display-sm text-display-sm text-primary">Rp 145.000</p>
+            </div>
+        </section>
+        <!-- Fixed Bottom Action Bar -->
+        <div
+            class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[512px] bg-white border-t border-gray-200 px-5 py-4 z-50 flex gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+            <button onclick="showToast()"
+                class="flex-1 border border-primary text-primary font-headline-md text-[14px] py-3 rounded-lg flex items-center justify-center gap-2 tap-highlight-transparent active:scale-95 transition-transform">
+                <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                Tambah
+            </button>
+            <button onclick="window.location.href='checkout.html'"
+                class="flex-[2] bg-primary-container text-on-primary font-headline-md text-[14px] py-3 rounded-lg flex items-center justify-center gap-2 tap-highlight-transparent active:scale-95 transition-transform shadow-lg shadow-primary-container/20">
+                Beli Sekarang
+            </button>
+        </div>
+    </div>
+    <div class="fixed top-20 left-1/2 -translate-x-1/2 z-[60] bg-gray-900 text-white px-6 py-3 rounded-full text-sm font-medium shadow-2xl opacity-0 translate-y-4 pointer-events-none transition-all duration-300 flex items-center gap-2"
+        id="success-toast">
+        <span class="material-symbols-outlined text-green-400 text-lg">check_circle</span>
+        Berhasil ditambahkan ke keranjang
+    </div>
+    <script>
+        function showToast() {
+            const toast = document.getElementById('success-toast');
+            toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

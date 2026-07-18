@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SADITA AI - Konsultasi Ternak</title>
+    <meta name="description" content="Konsultasi awal gejala ternak dan rekomendasi produk SADITA berbasis AI." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#610000",
+                        background: "#fcf9f8",
+                        surface: "#f6f3f2",
+                        ink: "#1b1c1c",
+                        muted: "#5d5f5f",
+                        line: "#ead8d5",
+                        moss: "#31584a",
+                        amber: "#b7791f"
+                    },
+                    fontFamily: { sans: ["Inter", "sans-serif"] },
+                    borderRadius: { xl: "0.5rem", "2xl": "0.75rem" }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: Inter, sans-serif; }
+        .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-ink">
+    <div class="mx-auto min-h-screen w-full max-w-[512px] bg-background pb-36 shadow-2xl">
+        <header class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
+            <a href="chat.html" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Kembali ke konsultasi">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <div class="text-center">
+                <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">SADITA AI</p>
+                <h1 class="text-base font-black text-primary">Konsultasi Ternak</h1>
+            </div>
+            <a href="katalog.html" class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white" aria-label="Buka produk">
+                <span class="material-symbols-outlined">inventory_2</span>
+            </a>
+        </header>
+
+        <main class="px-5 pt-5">
+            <section class="rounded-2xl border border-line bg-white p-4 shadow-sm">
+                <div class="flex gap-3">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary text-white">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                    </span>
+                    <div>
+                        <h2 class="text-xl font-black text-primary">Asisten awal untuk peternak</h2>
+                        <p class="mt-2 text-sm leading-6 text-muted">Ceritakan gejala ternak. AI akan memberi arahan awal, pertanyaan lanjutan, dan produk terkait. Untuk kondisi berat, tetap hubungi dokter hewan atau tim SADITA.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mt-4 grid grid-cols-2 gap-3">
+                <button class="animal-chip rounded-2xl border-2 border-primary bg-primary/5 p-3 text-left" data-animal="Ayam">
+                    <span class="material-symbols-outlined text-primary">egg_alt</span>
+                    <span class="mt-2 block text-sm font-black">Ayam</span>
+                </button>
+                <button class="animal-chip rounded-2xl border border-line bg-white p-3 text-left" data-animal="Sapi">
+                    <span class="material-symbols-outlined text-primary">agriculture</span>
+                    <span class="mt-2 block text-sm font-black">Sapi</span>
+                </button>
+                <button class="animal-chip rounded-2xl border border-line bg-white p-3 text-left" data-animal="Kambing">
+                    <span class="material-symbols-outlined text-primary">grass</span>
+                    <span class="mt-2 block text-sm font-black">Kambing</span>
+                </button>
+                <button class="animal-chip rounded-2xl border border-line bg-white p-3 text-left" data-animal="Ikan / Udang">
+                    <span class="material-symbols-outlined text-primary">set_meal</span>
+                    <span class="mt-2 block text-sm font-black">Ikan / Udang</span>
+                </button>
+            </section>
+
+            <section class="mt-5">
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-muted">Contoh pertanyaan cepat</p>
+                <div class="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+                    <button class="prompt-chip shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-primary shadow-sm" data-prompt="Ayam broiler saya ngorok, tidak mau makan, umur 18 hari. Apa yang perlu dicek?">Ayam ngorok</button>
+                    <button class="prompt-chip shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-primary shadow-sm" data-prompt="Sapi saya nafsu makan turun dan terlihat lemas. Data apa yang perlu saya siapkan?">Sapi lemas</button>
+                    <button class="prompt-chip shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-primary shadow-sm" data-prompt="Ayam saya mencret dan konsumsi pakan turun. Produk kategori apa yang relevan?">Mencret</button>
+                    <button class="prompt-chip shrink-0 rounded-full bg-white px-4 py-2 text-xs font-bold text-primary shadow-sm" data-prompt="Saya ingin belajar coding Laravel.">Tes luar topik</button>
+                </div>
+            </section>
+
+            <section class="mt-5 rounded-2xl border border-line bg-white p-4 shadow-sm">
+                <div class="mb-4 flex items-start gap-3">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><span class="material-symbols-outlined">fact_check</span></span>
+                    <div>
+                        <h2 class="text-lg font-black text-primary">Data konsultasi cepat</h2>
+                        <p class="mt-1 text-sm leading-6 text-muted">Isi data ini agar jawaban AI dan ringkasan untuk admin lebih akurat.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="block">
+                        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-muted">Umur/bobot</span>
+                        <input id="consultAge" class="h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm focus:border-primary focus:ring-primary/20" placeholder="18 hari / 250 kg" />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-muted">Populasi</span>
+                        <input id="consultPopulation" class="h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm focus:border-primary focus:ring-primary/20" placeholder="5.000 ekor" />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-muted">Terdampak</span>
+                        <input id="consultAffected" class="h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm focus:border-primary focus:ring-primary/20" placeholder="120 ekor" />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-muted">Durasi</span>
+                        <input id="consultDuration" class="h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm focus:border-primary focus:ring-primary/20" placeholder="2 hari" />
+                    </label>
+                </div>
+                <label class="mt-3 block">
+                    <span class="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-muted">Gejala utama</span>
+                    <textarea id="consultSymptoms" class="min-h-20 w-full rounded-xl border border-line bg-surface px-3 py-3 text-sm leading-6 focus:border-primary focus:ring-primary/20" placeholder="Contoh: ngorok, nafsu makan turun, kotoran encer"></textarea>
+                </label>
+                <label class="mt-3 block">
+                    <span class="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-muted">Lokasi kandang</span>
+                    <input id="consultLocation" class="h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm focus:border-primary focus:ring-primary/20" placeholder="Contoh: Maros, Sulawesi Selatan" />
+                </label>
+                <button id="makeSummary" type="button" class="mt-4 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-black text-white">
+                    <span class="material-symbols-outlined text-[18px]">summarize</span>
+                    Buat Ringkasan Konsultasi
+                </button>
+            </section>
+
+            <section id="consultationSummary" class="mt-5 hidden rounded-2xl border border-line bg-white p-4 shadow-sm">
+                <p class="text-xs font-bold uppercase tracking-[0.16em] text-moss">Ringkasan siap kirim</p>
+                <div id="summaryText" class="mt-3 rounded-xl bg-surface p-3 text-sm leading-6"></div>
+                <div class="mt-3 grid grid-cols-2 gap-3">
+                    <button id="sendSummaryToAi" type="button" class="flex h-11 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-xs font-black text-white">
+                        <span class="material-symbols-outlined text-[17px]">smart_toy</span>
+                        Tanya AI
+                    </button>
+                    <a href="chat.html" class="flex h-11 items-center justify-center gap-2 rounded-xl border border-line bg-white px-3 text-xs font-black text-primary">
+                        <span class="material-symbols-outlined text-[17px]">support_agent</span>
+                        Admin
+                    </a>
+                </div>
+            </section>
+
+            <section id="chatLog" class="mt-4 space-y-4">
+                <article class="flex gap-3">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+                        <span class="material-symbols-outlined text-[19px]">smart_toy</span>
+                    </span>
+                    <div class="rounded-2xl rounded-tl-none border border-line bg-white p-4 shadow-sm">
+                        <p class="text-sm leading-6">Halo, saya SADITA AI. Saya hanya membantu pertanyaan seputar ternak, gejala, kesehatan hewan, produk peternakan, dosis umum berdasarkan arahan teknis, dan layanan SADITA.</p>
+                        <p class="mt-2 text-sm leading-6 text-muted">Contoh format terbaik: jenis ternak, umur, jumlah populasi, gejala, sejak kapan, lokasi kandang, dan produk yang sedang dipakai.</p>
+                    </div>
+                </article>
+            </section>
+
+            <section id="recommendationPanel" class="mt-5 hidden rounded-2xl border border-line bg-white p-4 shadow-sm">
+                <div class="mb-3 flex items-center justify-between gap-3">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.16em] text-moss">Produk terkait</p>
+                        <h2 class="text-lg font-black text-primary">Rekomendasi awal</h2>
+                    </div>
+                    <a href="katalog.html" class="text-xs font-bold uppercase tracking-wide text-primary">Lihat Katalog</a>
+                </div>
+                <div class="grid gap-3">
+                    <a href="detail-cyprotil.html" class="flex gap-3 rounded-xl border border-line bg-surface p-3">
+                        <img class="h-16 w-16 rounded-xl object-cover" alt="Cyprotil 250 mg" src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=300&q=80" />
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-sm font-black">Cyprotil 250 mg</h3>
+                            <p class="mt-1 text-xs leading-5 text-muted">Kategori pernapasan/antibiotik. Konsultasikan dosis sebelum pemakaian.</p>
+                        </div>
+                    </a>
+                    <a href="katalog.html" class="flex gap-3 rounded-xl border border-line bg-surface p-3">
+                        <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-moss/10 text-moss"><span class="material-symbols-outlined">water_drop</span></span>
+                        <div class="min-w-0 flex-1">
+                            <h3 class="text-sm font-black">Elektrolit & vitamin</h3>
+                            <p class="mt-1 text-xs leading-5 text-muted">Pendukung stamina saat konsumsi turun atau masa pemulihan.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <form id="aiForm" class="fixed bottom-0 left-1/2 z-50 w-full max-w-[512px] -translate-x-1/2 border-t border-line bg-white p-4">
+            <label class="relative block">
+                <textarea id="aiInput" class="min-h-[52px] w-full resize-none rounded-2xl border border-line bg-surface py-3 pl-4 pr-14 text-base leading-6 focus:border-primary focus:ring-primary/20" placeholder="Tulis gejala ternak atau tanya produk..."></textarea>
+                <button class="absolute bottom-2 right-2 flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white" type="submit" aria-label="Kirim pertanyaan">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </label>
+        </form>
+    </div>
+
+    <script>
+        const aiForm = document.getElementById("aiForm");
+        const aiInput = document.getElementById("aiInput");
+        const chatLog = document.getElementById("chatLog");
+        const recommendationPanel = document.getElementById("recommendationPanel");
+        const consultationSummary = document.getElementById("consultationSummary");
+        const summaryText = document.getElementById("summaryText");
+        const makeSummary = document.getElementById("makeSummary");
+        const sendSummaryToAi = document.getElementById("sendSummaryToAi");
+        let selectedAnimal = "Ayam";
+        let latestSummary = "";
+
+        const allowedKeywords = [
+            "ayam", "sapi", "kambing", "domba", "ikan", "udang", "ternak", "kandang", "pakan", "minum",
+            "vaksin", "obat", "vitamin", "premix", "desinfektan", "dosis", "produk", "sadita", "sales",
+            "muntah", "ngorok", "mencret", "diare", "lemas", "demam", "napas", "batuk", "pilek", "nafsu",
+            "makan", "mati", "kematian", "crd", "coryza", "kolibasilosis", "cacing", "parasit", "sanitasi"
+        ];
+
+        function appendMessage(role, text) {
+            const isUser = role === "user";
+            const article = document.createElement("article");
+            article.className = isUser ? "flex justify-end" : "flex gap-3";
+            article.innerHTML = isUser
+                ? `<div class="max-w-[86%] rounded-2xl rounded-tr-none bg-primary p-4 text-white shadow-sm"><p class="text-sm leading-6">${text}</p></div>`
+                : `<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white"><span class="material-symbols-outlined text-[19px]">smart_toy</span></span><div class="max-w-[86%] rounded-2xl rounded-tl-none border border-line bg-white p-4 shadow-sm"><p class="text-sm leading-6">${text}</p></div>`;
+            chatLog.appendChild(article);
+            article.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+
+        function appendTyping() {
+            const article = document.createElement("article");
+            article.id = "typingIndicator";
+            article.className = "flex gap-3";
+            article.innerHTML = `<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white"><span class="material-symbols-outlined text-[19px]">smart_toy</span></span><div class="rounded-2xl rounded-tl-none border border-line bg-white p-4 shadow-sm"><p class="text-sm leading-6 text-muted">SADITA AI sedang membaca data...</p></div>`;
+            chatLog.appendChild(article);
+            article.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+
+        function removeTyping() {
+            document.getElementById("typingIndicator")?.remove();
+        }
+
+        function getConsultationSummary() {
+            const age = document.getElementById("consultAge").value.trim() || "-";
+            const population = document.getElementById("consultPopulation").value.trim() || "-";
+            const affected = document.getElementById("consultAffected").value.trim() || "-";
+            const duration = document.getElementById("consultDuration").value.trim() || "-";
+            const symptoms = document.getElementById("consultSymptoms").value.trim() || "-";
+            const location = document.getElementById("consultLocation").value.trim() || "-";
+            return `Jenis ternak: ${selectedAnimal}. Umur/bobot: ${age}. Populasi: ${population}. Terdampak: ${affected}. Durasi gejala: ${duration}. Gejala utama: ${symptoms}. Lokasi kandang: ${location}.`;
+        }
+
+        function isInScope(message) {
+            const lower = message.toLowerCase();
+            return allowedKeywords.some((keyword) => lower.includes(keyword));
+        }
+
+        function createAiReply(message) {
+            const lower = message.toLowerCase();
+            if (!isInScope(message)) {
+                recommendationPanel.classList.add("hidden");
+                return "Maaf, saya hanya bisa membantu pertanyaan seputar kesehatan ternak, gejala ternak, produk peternakan, dosis umum, dan layanan SADITA.";
+            }
+
+            if (lower.includes("mati") || lower.includes("kematian") || lower.includes("tidak bisa berdiri") || lower.includes("sesak")) {
+                recommendationPanel.classList.remove("hidden");
+                return `Untuk ${selectedAnimal}, gejala yang Anda sebutkan termasuk perlu ditangani cepat. Pisahkan ternak yang sakit, cek air minum, pakan, suhu kandang, dan segera hubungi dokter hewan atau tim SADITA. Saya bisa bantu arahkan produk pendukung, tetapi diagnosis final perlu pemeriksaan lapangan.`;
+            }
+
+            if (lower.includes("ngorok") || lower.includes("napas") || lower.includes("batuk") || lower.includes("crd")) {
+                recommendationPanel.classList.remove("hidden");
+                return `Pada ${selectedAnimal}, gejala pernapasan seperti ngorok/batuk bisa terkait kondisi kandang, kualitas udara, air minum, atau infeksi. Data yang perlu dicek: umur, jumlah populasi, berapa ekor terdampak, lama gejala, mortalitas, riwayat vaksin, dan obat yang sudah dipakai. Produk kategori pernapasan bisa relevan, tapi dosis sebaiknya dikonfirmasi ke tim teknis.`;
+            }
+
+            if (lower.includes("muntah") || lower.includes("mencret") || lower.includes("diare") || lower.includes("nafsu") || lower.includes("makan")) {
+                recommendationPanel.classList.remove("hidden");
+                return `Untuk ${selectedAnimal}, gangguan makan/pencernaan perlu dilihat dari pakan, air minum, perubahan ransum, umur, dan jumlah ternak yang terdampak. Langkah awal: pastikan air bersih, pisahkan yang parah, catat gejala, dan kirim foto/kronologi ke tim SADITA. Produk vitamin, elektrolit, atau kategori pencernaan bisa dipertimbangkan sesuai kondisi.`;
+            }
+
+            if (lower.includes("dosis") || lower.includes("produk") || lower.includes("obat") || lower.includes("vitamin")) {
+                recommendationPanel.classList.remove("hidden");
+                return `Saya bisa bantu arahkan kategori produk SADITA, tetapi dosis perlu disesuaikan dengan jenis ternak, umur/bobot, jumlah populasi, tingkat gejala, dan produk spesifik. Kirim nama produk atau gejala utama agar saya bisa arahkan ke kategori yang paling relevan.`;
+            }
+
+            recommendationPanel.classList.add("hidden");
+            return `Baik. Untuk konsultasi ${selectedAnimal}, mohon lengkapi data: umur/bobot, jumlah populasi, gejala utama, sejak kapan, jumlah yang terdampak, kondisi kandang, pakan, air minum, dan lokasi. Setelah itu saya bisa bantu memberi arahan awal dan produk terkait.`;
+        }
+
+        document.querySelectorAll(".animal-chip").forEach((button) => {
+            button.addEventListener("click", () => {
+                selectedAnimal = button.dataset.animal;
+                document.querySelectorAll(".animal-chip").forEach((item) => {
+                    item.classList.remove("border-2", "border-primary", "bg-primary/5");
+                    item.classList.add("border", "border-line", "bg-white");
+                });
+                button.classList.remove("border", "border-line", "bg-white");
+                button.classList.add("border-2", "border-primary", "bg-primary/5");
+                appendMessage("assistant", `Jenis ternak dipilih: ${selectedAnimal}. Silakan ceritakan gejala, umur/bobot, jumlah ternak, dan sejak kapan terjadi.`);
+            });
+        });
+
+        document.querySelectorAll(".prompt-chip").forEach((button) => {
+            button.addEventListener("click", () => {
+                aiInput.value = button.dataset.prompt;
+                aiInput.focus();
+            });
+        });
+
+        makeSummary.addEventListener("click", () => {
+            latestSummary = getConsultationSummary();
+            summaryText.textContent = latestSummary;
+            consultationSummary.classList.remove("hidden");
+            localStorage.setItem("saditaLastConsultationSummary", latestSummary);
+            consultationSummary.scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+
+        sendSummaryToAi.addEventListener("click", () => {
+            if (!latestSummary) latestSummary = getConsultationSummary();
+            appendMessage("user", latestSummary);
+            appendTyping();
+            setTimeout(() => {
+                removeTyping();
+                appendMessage("assistant", createAiReply(latestSummary));
+            }, 500);
+        });
+
+        aiForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const message = aiInput.value.trim();
+            if (!message) return;
+            appendMessage("user", message);
+            aiInput.value = "";
+            appendTyping();
+            setTimeout(() => {
+                removeTyping();
+                appendMessage("assistant", createAiReply(message));
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

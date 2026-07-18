@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-container": "#dcdddd",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "surface-container": "#f0eded",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#2b2d2d",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#ff907f",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "surface-variant": "#e4e2e1",
+                        "on-error-container": "#93000a",
+                        "secondary": "#5d5f5f",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-tertiary-container": "#afafb0",
+                        "outline": "#8e706b",
+                        "surface-container-high": "#eae7e7",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed": "#410000",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "primary": "#610000",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface": "#fcf9f8",
+                        "on-secondary-fixed-variant": "#454747",
+                        "outline-variant": "#e3beb8",
+                        "surface-dim": "#dcd9d9",
+                        "primary-container": "#8b0000",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#ffdad4",
+                        "surface-tint": "#b52619",
+                        "inverse-on-surface": "#f3f0f0",
+                        "tertiary-container": "#414343",
+                        "inverse-primary": "#ffb4a8",
+                        "on-background": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#5f6161",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "on-surface-variant": "#5a403c",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary-fixed-variant": "#920703"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "512px",
+                        "stack-md": "1rem",
+                        "margin-main": "1.25rem",
+                        "gutter-grid": "1rem",
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "display-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-sm": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        body {
+            background-color: #f3f4f6;
+        }
+
+        .main-canvas {
+            width: 100%;
+            max-width: 512px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: #fcf9f8;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-body-md text-on-surface">
+    <div class="main-canvas pb-24 shadow-2xl">
+        <!-- TopAppBar -->
+        <header
+            class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[512px] z-50 flex items-center justify-between px-5 h-16 bg-white border-b border-gray-200 shadow-sm">
+            <a href="index.html" class="text-xl font-bold tracking-tight text-red-900">SADITA</a>
+            <a href="toko.html" class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white"
+                aria-label="Buka toko SADITA">
+                <span class="material-symbols-outlined">storefront</span>
+            </a>
+        </header>
+        <!-- Content Wrapper -->
+        <main class="pt-16 px-margin-main space-y-stack-lg">
+            <!-- Hero Section -->
+            <section class="mt-8 space-y-stack-md">
+                <div class="flex flex-col gap-2">
+                    <span class="text-primary font-label-lg uppercase tracking-widest">About Us</span>
+                    <h1 class="font-display-sm text-display-sm text-primary">PT SATWA MEDIKA UTAMA</h1>
+                </div>
+                <p class="text-on-surface-variant font-body-md leading-relaxed">
+                    SADITA is a leading force in veterinary pharmaceuticals, dedicated to enhancing animal welfare
+                    through rigorous scientific research and premium-grade manufacturing processes.
+                </p>
+            </section>
+            <!-- Video Player Placeholder -->
+            <section
+                class="relative aspect-video bg-surface-container rounded-xl overflow-hidden border border-outline-variant flex items-center justify-center">
+                <img class="absolute inset-0 w-full h-full object-cover opacity-60"
+                    data-alt="Modern high-tech pharmaceutical manufacturing facility with clean white equipment and clinical atmosphere"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhW7_c_ujmQdObMb4dX0vm9IOy9O_3SqFt8I7zrCysQ9eBcc6uUwvmTo-ytMhOiLBHNVWR7zfJXkxFb57lfH-icUScNjN48w1q32Yxg_L0MibQebkBcwSiIfgNZQK-lW-RmBkiTXS5KpcJ24ggrC46IuWY0eT-_-jSmogWAnkJu7tIOkwI3nD8-fT2aAg05AmtXGa6p3JFiBeeo3p0AQG9fSf8aypw9qPQ29nXpeo6hhMxBf082siViWXSL-H8LYWNlgjIZMOXLv1F" />
+                <button
+                    class="relative z-10 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined text-white text-4xl" data-icon="play_arrow"
+                        data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                </button>
+                <div class="absolute bottom-4 left-4 z-10 text-white drop-shadow-md">
+                    <p class="font-label-lg">Corporate Profile 2024</p>
+                </div>
+            </section>
+            <!-- Advantages List (Bento-style Grid) -->
+            <section class="space-y-stack-md">
+                <h2 class="font-headline-md text-headline-md text-on-surface">Our Key Advantages</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="p-4 bg-white border border-outline-variant rounded-xl flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-primary" data-icon="groups">groups</span>
+                        <h3 class="font-label-lg text-primary">Experienced Staff</h3>
+                        <p class="text-[11px] text-on-surface-variant">Specialized veterinary experts and researchers.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-white border border-outline-variant rounded-xl flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-primary" data-icon="biotech">biotech</span>
+                        <h3 class="font-label-lg text-primary">Standardized Equipment</h3>
+                        <p class="text-[11px] text-on-surface-variant">Global medical-grade laboratory technologies.</p>
+                    </div>
+                    <div class="p-4 bg-white border border-outline-variant rounded-xl flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-primary" data-icon="fact_check">fact_check</span>
+                        <h3 class="font-label-lg text-primary">SOP Production</h3>
+                        <p class="text-[11px] text-on-surface-variant">Stringent operational procedures for consistency.
+                        </p>
+                    </div>
+                    <div class="p-4 bg-white border border-outline-variant rounded-xl flex flex-col gap-2">
+                        <span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+                        <h3 class="font-label-lg text-primary">Quality Control</h3>
+                        <p class="text-[11px] text-on-surface-variant">Multi-stage testing for every batch produced.</p>
+                    </div>
+                    <div class="col-span-2 p-4 bg-primary text-white rounded-xl flex items-center justify-between">
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-label-lg">Full Documentation</h3>
+                            <p class="text-[11px] opacity-90">Traceable manufacturing history for every unit.</p>
+                        </div>
+                        <span class="material-symbols-outlined text-3xl opacity-50"
+                            data-icon="description">description</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Company History Timeline -->
+            <section class="space-y-stack-md py-4">
+                <h2 class="font-headline-md text-headline-md text-on-surface">Milestones</h2>
+                <div class="relative ml-4 border-l-2 border-outline-variant pl-8 space-y-8 py-2">
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-1 w-4 h-4 bg-primary rounded-full border-4 border-surface">
+                        </div>
+                        <span class="font-label-lg text-primary">2012</span>
+                        <p class="text-on-surface mt-1">Foundation of PT SATWA MEDIKA UTAMA with a vision for animal
+                            health.</p>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-1 w-4 h-4 bg-outline-variant rounded-full border-4 border-surface">
+                        </div>
+                        <span class="font-label-lg text-primary">2014</span>
+                        <p class="text-on-surface mt-1">Expansion of research laboratory and pilot production
+                            facilities.</p>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-1 w-4 h-4 bg-outline-variant rounded-full border-4 border-surface">
+                        </div>
+                        <span class="font-label-lg text-primary">2015</span>
+                        <p class="text-on-surface mt-1">First major pharmaceutical line launched focusing on
+                            antibiotics.</p>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-1 w-4 h-4 bg-outline-variant rounded-full border-4 border-surface">
+                        </div>
+                        <span class="font-label-lg text-primary">2018</span>
+                        <p class="text-on-surface mt-1">Achieved national certification for standardized manufacturing
+                            excellence.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- CPOHB Certification -->
+            <section class="bg-surface-container-high rounded-xl p-6 flex flex-col gap-4 border border-outline-variant">
+                <div class="flex items-center gap-3">
+                    <div class="bg-primary p-2 rounded-lg">
+                        <span class="material-symbols-outlined text-white"
+                            data-icon="workspace_premium">workspace_premium</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface">CPOHB Certification</h2>
+                </div>
+                <p class="font-body-md text-on-surface-variant italic">
+                    "Ensuring the highest standards of production as mandated by the Indonesian Ministry of
+                    Agriculture."
+                </p>
+                <div class="rounded-lg overflow-hidden border border-outline">
+                    <img class="w-full h-40 object-cover"
+                        data-alt="Official industrial laboratory certification document displayed in a glass frame on a clean medical wall"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1tyq3PkuGxqfqSVdNeQDNwqjo0euqESghMvSVfaU9LMbpeX2M7iSRcQwrzgU3jBgHH1akHEOJMK2lJsWzX93T6eZEshJj9KLEkv-bDiw9Xl_8EYY-RTAmAhMcuGIPADhW6R3bzO9obzpN2IX6tmqpGTQg2PpnD1pzDYuvYKm76N2HFG5AcXeGZMSXoXaT7unXfWAfVs1bH_osI4KXmGr_axLCaw2fFzEDvO2KblTeTldrGbf7YGCFGWb8glaE4Z7z36zNHODBPOIK" />
+                </div>
+            </section>
+            <!-- Customer Testimonial -->
+            <section class="space-y-stack-md">
+                <h2 class="font-headline-md text-headline-md text-on-surface text-center">What Our Partners Say</h2>
+                <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm relative overflow-hidden">
+                    <span
+                        class="material-symbols-outlined text-6xl text-surface-variant absolute -top-2 -left-2 opacity-30"
+                        data-icon="format_quote">format_quote</span>
+                    <p class="relative z-10 text-on-surface-variant leading-relaxed text-center italic">
+                        "SADITA's commitment to quality is evident in every batch. Their pharmaceutical solutions have
+                        significantly improved the health outcomes in our livestock clusters."
+                    </p>
+                    <div class="mt-6 flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+                            <img class="w-full h-full object-cover"
+                                data-alt="Professional portrait of a middle-aged veterinary consultant with a confident and trustworthy expression"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3DYGrO7CwRkV_F4-iiUmgnAUrPlajy9RR5xsOABTjhomGGcRqVJZ5BtL4_Zdoe9mI-5WiheRTEl7A3ohLwpq7cacXXSA0F8VYcGvWxA3689-Gb0LuJGUyYSOtZiLddgpM9dTrtFzIVcgob3xlrxoOElZRl929MkqXmWRikAftb43M_ypVehe4eqN41An8mY6FVRevFCW-BEwOh929cLrfe53QDsPnK520uwta4cYbd5g0m6VehGsxv1CHd_q1q0SHI7wDukIDQSum" />
+                        </div>
+                        <span class="font-label-lg text-primary mt-2">Dr. Hendrawan Saputra</span>
+                        <span class="text-[10px] text-secondary">Veterinary Consultant</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Footer -->
+            <footer class="pt-8 border-t border-gray-200 text-center space-y-stack-md">
+                <div class="text-lg font-bold text-red-900">SADITA</div>
+                <p class="text-xs text-on-surface-variant">© 2024 PT SATWA MEDIKA UTAMA. All Rights Reserved.</p>
+                <div class="flex justify-center gap-6 pb-12">
+                    <span class="material-symbols-outlined text-gray-400" data-icon="public">public</span>
+                    <span class="material-symbols-outlined text-gray-400" data-icon="mail">mail</span>
+                    <span class="material-symbols-outlined text-gray-400" data-icon="call">call</span>
+                </div>
+            </footer>
+        </main>
+        <!-- BottomNavBar -->
+        <nav
+            class="fixed bottom-0 left-1/2 z-50 flex h-[72px] w-full max-w-[512px] -translate-x-1/2 items-center justify-around border-t border-gray-200 bg-white">
+            <a href="index.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">home</span>
+                <span class="text-[11px] font-semibold">Beranda</span>
+            </a>
+            <a href="tentangkami.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-red-900">
+                <span class="material-symbols-outlined text-[27px]"
+                    style="font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;">apartment</span>
+                <span class="text-[11px] font-semibold">Tentang</span>
+            </a>
+            <a href="produk.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">inventory_2</span>
+                <span class="text-[11px] font-semibold">Produk</span>
+            </a>
+            <a href="artikel.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">article</span>
+                <span class="text-[11px] font-semibold">Artikel</span>
+            </a>
+            <a href="chat.html" class="flex min-w-0 flex-1 flex-col items-center gap-1 text-slate-400">
+                <span class="material-symbols-outlined text-[27px]">chat_bubble</span>
+                <span class="text-[11px] font-semibold">Chat</span>
+            </a>
+        </nav>
+    </div>
+</body>
+
+</html>

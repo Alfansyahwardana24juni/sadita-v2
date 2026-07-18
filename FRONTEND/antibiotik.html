@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#e3beb8",
+                        "secondary": "#5d5f5f",
+                        "inverse-primary": "#ffb4a8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#610000",
+                        "on-background": "#1b1c1c",
+                        "on-primary-fixed": "#410000",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#2b2d2d",
+                        "tertiary-fixed": "#e2e2e2",
+                        "secondary-fixed": "#e2e2e2",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "inverse-surface": "#303030",
+                        "inverse-on-surface": "#f3f0f0",
+                        "outline": "#8e706b",
+                        "on-secondary-fixed-variant": "#454747",
+                        "surface-container": "#f0eded",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#ff907f",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#ffdad4",
+                        "primary-fixed-dim": "#ffb4a8",
+                        "on-secondary-container": "#5f6161",
+                        "surface-variant": "#e4e2e1",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-container": "#414343",
+                        "on-primary-fixed-variant": "#920703",
+                        "on-surface": "#1b1c1c",
+                        "surface-bright": "#fcf9f8",
+                        "primary-container": "#8b0000",
+                        "surface-container-high": "#eae7e7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-surface-variant": "#5a403c",
+                        "surface-container-highest": "#e4e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "2rem",
+                        "gutter-grid": "1rem",
+                        "stack-md": "1rem",
+                        "container-max": "512px",
+                        "stack-sm": "0.5rem",
+                        "margin-main": "1.25rem"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-sm": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface flex justify-center min-h-screen">
+    <main class="w-full max-w-[512px] bg-background min-h-screen relative shadow-2xl flex flex-col">
+        <!-- TopAppBar -->
+        <header
+            class="fixed top-0 w-full max-w-[512px] border-b border-gray-200 dark:border-gray-800 flex justify-between items-center h-16 px-5 z-50 bg-white/95 backdrop-blur-sm shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
+            <div class="text-xl font-black tracking-tight text-red-900 dark:text-red-500 font-['Inter'] antialiased">
+                SADITA</div>
+            <div class="flex gap-4">
+                <button
+                    class="active:scale-95 transition-transform duration-150 hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-full">
+                    <span class="material-symbols-outlined text-red-900 dark:text-red-500">notifications</span>
+                </button>
+                <button
+                    class="active:scale-95 transition-transform duration-150 hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-full">
+                    <span class="material-symbols-outlined text-red-900 dark:text-red-500">account_circle</span>
+                </button>
+            </div>
+        </header>
+        <!-- Content Canvas -->
+        <div class="pt-20 pb-24 px-5">
+            <!-- Category Header & Search -->
+            <section class="mb-stack-lg">
+                <div class="flex items-center gap-2 mb-stack-md">
+                    <button onclick="window.location.href='index.html'"
+                        class="text-primary hover:bg-primary/5 p-1 rounded-lg transition-colors">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <h1 class="font-display-sm text-display-sm text-primary">Antibiotik</h1>
+                </div>
+                <div class="relative group">
+                    <input
+                        class="w-full bg-white border border-outline-variant rounded-xl py-3 pl-12 pr-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-secondary/50 font-body-md text-body-md"
+                        placeholder="Cari produk antibiotik..." type="text" />
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary group-focus-within:text-primary transition-colors">search</span>
+                </div>
+            </section>
+            <!-- Sub-category Filters -->
+            <section class="mb-stack-lg flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                <div onclick="window.location.href='antibiotik.html'"
+                    class="px-4 py-1.5 bg-primary text-on-primary rounded-full font-label-lg text-label-lg whitespace-nowrap cursor-pointer shadow-sm">
+                    Semua</div>
+                <div
+                    class="px-4 py-1.5 bg-white border border-outline-variant text-secondary rounded-full font-label-lg text-label-lg whitespace-nowrap cursor-pointer hover:border-primary transition-colors">
+                    Injeksi</div>
+                <div
+                    class="px-4 py-1.5 bg-white border border-outline-variant text-secondary rounded-full font-label-lg text-label-lg whitespace-nowrap cursor-pointer hover:border-primary transition-colors">
+                    Oral</div>
+                <div
+                    class="px-4 py-1.5 bg-white border border-outline-variant text-secondary rounded-full font-label-lg text-label-lg whitespace-nowrap cursor-pointer hover:border-primary transition-colors">
+                    Topikal</div>
+            </section>
+            <!-- Product Grid -->
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Product 1 -->
+                <a href="detail-cyprotil.html"
+                    class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="aspect-square bg-surface-container-low overflow-hidden">
+                        <img alt="Vial of veterinary antibiotic" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiaoZw8PvkOZKmQ91wWDKFKUmtz1mY4UCNEN_vIG6ZnnCOaTkLUMwn44w9k9okOLjvMEtOTCOlZjjmFQa_mrSpYkCgUE_u_yyeHoN1WLxtb9cjB6dNpYCrZpdrTQZwBdnoPTBCmeN5ecLPKtpqvTYK7V8EDD3pORdnYSsrZlHfJGthZAaKOThZ-JpJ8emtBHftXYduPbsAlixEJA2F5U2UL71flwzmyETgquDplkoFO2muZPsaOgnOgXhp5BrQArmUKNsjsfixUR1K" />
+                    </div>
+                    <div class="p-3">
+                        <span
+                            class="text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">INJEKSI</span>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-1">CYPROTIL</h3>
+                        <p class="text-[12px] text-secondary leading-tight line-clamp-2">Solusi efektif untuk infeksi
+                            pernafasan pada ternak.</p>
+                    </div>
+                </a>
+                <!-- Product 2 -->
+                <a href="detail-cyprotil.html"
+                    class="bg-white border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div class="aspect-square bg-surface-container-low overflow-hidden">
+                        <img alt="Medicine bottle" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoBJTg3ikXVV6-I2FVNArXdtFpMk5Vz0zC-rDMsTHagb1SfwG0BLUsSG5LaTPSIdaL7YLg_tJ3g4W128JFj7SP4dGdP-vyTmpDq3B8mlCiSXh4ZgGWJbI6Pswi_EtCX1wlrNKk4ATunz1DO2PcDpKwTDk-XsIjd3A2QTg4lSABikBSdGike-VlmqKVExE3M8q1M7pVmYz6vXwngohOf28QHOB4NmUceABQFIcZb9P2hf3azWDK4R9IaEYqm4zEA8hn5K4iyfxCJdd3" />
+                    </div>
+                    <div class="p-3">
+                        <span
+                            class="text-[10px] font-bold text-primary uppercase tracking-widest block mb-1">INJEKSI</span>
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-1">DITA FLOXA</h3>
+                        <p class="text-[12px] text-secondary leading-tight line-clamp-2">Antibiotik berspektrum luas
+                            untuk kesehatan unggas.</p>
+                    </div>
+                </a>
+                <!-- More products truncated for brevity in this page -->
+            </div>
+            <!-- Result count -->
+            <div class="mt-8 text-center">
+                <p class="text-label-sm font-label-sm text-secondary uppercase tracking-widest">Menampilkan 6 dari 24
+                    Produk Antibiotik</p>
+                <button onclick="window.location.href='katalog.html'"
+                    class="mt-4 px-6 py-2 border border-primary text-primary font-label-lg text-label-lg rounded-xl hover:bg-primary hover:text-on-primary transition-colors active:scale-95 duration-150">LIHAT
+                    LEBIH BANYAK</button>
+            </div>
+        </div>
+        <!-- BottomNavBar -->
+        <nav
+            class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[512px] h-16 flex justify-around items-center px-2 z-50 bg-white/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800 shadow-[0px_-4px_20px_rgba(0,0,0,0.05)]">
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-red-700 dark:hover:text-red-400 transition-colors active:opacity-70"
+                href="index.html">
+                <span class="material-symbols-outlined">home</span>
+                <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-red-700 dark:hover:text-red-400 transition-colors active:opacity-70"
+                href="tentangkami.html">
+                <span class="material-symbols-outlined">info</span>
+                <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">About</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-red-900 dark:text-red-500 font-bold active:opacity-70"
+                href="katalog.html">
+                <span class="material-symbols-outlined"
+                    style="font-variation-settings: 'FILL' 1;">medical_services</span>
+                <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Products</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-red-700 dark:hover:text-red-400 transition-colors active:opacity-70"
+                href="artikel.html">
+                <span class="material-symbols-outlined">description</span>
+                <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Articles</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 hover:text-red-700 dark:hover:text-red-400 transition-colors active:opacity-70"
+                href="chat.html">
+                <span class="material-symbols-outlined">chat</span>
+                <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-wider">Chat</span>
+            </a>
+        </nav>
+    </main>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body>
+
+</html>

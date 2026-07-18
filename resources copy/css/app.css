@@ -1,0 +1,56 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+  .container-main {
+    @apply w-full max-w-container mx-auto px-4 sm:px-6;
+  }
+
+  .btn-primary {
+    @apply px-6 py-2.5 bg-primary text-white font-label-lg rounded-xl shadow-lg active:scale-95 transition-transform;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2.5 bg-white border border-primary text-primary font-label-lg rounded-xl active:scale-95 transition-transform;
+  }
+
+  .product-card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow;
+  }
+
+  .product-badge {
+    @apply text-[10px] font-bold uppercase tracking-wider text-primary;
+  }
+
+  .hide-scrollbar {
+    @apply -ms-overflow-style-none scrollbar-width-none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    @apply hidden;
+  }
+}
+
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url("https://fonts.gstatic.com/s/materialsymbolsoutlined/v221/kJF1BvYX7OsON-A1w0PtWIlw-rkkVf0P.woff2") format("woff2");
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}

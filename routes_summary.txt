@@ -1,0 +1,99 @@
+
+ GET|HEAD / .. home › HomeController
+ GET|HEAD admin .. filament.admin.pages.dashboard › Filament\Pages › Dashboard
+ GET|HEAD admin/ai-agent-settings .. filament.admin.resources.ai-agent-settings.index › App\Filament\Resources\AiAgentSettings\Pages\ListAiAgentSettings
+ GET|HEAD admin/ai-agent-settings/create .. filament.admin.resources.ai-agent-settings.create › App\Filament\Resources\AiAgentSettings\Pages\CreateAiAgentSetting
+ GET|HEAD admin/ai-agent-settings/{record}/edit .. filament.admin.resources.ai-agent-settings.edit › App\Filament\Resources\AiAgentSettings\Pages\EditAiAgentSetting
+ GET|HEAD admin/ai-knowledge-bases .. filament.admin.resources.ai-knowledge-bases.index › App\Filament\Resources\AiKnowledgeBases\Pages\ListAiKnowledgeBases
+ GET|HEAD admin/ai-knowledge-bases/create .. filament.admin.resources.ai-knowledge-bases.create › App\Filament\Resources\AiKnowledgeBases\Pages\CreateAiKnowledgeBase
+ GET|HEAD admin/ai-knowledge-bases/{record}/edit .. filament.admin.resources.ai-knowledge-bases.edit › App\Filament\Resources\AiKnowledgeBases\Pages\EditAiKnowledgeBase
+ GET|HEAD admin/article-categories .. filament.admin.resources.article-categories.index › App\Filament\Resources\ArticleCategories\Pages\ListArticleCategories
+ GET|HEAD admin/article-categories/create .. filament.admin.resources.article-categories.create › App\Filament\Resources\ArticleCategories\Pages\CreateArticleCategory
+ GET|HEAD admin/article-categories/{record} .. filament.admin.resources.article-categories.view › App\Filament\Resources\ArticleCategories\Pages\ViewArticleCategory
+ GET|HEAD admin/article-categories/{record}/edit .. filament.admin.resources.article-categories.edit › App\Filament\Resources\ArticleCategories\Pages\EditArticleCategory
+ GET|HEAD admin/articles .. filament.admin.resources.articles.index › App\Filament\Resources\Articles\Pages\ListArticles
+ GET|HEAD admin/articles/create .. filament.admin.resources.articles.create › App\Filament\Resources\Articles\Pages\CreateArticle
+ GET|HEAD admin/articles/{record} .. filament.admin.resources.articles.view › App\Filament\Resources\Articles\Pages\ViewArticle
+ GET|HEAD admin/articles/{record}/edit .. filament.admin.resources.articles.edit › App\Filament\Resources\Articles\Pages\EditArticle
+ GET|HEAD admin/categories .. filament.admin.resources.categories.index › App\Filament\Resources\Categories\Pages\ListCategories
+ GET|HEAD admin/categories/create .. filament.admin.resources.categories.create › App\Filament\Resources\Categories\Pages\CreateCategory
+ GET|HEAD admin/categories/{record} .. filament.admin.resources.categories.view › App\Filament\Resources\Categories\Pages\ViewCategory
+ GET|HEAD admin/categories/{record}/edit .. filament.admin.resources.categories.edit › App\Filament\Resources\Categories\Pages\EditCategory
+ GET|HEAD admin/consultation-logs .. filament.admin.resources.consultation-logs.index › App\Filament\Resources\ConsultationLogs\Pages\ListConsultationLogs
+ GET|HEAD admin/consultation-logs/create .. filament.admin.resources.consultation-logs.create › App\Filament\Resources\ConsultationLogs\Pages\CreateConsultationLog
+ GET|HEAD admin/consultation-logs/{record} .. filament.admin.resources.consultation-logs.view › App\Filament\Resources\ConsultationLogs\Pages\ViewConsultationLog
+ GET|HEAD admin/consultation-logs/{record}/edit .. filament.admin.resources.consultation-logs.edit › App\Filament\Resources\ConsultationLogs\Pages\EditConsultationLog
+ GET|HEAD admin/display-settings .. filament.admin.resources.display-settings.index › App\Filament\Resources\DisplaySettings\Pages\ListDisplaySettings
+ GET|HEAD admin/display-settings/{record}/edit .. filament.admin.resources.display-settings.edit › App\Filament\Resources\DisplaySettings\Pages\EditDisplaySetting
+ GET|HEAD admin/hero-banners .. filament.admin.resources.hero-banners.index › App\Filament\Resources\HeroBanners\Pages\ListHeroBanners
+ GET|HEAD admin/hero-banners/create .. filament.admin.resources.hero-banners.create › App\Filament\Resources\HeroBanners\Pages\CreateHeroBanner
+ GET|HEAD admin/hero-banners/{record}/edit .. filament.admin.resources.hero-banners.edit › App\Filament\Resources\HeroBanners\Pages\EditHeroBanner
+ GET|HEAD admin/login .. filament.admin.auth.login › Filament\Auth › Login
+ POST admin/logout .. filament.admin.auth.logout › Filament\Auth › LogoutController
+ GET|HEAD admin/orders .. filament.admin.resources.orders.index › App\Filament\Resources\Orders\Pages\ListOrders
+ GET|HEAD admin/orders/create .. filament.admin.resources.orders.create › App\Filament\Resources\Orders\Pages\CreateOrder
+ GET|HEAD admin/orders/{record} .. filament.admin.resources.orders.view › App\Filament\Resources\Orders\Pages\ViewOrder
+ GET|HEAD admin/orders/{record}/edit .. filament.admin.resources.orders.edit › App\Filament\Resources\Orders\Pages\EditOrder
+ GET|HEAD admin/product-stocks .. filament.admin.resources.product-stocks.index › App\Filament\Resources\ProductStocks\Pages\ListProductStocks
+ GET|HEAD admin/product-stocks/create .. filament.admin.resources.product-stocks.create › App\Filament\Resources\ProductStocks\Pages\CreateProductStock
+ GET|HEAD admin/product-stocks/{record} .. filament.admin.resources.product-stocks.view › App\Filament\Resources\ProductStocks\Pages\ViewProductStock
+ GET|HEAD admin/product-stocks/{record}/edit .. filament.admin.resources.product-stocks.edit › App\Filament\Resources\ProductStocks\Pages\EditProductStock
+ GET|HEAD admin/products .. filament.admin.resources.products.index › App\Filament\Resources\Products\Pages\ListProducts
+ GET|HEAD admin/products/create .. filament.admin.resources.products.create › App\Filament\Resources\Products\Pages\CreateProduct
+ GET|HEAD admin/products/{record} .. filament.admin.resources.products.view › App\Filament\Resources\Products\Pages\ViewProduct
+ GET|HEAD admin/products/{record}/edit .. filament.admin.resources.products.edit › App\Filament\Resources\Products\Pages\EditProduct
+ GET|HEAD admin/warehouses .. filament.admin.resources.warehouses.index › App\Filament\Resources\Warehouses\Pages\ListWarehouses
+ GET|HEAD admin/warehouses/create .. filament.admin.resources.warehouses.create › App\Filament\Resources\Warehouses\Pages\CreateWarehouse
+ GET|HEAD admin/warehouses/{record} .. filament.admin.resources.warehouses.view › App\Filament\Resources\Warehouses\Pages\ViewWarehouse
+ GET|HEAD admin/warehouses/{record}/edit .. filament.admin.resources.warehouses.edit › App\Filament\Resources\Warehouses\Pages\EditWarehouse
+ POST ai/chat .. ai.chat › AiController@chat
+ GET|HEAD api/shipping/cities .. Api\ShippingController@getCities
+ GET|HEAD api/shipping/districts .. Api\ShippingController@getDistricts
+ POST api/shipping/methods .. Api\ShippingController@getShippingMethods
+ GET|HEAD api/shipping/provinces .. Api\ShippingController@getProvinces
+ GET|HEAD api/shipping/subdistricts .. Api\ShippingController@getSubdistricts
+ GET|HEAD api/shipping/test .. routes/api.php:22
+ GET|HEAD api/shipping/villages .. Api\ShippingController@getVillages
+ POST api/vouchers/check .. Api\VoucherController@check
+ GET|HEAD artikel .. artikel › PageController@artikel
+ GET|HEAD artikel/{article:slug} .. artikel.show › PageController@artikelShow
+ GET|HEAD cart .. cart.index › CartController@index
+ POST cart/add-by-slug/{product:slug} .. cart.add.slug › CartController@add
+ POST cart/add/{product} .. cart.add › CartController@add
+ GET|HEAD cart/count .. cart.count › CartController@count
+ DELETE cart/remove/{productId} .. cart.remove › CartController@remove
+ PATCH cart/update/{productId} .. cart.update › CartController@update
+ GET|HEAD chat .. chat › PageController@chat
+ GET|HEAD checkout .. checkout › CheckoutController@index
+ POST checkout .. checkout.store › CheckoutController@store
+ GET|HEAD checkout/success/{orderNumber}/{token} .. checkout.success › CheckoutController@success
+ GET|HEAD filament/exports/{export}/download .. filament.exports.download › Filament\Actions › DownloadExport
+ GET|HEAD filament/imports/{import}/failed-rows/download .. filament.imports.failed-rows.download › Filament\Actions › DownloadImportFailureCsv
+ GET|HEAD lang/{locale} .. locale.switch › routes/web.php:52
+ GET|HEAD livewire-0c96f51d/css/{component}.css .. vendor/livewire/livewire/src/Features/SupportCssModules/SupportCssModules.php:15
+ GET|HEAD livewire-0c96f51d/css/{component}.global.css .. vendor/livewire/livewire/src/Features/SupportCssModules/SupportCssModules.php:48
+ GET|HEAD livewire-0c96f51d/js/{component}.js .. vendor/livewire/livewire/src/Features/SupportJsModules/SupportJsModules.php:16
+ GET|HEAD livewire-0c96f51d/livewire.csp.min.js.map .. Livewire\Mechanisms › FrontendAssets@cspMaps
+ GET|HEAD livewire-0c96f51d/livewire.js .. Livewire\Mechanisms › FrontendAssets@returnJavaScriptAsFile
+ GET|HEAD livewire-0c96f51d/livewire.min.js.map .. Livewire\Mechanisms › FrontendAssets@maps
+ GET|HEAD livewire-0c96f51d/preview-file/{filename} .. livewire.preview-file › Livewire\Features › FilePreviewController@handle
+ POST livewire-0c96f51d/update .. default-livewire.update › Livewire\Mechanisms › HandleRequests@handleUpdate
+ POST livewire-0c96f51d/upload-file .. livewire.upload-file › Livewire\Features › FileUploadController@handle
+ GET|HEAD produk .. produk › PageController@produk
+ GET|HEAD produk/{category:slug} .. produk.category › PageController@produkKategori
+ GET|HEAD produk/{category:slug}/{product:slug} .. produk.detail › PageController@produkDetail
+ GET|HEAD saditacare .. saditacare › PageController@saditacare
+ GET|HEAD storage/{path} .. storage.local › vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:111
+ PUT storage/{path} .. storage.local.upload › vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:119
+ GET|HEAD tentang .. tentang › PageController@tentang
+ GET|HEAD toko .. toko.home › StoreController@index
+ GET|HEAD toko/katalog .. toko.katalog › ProductController@index
+ GET|HEAD toko/lacak-pesanan .. toko.track-order › OrderTrackingController@index
+ POST toko/lacak-pesanan .. OrderTrackingController@index
+ GET|HEAD toko/order .. toko.orders › CheckoutController@orders
+ GET|HEAD toko/produk/{product:slug} .. toko.produk.show › ProductController@show
+ POST toko/select-warehouse/{warehouse:slug} .. toko.select-warehouse › StoreController@select
+ GET|HEAD up .. vendor/laravel/framework/src/Illuminate/Foundation/Configuration/ApplicationBuilder.php:224
+
+ Showing [95] routes
+

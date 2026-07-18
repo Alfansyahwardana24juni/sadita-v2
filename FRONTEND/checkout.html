@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Checkout - SADITA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700,800,900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#ffb4a8",
+                        "tertiary-fixed": "#e2e2e2",
+                        "tertiary": "#2b2d2d",
+                        "on-primary-container": "#ff907f",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dcdddd",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary-container": "#afafb0",
+                        "surface": "#fcf9f8",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-container-low": "#f6f3f2",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#e3beb8",
+                        "primary": "#610000",
+                        "surface-variant": "#e4e2e1",
+                        "secondary": "#5d5f5f",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#b52619",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1b1c1c",
+                        "inverse-primary": "#ffb4a8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#5f6161",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#414343",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "outline": "#8e706b",
+                        "on-surface-variant": "#5a403c",
+                        "on-surface": "#1b1c1c",
+                        "surface-container": "#f0eded",
+                        "inverse-surface": "#303030",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "primary-container": "#8b0000",
+                        "secondary-fixed": "#e2e2e2",
+                        "inverse-on-surface": "#f3f0f0",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary-fixed-variant": "#920703",
+                        "on-primary-fixed": "#410000",
+                        "background": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed": "#ffdad4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "2rem",
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1rem",
+                        "container-max": "512px",
+                        "margin-main": "1.25rem",
+                        "gutter-grid": "1rem"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["10px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "label-lg": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display-sm": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 512px;
+            background-color: #fcf9f8;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 24px rgba(0, 0, 0, 0.05);
+        }
+
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-surface">
+    <div class="app-container">
+        <!-- TopAppBar -->
+        <header
+            class="fixed top-0 w-full max-w-[512px] left-1/2 -translate-x-1/2 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-sm dark:shadow-none flex justify-between items-center px-5 h-16">
+            <div class="flex items-center gap-3">
+                <button class="active:scale-95 duration-150 transition-colors hover:bg-gray-50 p-1 rounded-full"
+                    onclick="window.location.href='katalog.html'">
+                    <span class="material-symbols-outlined text-primary">arrow_back</span>
+                </button>
+                <h1 class="font-inter text-sm font-semibold tracking-tight text-red-900">Checkout</h1>
+            </div>
+            <div class="flex gap-4">
+                <span class="material-symbols-outlined text-red-900">location_on</span>
+                <span class="material-symbols-outlined text-red-900">shopping_cart</span>
+            </div>
+        </header>
+        <form id="checkoutForm" class="pt-20 pb-32 px-5 space-y-8" novalidate>
+            <section class="rounded-xl border border-outline-variant bg-white p-4">
+                <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">assignment</span>
+                    Informasi Pesanan
+                </h2>
+                <div class="grid grid-cols-1 gap-3">
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">ID pesanan</span>
+                        <input id="orderId" class="h-12 w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 text-base font-bold text-primary" type="text" readonly />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">Tanggal pemesanan</span>
+                        <input id="orderDate" class="h-12 w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 text-base font-bold text-primary" type="text" readonly />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">Informasi sales</span>
+                        <select id="salesInfo" class="h-12 w-full rounded-xl border border-outline-variant bg-surface-bright px-4 text-base focus:border-primary focus:ring-primary/20">
+                            <option value="Admin SADITA">Admin SADITA</option>
+                            <option value="Sales Bogor Timur">Sales Bogor Timur</option>
+                            <option value="Sales Makassar">Sales Makassar</option>
+                        </select>
+                    </label>
+                </div>
+            </section>
+
+            <div id="checkoutErrors" class="hidden rounded-xl border border-error bg-error-container p-4 text-sm font-semibold leading-6 text-on-error-container"></div>
+            <div id="checkoutSuccess" class="hidden rounded-xl border border-green-200 bg-green-50 p-4 text-sm font-semibold leading-6 text-green-800"></div>
+
+            <!-- Order Summary -->
+            <section>
+                <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">receipt_long</span>
+                    Ringkasan Pesanan
+                </h2>
+                <div id="checkoutItems" class="space-y-3"></div>
+                <button type="button" onclick="window.location.href='katalog.html'"
+                    class="w-full mt-4 flex items-center justify-center gap-2 py-3 border-2 border-dashed border-outline-variant rounded-xl text-secondary hover:text-primary hover:border-primary transition-colors font-label-lg">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Tambah Item Lainnya
+                </button>
+            </section>
+            <!-- Customer And Delivery Form -->
+            <section class="space-y-4">
+                <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">person_pin_circle</span>
+                    Informasi Pemesan
+                </h2>
+                <div class="space-y-3 rounded-xl border border-outline-variant bg-white p-4">
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">Nama lengkap</span>
+                        <input id="customerName" class="h-12 w-full rounded-xl border border-outline-variant bg-surface-bright px-4 text-base focus:border-primary focus:ring-primary/20" placeholder="Contoh: Budi Santoso / Budi Farm" type="text" autocomplete="name" />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">No WhatsApp pemesan</span>
+                        <input id="customerWhatsapp" class="h-12 w-full rounded-xl border border-outline-variant bg-surface-bright px-4 text-base focus:border-primary focus:ring-primary/20" placeholder="08xxxxxxxxxx" type="tel" inputmode="tel" autocomplete="tel" />
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">Alamat pengiriman</span>
+                        <textarea id="shippingAddress" class="min-h-28 w-full rounded-xl border border-outline-variant bg-surface-bright px-4 py-3 text-base leading-6 focus:border-primary focus:ring-primary/20" placeholder="Usahakan alamat lengkap: jalan, desa/kelurahan, kecamatan, kabupaten/kota, provinsi, patokan lokasi"></textarea>
+                    </label>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                    Pengiriman & Catatan
+                </h2>
+                <div class="rounded-xl border border-outline-variant bg-white p-4">
+                    <div class="flex items-start gap-3">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-fixed text-primary">
+                            <span class="material-symbols-outlined">warehouse</span>
+                        </span>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-bold text-primary">Gudang Bogor Timur</p>
+                            <p class="mt-1 text-sm leading-6 text-secondary">Estimasi kirim 1-2 hari. Admin akan konfirmasi ongkir dan ketersediaan stok.</p>
+                        </div>
+                        <button type="button" onclick="window.location.href='toko.html'" class="text-xs font-bold uppercase tracking-wide text-primary">Ubah</button>
+                    </div>
+                    <label class="mt-4 block">
+                        <span class="mb-2 block text-sm font-semibold text-secondary">Tambah catatan lainnya</span>
+                        <textarea id="orderNotes" class="min-h-24 w-full rounded-xl border border-outline-variant bg-surface-bright px-4 py-3 text-base leading-6 focus:border-primary focus:ring-primary/20" placeholder="Contoh: butuh saran dosis untuk broiler 18 hari, populasi 5.000 ekor"></textarea>
+                    </label>
+                </div>
+            </section>
+
+            <section class="rounded-xl border border-outline-variant bg-white p-4">
+                <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                    Pembayaran
+                </h2>
+                <div id="paymentOptions" class="space-y-3">
+                    <label class="flex items-start gap-3 rounded-xl border-2 border-primary bg-primary-fixed p-3">
+                        <input class="mt-1 text-primary focus:ring-primary" type="radio" name="paymentMethod" value="Konfirmasi admin dulu" checked />
+                        <span>
+                            <span class="block text-sm font-black text-primary">Konfirmasi admin dulu</span>
+                            <span class="mt-1 block text-sm leading-6 text-on-surface-variant">Rekomendasi saat ini. Admin cek stok, ongkir, total final, lalu kirim instruksi pembayaran.</span>
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-3 rounded-xl border border-outline-variant bg-surface-bright p-3">
+                        <input class="mt-1 text-primary focus:ring-primary" type="radio" name="paymentMethod" value="Transfer bank" />
+                        <span>
+                            <span class="block text-sm font-bold text-on-surface">Transfer bank</span>
+                            <span class="mt-1 block text-sm leading-6 text-secondary">Nomor rekening dikirim setelah pesanan dikonfirmasi.</span>
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-3 rounded-xl border border-outline-variant bg-surface-bright p-3">
+                        <input class="mt-1 text-primary focus:ring-primary" type="radio" name="paymentMethod" value="QRIS" />
+                        <span>
+                            <span class="block text-sm font-bold text-on-surface">QRIS</span>
+                            <span class="mt-1 block text-sm leading-6 text-secondary">Kode QR dikirim admin setelah total final tersedia.</span>
+                        </span>
+                    </label>
+                    <label class="flex items-start gap-3 rounded-xl border border-outline-variant bg-surface-bright p-3">
+                        <input class="mt-1 text-primary focus:ring-primary" type="radio" name="paymentMethod" value="COD / bayar di tempat" />
+                        <span>
+                            <span class="block text-sm font-bold text-on-surface">COD / bayar di tempat</span>
+                            <span class="mt-1 block text-sm leading-6 text-secondary">Tergantung area layanan dan persetujuan admin.</span>
+                        </span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="rounded-xl border border-outline-variant bg-white p-4">
+                <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined">payments</span>
+                    Ringkasan Biaya
+                </h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between gap-4"><span class="text-secondary">Subtotal produk</span><span id="checkoutSubtotal" class="font-bold text-on-surface">Rp 0</span></div>
+                    <div class="flex justify-between gap-4"><span class="text-secondary">Ongkir</span><span class="font-bold text-on-surface">Dikonfirmasi admin</span></div>
+                    <div class="flex justify-between gap-4 border-t border-outline-variant pt-3 text-base"><span class="font-bold text-primary">Total sementara</span><span id="checkoutTotal" class="font-black text-primary">Rp 0</span></div>
+                </div>
+                <p class="mt-4 rounded-xl bg-primary-fixed p-3 text-sm leading-6 text-primary">Pesanan belum dibayar otomatis. Admin SADITA akan menghubungi Anda untuk konfirmasi stok, ongkir, dan pembayaran.</p>
+            </section>
+        </form>
+        <!-- Bottom Action Bar -->
+        <footer
+            class="fixed bottom-0 w-full max-w-[512px] left-1/2 -translate-x-1/2 z-50 bg-white border-t border-gray-200 px-5 py-4 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+            <button form="checkoutForm" type="submit"
+                class="w-full bg-primary text-white font-inter text-sm font-semibold py-4 rounded-full active:scale-[0.98] transition-all flex items-center justify-center gap-2 hover:bg-red-900">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+                Kirim Pesanan ke Admin
+            </button>
+        </footer>
+    </div>
+    <script>
+        const checkoutForm = document.getElementById("checkoutForm");
+        const orderIdInput = document.getElementById("orderId");
+        const orderDateInput = document.getElementById("orderDate");
+        const checkoutErrors = document.getElementById("checkoutErrors");
+        const checkoutSuccess = document.getElementById("checkoutSuccess");
+        const checkoutItems = document.getElementById("checkoutItems");
+        const checkoutSubtotal = document.getElementById("checkoutSubtotal");
+        const checkoutTotal = document.getElementById("checkoutTotal");
+        let cartItems = JSON.parse(localStorage.getItem("saditaCart") || "[]");
+
+        function formatRupiah(value) {
+            return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(value);
+        }
+
+        function saveCart() {
+            localStorage.setItem("saditaCart", JSON.stringify(cartItems));
+            renderCheckoutItems();
+        }
+
+        function getSubtotal() {
+            return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
+        }
+
+        function renderCheckoutItems() {
+            const subtotal = getSubtotal();
+            checkoutSubtotal.textContent = formatRupiah(subtotal);
+            checkoutTotal.textContent = formatRupiah(subtotal);
+
+            if (cartItems.length === 0) {
+                checkoutItems.innerHTML = `
+                    <div class="rounded-xl border border-dashed border-outline-variant bg-white p-6 text-center">
+                        <span class="material-symbols-outlined text-4xl text-secondary">shopping_cart_off</span>
+                        <h3 class="mt-3 text-base font-black text-primary">Keranjang masih kosong</h3>
+                        <p class="mt-2 text-sm leading-6 text-secondary">Tambahkan produk dari katalog sebelum mengirim pesanan.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            checkoutItems.innerHTML = cartItems.map((item) => `
+                <div class="bg-white border border-outline-variant p-4 rounded-xl flex gap-4 transition-all">
+                    <div class="w-20 h-20 bg-surface-container rounded-lg overflow-hidden flex-shrink-0 border border-gray-100">
+                        <img class="w-full h-full object-cover" alt="${item.name}" src="${item.image}" />
+                    </div>
+                    <div class="flex-grow flex flex-col justify-between py-0.5">
+                        <div>
+                            <h3 class="font-label-lg text-label-lg text-primary">${item.name}</h3>
+                            <p class="font-label-sm text-label-sm text-secondary">${item.pack || item.category}</p>
+                        </div>
+                        <div class="flex justify-between items-end gap-3">
+                            <span class="font-headline-md text-label-lg text-primary">${formatRupiah(item.price)}</span>
+                            <div class="flex items-center border border-outline-variant rounded-full px-2 py-1 gap-3 bg-surface-bright">
+                                <button type="button" class="qty-btn text-primary active:scale-90 duration-150" data-id="${item.id}" data-action="minus" aria-label="Kurangi ${item.name}"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+                                <span class="font-label-lg text-label-lg">${item.qty}</span>
+                                <button type="button" class="qty-btn text-primary active:scale-90 duration-150" data-id="${item.id}" data-action="plus" aria-label="Tambah ${item.name}"><span class="material-symbols-outlined text-[18px]">add</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+
+            document.querySelectorAll(".qty-btn").forEach((button) => {
+                button.addEventListener("click", () => {
+                    const item = cartItems.find((cartItem) => cartItem.id === button.dataset.id);
+                    if (!item) return;
+                    if (button.dataset.action === "plus") item.qty += 1;
+                    if (button.dataset.action === "minus") item.qty -= 1;
+                    cartItems = cartItems.filter((cartItem) => cartItem.qty > 0);
+                    saveCart();
+                });
+            });
+        }
+
+        function createOrderId() {
+            const now = new Date();
+            const datePart = now.toISOString().slice(0, 10).replaceAll("-", "");
+            const randomPart = Math.floor(1000 + Math.random() * 9000);
+            return `SDT-${datePart}-${randomPart}`;
+        }
+
+        function formatOrderDate(date) {
+            return new Intl.DateTimeFormat("id-ID", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }).format(date);
+        }
+
+        function setInvalid(input, invalid) {
+            input.classList.toggle("border-error", invalid);
+            input.classList.toggle("bg-error-container", invalid);
+        }
+
+        function normalizeWhatsapp(value) {
+            return value.replace(/[\s-]/g, "");
+        }
+
+        const initialOrderId = localStorage.getItem("saditaDraftOrderId") || createOrderId();
+        localStorage.setItem("saditaDraftOrderId", initialOrderId);
+        orderIdInput.value = initialOrderId;
+        orderDateInput.value = formatOrderDate(new Date());
+
+        checkoutForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const customerName = document.getElementById("customerName");
+            const customerWhatsapp = document.getElementById("customerWhatsapp");
+            const shippingAddress = document.getElementById("shippingAddress");
+            const salesInfo = document.getElementById("salesInfo");
+            const orderNotes = document.getElementById("orderNotes");
+            const paymentMethod = checkoutForm.querySelector("input[name='paymentMethod']:checked");
+            const whatsappValue = normalizeWhatsapp(customerWhatsapp.value);
+            const errors = [];
+
+            setInvalid(customerName, false);
+            setInvalid(customerWhatsapp, false);
+            setInvalid(shippingAddress, false);
+
+            if (customerName.value.trim().length < 3) {
+                errors.push("Nama lengkap wajib diisi minimal 3 karakter.");
+                setInvalid(customerName, true);
+            }
+
+            if (!/^(\+?62|0)8[0-9]{8,12}$/.test(whatsappValue)) {
+                errors.push("No WhatsApp wajib valid, contoh 081234567890 atau +6281234567890.");
+                setInvalid(customerWhatsapp, true);
+            }
+
+            if (shippingAddress.value.trim().length < 20) {
+                errors.push("Alamat pengiriman wajib lengkap minimal 20 karakter.");
+                setInvalid(shippingAddress, true);
+            }
+
+            if (cartItems.length === 0) {
+                errors.push("Keranjang masih kosong. Tambahkan produk terlebih dahulu.");
+            }
+
+            checkoutSuccess.classList.add("hidden");
+
+            if (errors.length > 0) {
+                checkoutErrors.innerHTML = errors.map((error) => `<p>${error}</p>`).join("");
+                checkoutErrors.classList.remove("hidden");
+                checkoutErrors.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+
+            const orderPayload = {
+                orderId: orderIdInput.value,
+                orderDate: orderDateInput.value,
+                salesInfo: salesInfo.value,
+                customerName: customerName.value.trim(),
+                customerWhatsapp: whatsappValue,
+                shippingAddress: shippingAddress.value.trim(),
+                notes: orderNotes.value.trim(),
+                paymentMethod: paymentMethod.value,
+                items: cartItems,
+                subtotal: getSubtotal(),
+                shippingCost: "Dikonfirmasi admin",
+                status: "Menunggu konfirmasi admin"
+            };
+
+            localStorage.setItem("saditaLastOrder", JSON.stringify(orderPayload));
+            localStorage.removeItem("saditaDraftOrderId");
+            localStorage.removeItem("saditaCart");
+
+            window.location.href = "order-success.html";
+        });
+
+        renderCheckoutItems();
+    </script>
+</body>
+
+</html>
