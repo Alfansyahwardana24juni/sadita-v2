@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+@theme {
+    /* Colors */
+    --color-primary: #800000;
+    --color-primary-container: #8b0000;
+    --color-on-primary: #ffffff;
+    --color-background: #fcf9f8;
+    --color-surface: #f6f3f2;
+    --color-ink: #1b1c1c;
+    --color-muted: #5d5f5f;
+    --color-line: #ead8d5;
+    --color-moss: #31584a;
+    --color-amber: #b7791f;
+    --color-error: #ba1a1a;
+    
+    /* Typography */
+    --font-family-sans: Inter, sans-serif;
+    
+    /* Border Radius */
+    --radius-xl: 0.5rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+
+    /* Animations */
+    --animate-fade-in-up: fadeInUp 0.5s ease-out forwards;
+    
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+}
+
+@keyframes saditaSkeleton {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.sadita-skeleton {
+    background: linear-gradient(90deg, #f4eeed 25%, #ece2e0 37%, #f4eeed 63%);
+    background-size: 400% 100%;
+    animation: saditaSkeleton 1.2s ease-in-out infinite;
+}
+
+@layer components {
+    .main-container-responsive {
+        @apply mx-auto min-h-screen w-full max-w-[420px] sm:max-w-[540px] bg-white shadow-[0_0_40px_rgba(0,0,0,0.05)] rounded-t-[32px] overflow-hidden relative sm:mt-4 sm:mb-0 sm:min-h-[calc(100vh-1rem)];
+    }
+    .fixed-container-responsive {
+        @apply mx-auto w-full max-w-[420px] sm:max-w-[540px];
+    }
+    .page-container {
+        @apply pb-[110px];
+    }
+}
+
+@layer utilities {
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
