@@ -37,28 +37,32 @@ class AiAgentSettingResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('Identity & Style')
+            Section::make('BUSINESS INFORMATION')
                 ->columns(2)
                 ->schema([
-                    TextInput::make('name')->required(),
-                    TextInput::make('role'),
-                    TextInput::make('language'),
-                    TextInput::make('style'),
-                    TextInput::make('tone'),
-                    TextInput::make('addressing'),
-                    Toggle::make('is_active')->default(true),
+                    TextInput::make('business_name')->label('Business Name'),
+                    TextInput::make('business_address')->label('Address')->columnSpanFull(),
+                    TextInput::make('business_phone')->label('Phone')->tel(),
+                    TextInput::make('business_email')->label('Email')->email(),
+                    TextInput::make('business_website')->label('Website')->url(),
+                    TextInput::make('business_hours')->label('Hours')->columnSpanFull(),
                 ]),
-            Section::make('Agent Instructions')
-                ->schema([
-                    Textarea::make('scope_rules')->rows(6)->columnSpanFull(),
-                    Textarea::make('instructions')->rows(10)->columnSpanFull(),
-                    Textarea::make('response_format')->rows(8)->columnSpanFull(),
-                ]),
-            Section::make('Contact')
+                
+            Section::make('IDENTITY & STYLE')
                 ->columns(2)
                 ->schema([
-                    TextInput::make('contact_label'),
-                    TextInput::make('contact_value'),
+                    TextInput::make('name')->label('Name')->required(),
+                    TextInput::make('role')->label('Role')->columnSpanFull(),
+                    TextInput::make('language')->label('Language'),
+                    TextInput::make('style')->label('Style')->columnSpanFull(),
+                    TextInput::make('tone')->label('Tone')->columnSpanFull(),
+                    TextInput::make('addressing')->label('Address'),
+                    TextInput::make('allowed_emoji')->label('Emoji'),
+                    TextInput::make('no_emoji')->label('No Emoji'),
+                    TextInput::make('number_format')->label('Number Format'),
+                    Textarea::make('instructions')->label('Instructions')->rows(6)->columnSpanFull(),
+                    
+                    Toggle::make('is_active')->label('Status Aktif')->default(true)->columnSpanFull(),
                 ]),
         ]);
     }

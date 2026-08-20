@@ -4,7 +4,7 @@
 @endphp
 <x-layouts.toko title="Checkout - SADITA">
     {{-- Header --}}
-    <section class="sticky top-0 z-30 border-b border-line bg-white">
+    <section class="sticky top-[52px] z-40 border-b border-line bg-white">
         <div class="flex items-center gap-3 px-5 py-4">
             <a href="{{ route('cart.index') }}" class="flex h-10 w-10 items-center justify-center rounded-full hover:bg-surface transition-colors">
                 <span class="material-symbols-outlined text-xl">arrow_back</span>
@@ -577,8 +577,8 @@
                                     villageSelect.value = data.village_id;
                                     hideShippingSection();
                                     const o = citySelect.options[citySelect.selectedIndex];
-                                    if (o && o.dataset.rajaongkirCityId) {
-                                        const rjId = o.dataset.rajaongkirCityId;
+                                    if (o) {
+                                        const rjId = o.dataset.rajaongkirCityId || '';
                                         await loadShippingMethods(data.customer_regency_id, rjId, o.textContent, cartWeightGram);
                                     }
                                 }
@@ -782,7 +782,14 @@
                     `;
                 }
 
-                shippingOptions.innerHTML = header + '<div class="space-y-2">' + firstOptionHtml + '</div>' + extraOptionsHtml + toggleBtnHtml;
+                const noteHtml = `
+                    <div class="mt-3 text-[10.5px] leading-relaxed text-muted flex gap-2 items-start bg-orange-50/50 p-2.5 rounded-lg border border-orange-100/50">
+                        <span class="material-symbols-outlined text-[14px] mt-0.5 text-orange-400">info</span>
+                        <span>Estimasi pengiriman yang tampil berlaku <strong>setelah</strong> paket/barang diserahkan kepada pihak kurir jasa pengiriman.</span>
+                    </div>
+                `;
+
+                shippingOptions.innerHTML = header + '<div class="space-y-2">' + firstOptionHtml + '</div>' + extraOptionsHtml + toggleBtnHtml + noteHtml;
 
                 // Bind change event to all radios
                 shippingOptions.querySelectorAll('input[name="shipping_option"]').forEach((radio) => {

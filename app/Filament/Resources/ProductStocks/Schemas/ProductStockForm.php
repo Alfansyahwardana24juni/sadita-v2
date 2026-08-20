@@ -17,7 +17,13 @@ class ProductStockForm
                     ->required(),
                 Select::make('warehouse_id')
                     ->relationship('warehouse', 'name')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord: true, modifyRuleUsing: function (\Illuminate\Validation\Rules\Unique $rule, $get) {
+                        return $rule->where('product_id', $get('product_id'));
+                    })
+                    ->validationMessages([
+                        'unique' => 'Kombinasi Produk dan Gudang ini sudah ada! Silakan edit stok yang sudah ada.',
+                    ]),
                 TextInput::make('stock')
                     ->required()
                     ->numeric()

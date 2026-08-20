@@ -1,6 +1,6 @@
 <x-layouts.toko title="SADITA Toko - Katalog Produk">
     <div class="pb-24">
-        <header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
+        <header class="sticky top-[52px] z-40 border-b border-line bg-white/95 backdrop-blur">
             <div class="flex h-16 items-center justify-between px-5">
                 <a href="{{ route('toko.home') }}" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Kembali ke pilih gudang"><span class="material-symbols-outlined">arrow_back</span></a>
                 <div class="text-center">

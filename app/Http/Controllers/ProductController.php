@@ -83,6 +83,9 @@ class ProductController extends Controller
             'product' => $product,
             'warehouse' => $this->selectedWarehouse(),
             'relatedProducts' => $relatedProducts,
+            'title' => $product->name . ' - SADITA',
+            'description' => \Illuminate\Support\Str::limit(strip_tags($product->short_description ?? $product->description), 160),
+            'ogImage' => $product->image_url,
         ]);
     }
 

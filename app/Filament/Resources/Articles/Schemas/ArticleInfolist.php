@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Articles\Schemas;
 
 use Filament\Infolists\Components\ImageEntry;
-use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 
 class ArticleInfolist
@@ -12,37 +12,37 @@ class ArticleInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('category.name')
+                Text::make('category.name')
                     ->label('Category')
                     ->placeholder('-'),
-                TextEntry::make('title'),
-                TextEntry::make('slug'),
-                TextEntry::make('excerpt')
+                Text::make('title'),
+                Text::make('slug'),
+                Text::make('excerpt')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('content')
+                Text::make('content')
                     ->columnSpanFull(),
                 ImageEntry::make('featured_image')
                     ->placeholder('-'),
-                TextEntry::make('author'),
-                TextEntry::make('status')
+                Text::make('author'),
+                Text::make('status')
                     ->badge(),
-                TextEntry::make('published_at')
+                Text::make('published_at')
                     ->dateTime()
                     ->placeholder('-'),
-                TextEntry::make('meta_title')
+                Text::make('meta_title')
                     ->placeholder('-'),
-                TextEntry::make('meta_description')
+                Text::make('meta_description')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('views_count')
+                Text::make('views_count')
                     ->numeric(),
-                TextEntry::make('sort_order')
+                Text::make('sort_order')
                     ->numeric(),
-                TextEntry::make('created_at')
+                Text::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
-                TextEntry::make('updated_at')
+                Text::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

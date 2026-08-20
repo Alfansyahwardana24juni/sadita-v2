@@ -7,10 +7,20 @@
 
     <title>{{ $title ?? 'SADITA Toko' }}</title>
 
-    <meta
-        name="description"
-        content="{{ $description ?? 'Toko SADITA - Belanja produk kesehatan hewan.' }}"
-    >
+    <meta name="description" content="{{ $description ?? 'Toko SADITA - Belanja produk kesehatan, vitamin, dan obat hewan ternak terlengkap dan terpercaya.' }}">
+
+    <!-- OpenGraph (Facebook/WhatsApp) -->
+    <meta property="og:title" content="{{ $title ?? 'Toko SADITA - Belanja Obat Hewan Ternak' }}">
+    <meta property="og:description" content="{{ $description ?? 'Toko SADITA - Belanja produk kesehatan, vitamin, dan obat hewan ternak terlengkap dan terpercaya.' }}">
+    <meta property="og:image" content="{{ $ogImage ?? asset('images/logo sadita.png') }}">
+    <meta property="og:url" content="{{ request()->url() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'Toko SADITA - Belanja Obat Hewan Ternak' }}">
+    <meta name="twitter:description" content="{{ $description ?? 'Toko SADITA - Belanja produk kesehatan, vitamin, dan obat hewan ternak terlengkap dan terpercaya.' }}">
+    <meta name="twitter:image" content="{{ $ogImage ?? asset('images/logo sadita.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

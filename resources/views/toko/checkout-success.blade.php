@@ -36,11 +36,12 @@
     </section>
 
     @php
-        $displaySetting = \App\Models\DisplaySetting::active();
-        $bankName = $displaySetting->payment_bank_name ?: '-';
-        $bankAccount = $displaySetting->payment_bank_account ?: '-';
-        $bankHolder = $displaySetting->payment_bank_holder ?: '-';
-        $qrisImageUrl = $displaySetting->payment_qris_image ? asset('storage/' . $displaySetting->payment_qris_image) : null;
+        $storeSetting = \App\Models\StoreSetting::active();
+        $paymentMethods = is_array($storeSetting->payment_methods) ? $storeSetting->payment_methods : [];
+        $banks = array_filter($paymentMethods, fn($m) => ($m['type'] ?? '') === 'bank');
+        $qrisList = array_filter($paymentMethods, fn($m) => ($m['type'] ?? '') === 'qris');
+        $firstQris = reset($qrisList);
+        $qrisImageUrl = $firstQris && !empty($firstQris['qris_image']) ? asset('storage/' . $firstQris['qris_image']) : null;
     @endphp
 
     @if ($order->payment_status !== 'paid_confirmed')
@@ -50,12 +51,20 @@
             @if ($order->payment_method === 'transfer')
                 <div class="rounded-xl bg-surface p-3 text-sm text-ink">
                     <p class="font-bold">Transfer ke rekening resmi SADITA:</p>
-                    <div class="mt-2 space-y-1 text-sm text-muted">
-                        <p><span class="font-semibold text-ink">Bank:</span> {{ $bankName ?: '-' }}</p>
-                        <p><span class="font-semibold text-ink">No. Rek:</span> {{ $bankAccount ?: '-' }}</p>
-                        <p><span class="font-semibold text-ink">A/N:</span> {{ $bankHolder ?: '-' }}</p>
-                    </div>
-                    <p class="mt-3 text-xs leading-5 text-muted">Setelah transfer, kirim bukti pembayaran via WhatsApp agar pesanan bisa segera diproses.</p>
+                    @forelse($banks as $bank)
+                        <div class="mt-3 space-y-1 text-sm text-muted border-l-2 border-primary pl-3">
+                            <p><span class="font-semibold text-ink">Bank:</span> {{ $bank['bank_name'] ?? '-' }}</p>
+                            <p><span class="font-semibold text-ink">No. Rek:</span> {{ $bank['bank_account'] ?? '-' }}</p>
+                            <p><span class="font-semibold text-ink">A/N:</span> {{ $bank['bank_holder'] ?? '-' }}</p>
+                        </div>
+                    @empty
+                        <div class="mt-2 space-y-1 text-sm text-muted">
+                            <p><span class="font-semibold text-ink">Bank:</span> -</p>
+                            <p><span class="font-semibold text-ink">No. Rek:</span> -</p>
+                            <p><span class="font-semibold text-ink">A/N:</span> -</p>
+                        </div>
+                    @endforelse
+                    <p class="mt-4 text-xs leading-5 text-muted">Setelah transfer, kirim bukti pembayaran via WhatsApp agar pesanan bisa segera diproses.</p>
                 </div>
             @elseif ($order->payment_method === 'qris')
                 <div class="rounded-xl bg-surface p-3 text-sm text-muted">
@@ -90,7 +99,50 @@
         </section>
     @endif
 
-    <div class="mx-5 mt-4 grid grid-cols-2 gap-3">
+    @if ($order->status === 'pending')
+        <div class="mx-5 mt-5">
+            <div class="flex gap-3">
+                <a href="{{ route('toko.orders.edit', [$order->order_number, $order->success_token]) }}" class="flex-1 flex h-11 items-center justify-center gap-2 rounded-xl border border-primary text-sm font-bold text-primary bg-primary/5">
+                    <span class="material-symbols-outlined text-[17px]">edit</span>
+                    Edit Pesanan
+                </a>
+                
+                @if(!$order->cancel_requested)
+                    <button type="button" onclick="document.getElementById('cancel-modal').classList.remove('hidden')" class="flex-1 flex h-11 items-center justify-center gap-2 rounded-xl border border-red-500 text-sm font-bold text-red-500 bg-red-50">
+                        <span class="material-symbols-outlined text-[17px]">cancel</span>
+                        Batalkan
+                    </button>
+                @else
+                    <div class="flex-1 flex h-11 items-center justify-center gap-2 rounded-xl bg-orange-100 text-sm font-bold text-orange-600">
+                        <span class="material-symbols-outlined text-[17px]">pending_actions</span>
+                        Menunggu Batal
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        {{-- Cancel Modal --}}
+        @if(!$order->cancel_requested)
+            <div id="cancel-modal" class="fixed inset-0 z-50 hidden bg-black/50 px-5 backdrop-blur-sm transition-opacity flex items-center justify-center">
+                <div class="w-full max-w-sm rounded-2xl bg-white p-5 shadow-2xl">
+                    <h3 class="text-lg font-black text-ink mb-2">Batalkan Pesanan?</h3>
+                    <p class="text-sm text-muted mb-4">Pesanan yang dibatalkan memerlukan persetujuan Admin. Berikan alasan pembatalan Anda:</p>
+                    
+                    <form action="{{ route('toko.orders.cancel', [$order->order_number, $order->success_token]) }}" method="POST">
+                        @csrf
+                        <textarea name="cancel_reason" required rows="3" placeholder="Contoh: Ingin ganti alamat / salah pesan barang..." class="w-full rounded-xl border border-line bg-surface/50 p-3 text-sm focus:border-primary outline-none mb-4"></textarea>
+                        
+                        <div class="flex gap-3">
+                            <button type="button" onclick="document.getElementById('cancel-modal').classList.add('hidden')" class="flex-1 py-2.5 rounded-xl border border-line text-sm font-bold text-ink">Kembali</button>
+                            <button type="submit" class="flex-1 py-2.5 rounded-xl bg-red-500 text-sm font-bold text-white shadow-lg shadow-red-500/30">Ya, Batalkan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
+    @endif
+
+    <div class="mx-5 mt-4 grid grid-cols-2 gap-3 mb-10">
         <a href="{{ route('toko.katalog') }}" class="flex h-11 items-center justify-center gap-2 rounded-xl border border-line bg-white text-sm font-bold text-primary">
             <span class="material-symbols-outlined text-[17px]">grid_view</span>
             Katalog

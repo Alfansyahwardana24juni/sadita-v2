@@ -3,7 +3,7 @@ $selectedCount = collect($items)->filter(fn($i) => !isset($i["selected"]) || $i[
 $allSelected = count($items) > 0 && $selectedCount === count($items);
 ?>
 <x-layouts.toko title="Keranjang - SADITA">
-    <section class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur px-5 py-4 flex items-center gap-3">
+    <section class="sticky top-[52px] z-40 border-b border-line bg-white/95 backdrop-blur px-5 py-4 flex items-center gap-3">
         <a href="{{ route('toko.katalog') }}" class="flex h-9 w-9 items-center justify-center rounded-xl text-primary hover:bg-primary/5 transition-colors">
             <span class="material-symbols-outlined text-[22px]">arrow_back</span>
         </a>

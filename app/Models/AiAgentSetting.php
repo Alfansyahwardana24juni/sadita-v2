@@ -19,6 +19,17 @@ class AiAgentSetting extends Model
         'contact_label',
         'contact_value',
         'is_active',
+        // Business Info
+        'business_name',
+        'business_address',
+        'business_phone',
+        'business_email',
+        'business_website',
+        'business_hours',
+        // Additional Identity
+        'allowed_emoji',
+        'no_emoji',
+        'number_format',
     ];
 
     protected function casts(): array

@@ -46,6 +46,11 @@ Route::get('/toko/order', [CheckoutController::class, 'orders'])->name('toko.ord
 Route::get('/toko/lacak-pesanan', [App\Http\Controllers\OrderTrackingController::class, 'index'])->name('toko.track-order');
 Route::post('/toko/lacak-pesanan', [App\Http\Controllers\OrderTrackingController::class, 'index']);
 
+// Order Actions
+Route::get('/toko/pesanan/{orderNumber}/{token}/edit', [App\Http\Controllers\OrderActionController::class, 'edit'])->name('toko.orders.edit');
+Route::post('/toko/pesanan/{orderNumber}/{token}/edit', [App\Http\Controllers\OrderActionController::class, 'update'])->name('toko.orders.update');
+Route::post('/toko/pesanan/{orderNumber}/{token}/cancel', [App\Http\Controllers\OrderActionController::class, 'cancel'])->name('toko.orders.cancel');
+
 // AI Routes
 Route::post('/ai/chat', [AiController::class, 'chat'])->middleware('throttle:ai-chat')->name('ai.chat');
 

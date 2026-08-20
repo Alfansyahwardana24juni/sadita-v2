@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Orders\Schemas;
 
-use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 
 class OrderInfolist
@@ -11,40 +11,40 @@ class OrderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('order_number'),
-                TextEntry::make('warehouse.name')
+                Text::make('order_number'),
+                Text::make('warehouse.name')
                     ->label('Warehouse')
                     ->placeholder('-'),
-                TextEntry::make('user.name')
+                Text::make('user.name')
                     ->label('User')
                     ->placeholder('-'),
-                TextEntry::make('customer_name'),
-                TextEntry::make('customer_phone'),
-                TextEntry::make('customer_address')
+                Text::make('customer_name'),
+                Text::make('customer_phone'),
+                Text::make('customer_address')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('customer_city')
+                Text::make('customer_city')
                     ->placeholder('-'),
-                TextEntry::make('subtotal')
+                Text::make('subtotal')
                     ->numeric(),
-                TextEntry::make('shipping_cost')
+                Text::make('shipping_cost')
                     ->money(),
-                TextEntry::make('total')
+                Text::make('total')
                     ->numeric(),
-                TextEntry::make('status')
+                Text::make('status')
                     ->badge(),
-                TextEntry::make('payment_method')
+                Text::make('payment_method')
                     ->placeholder('-'),
-                TextEntry::make('notes')
+                Text::make('notes')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('admin_notes')
+                Text::make('admin_notes')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('created_at')
+                Text::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
-                TextEntry::make('updated_at')
+                Text::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\ProductStocks\Schemas;
 
-use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 
 class ProductStockInfolist
@@ -11,20 +11,20 @@ class ProductStockInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('product.name')
+                Text::make('product.name')
                     ->label('Product'),
-                TextEntry::make('warehouse.name')
+                Text::make('warehouse.name')
                     ->label('Warehouse'),
-                TextEntry::make('stock')
+                Text::make('stock')
                     ->numeric(),
-                TextEntry::make('reserved_stock')
+                Text::make('reserved_stock')
                     ->numeric(),
-                TextEntry::make('low_stock_threshold')
+                Text::make('low_stock_threshold')
                     ->numeric(),
-                TextEntry::make('created_at')
+                Text::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
-                TextEntry::make('updated_at')
+                Text::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

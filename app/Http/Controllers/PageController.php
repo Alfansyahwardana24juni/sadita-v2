@@ -147,6 +147,9 @@ class PageController extends Controller
         return view('pages.artikel-detail', [
             'article' => $article->fresh(['category']),
             'relatedArticles' => $relatedArticles,
+            'title' => $article->title . ' - Artikel SADITA',
+            'description' => \Illuminate\Support\Str::limit(strip_tags($article->excerpt ?? $article->content), 160),
+            'ogImage' => str_starts_with($article->featured_image, 'http') ? $article->featured_image : \Illuminate\Support\Facades\Storage::url($article->featured_image),
         ]);
     }
 

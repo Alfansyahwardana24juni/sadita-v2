@@ -7,10 +7,20 @@
 
     <title>{{ $title ?? 'SADITA' }}</title>
 
-    <meta
-        name="description"
-        content="{{ $description ?? 'Partner produk kesehatan hewan dan peternakan Indonesia.' }}"
-    >
+    <meta name="description" content="{{ $description ?? 'SADITA - Solusi Sehat Ternak Anda. Kami menyediakan obat-obatan, vitamin, dan konsultasi kesehatan hewan ternak terlengkap.' }}">
+
+    <!-- OpenGraph (Facebook/WhatsApp) -->
+    <meta property="og:title" content="{{ $title ?? 'SADITA - Solusi Sehat Ternak Anda' }}">
+    <meta property="og:description" content="{{ $description ?? 'SADITA - Solusi Sehat Ternak Anda. Kami menyediakan obat-obatan, vitamin, dan konsultasi kesehatan hewan ternak terlengkap.' }}">
+    <meta property="og:image" content="{{ $ogImage ?? asset('images/logo sadita.png') }}">
+    <meta property="og:url" content="{{ request()->url() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'SADITA - Solusi Sehat Ternak Anda' }}">
+    <meta name="twitter:description" content="{{ $description ?? 'SADITA - Solusi Sehat Ternak Anda. Kami menyediakan obat-obatan, vitamin, dan konsultasi kesehatan hewan ternak terlengkap.' }}">
+    <meta name="twitter:image" content="{{ $ogImage ?? asset('images/logo sadita.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 

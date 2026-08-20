@@ -58,6 +58,13 @@ class OrdersTable
                         'cancelled' => 'Dibatalkan',
                         default => $state,
                     }),
+                \Filament\Tables\Columns\IconColumn::make('cancel_requested')
+                    ->label('Req Batal')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-exclamation-triangle')
+                    ->trueColor('danger')
+                    ->falseIcon('')
+                    ->tooltip(fn ($record) => $record->cancel_requested ? $record->cancel_reason : null),
                 TextColumn::make('created_at')
                     ->label('Tanggal')
                     ->dateTime('d M Y H:i')
@@ -82,6 +89,28 @@ class OrdersTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make()->label('Update Status'),
+                \Filament\Actions\Action::make('approve_cancel')
+                    ->label('Setujui Batal')
+                    ->icon('heroicon-o-check-circle')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->modalHeading('Setujui Pembatalan')
+                    ->modalDescription(fn (\App\Models\Order $record) => 'Pelanggan meminta pembatalan dengan alasan: ' . $record->cancel_reason . '. Apakah Anda yakin ingin membatalkan pesanan ini?')
+                    ->visible(fn (\App\Models\Order $record) => $record->cancel_requested && $record->status !== 'cancelled')
+                    ->action(function (\App\Models\Order $record) {
+                        $record->update(['status' => 'cancelled', 'cancel_requested' => false]);
+                        \Filament\Notifications\Notification::make()->title('Pesanan berhasil dibatalkan')->success()->send();
+                    }),
+                \Filament\Actions\Action::make('reject_cancel')
+                    ->label('Tolak Batal')
+                    ->icon('heroicon-o-x-circle')
+                    ->color('warning')
+                    ->requiresConfirmation()
+                    ->visible(fn (\App\Models\Order $record) => $record->cancel_requested && $record->status !== 'cancelled')
+                    ->action(function (\App\Models\Order $record) {
+                        $record->update(['cancel_requested' => false]);
+                        \Filament\Notifications\Notification::make()->title('Permintaan batal ditolak')->success()->send();
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

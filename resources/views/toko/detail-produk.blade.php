@@ -16,7 +16,7 @@
     @endphp
 
     <div class="pb-32">
-        <header class="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
+        <header class="sticky top-[52px] z-40 flex h-16 items-center justify-between border-b border-line bg-white/95 px-5 backdrop-blur">
             <button onclick="window.history.length > 1 ? window.history.back() : window.location.href='{{ route('toko.katalog') }}'" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Kembali ke katalog"><span class="material-symbols-outlined">arrow_back</span></button>
             <div class="text-center">
                 <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">Detail Produk</p>

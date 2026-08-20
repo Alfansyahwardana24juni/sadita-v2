@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\ArticleCategories\Schemas;
 
 use Filament\Infolists\Components\IconEntry;
-use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 
 class ArticleCategoryInfolist
@@ -12,19 +12,19 @@ class ArticleCategoryInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('slug'),
-                TextEntry::make('description')
+                Text::make('name'),
+                Text::make('slug'),
+                Text::make('description')
                     ->placeholder('-')
                     ->columnSpanFull(),
                 IconEntry::make('is_active')
                     ->boolean(),
-                TextEntry::make('sort_order')
+                Text::make('sort_order')
                     ->numeric(),
-                TextEntry::make('created_at')
+                Text::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
-                TextEntry::make('updated_at')
+                Text::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

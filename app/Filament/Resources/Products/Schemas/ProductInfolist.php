@@ -13,60 +13,60 @@ class ProductInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('category.name')
+                Text::make('category.name')
                     ->label('Category'),
-                TextEntry::make('name'),
-                TextEntry::make('slug'),
-                TextEntry::make('description')
+                Text::make('name'),
+                Text::make('slug'),
+                Text::make('description')
                     ->columnSpanFull(),
-                TextEntry::make('short_description')
+                Text::make('short_description')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('composition')
+                Text::make('composition')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('indication')
+                Text::make('indication')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('usage_instruction')
+                Text::make('usage_instruction')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('dosage')
+                Text::make('dosage')
                     ->placeholder('-'),
-                TextEntry::make('withdrawal_time')
+                Text::make('withdrawal_time')
                     ->placeholder('-'),
-                TextEntry::make('registration_number')
+                Text::make('registration_number')
                     ->placeholder('-'),
-                TextEntry::make('pack')
+                Text::make('pack')
                     ->placeholder('-'),
-                TextEntry::make('animal_type')
+                Text::make('animal_type')
                     ->placeholder('-'),
-                TextEntry::make('symptom_tags')
+                Text::make('symptom_tags')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('price')
+                Text::make('price')
                     ->money(),
-                TextEntry::make('compare_at_price')
+                Text::make('compare_at_price')
                     ->money()
                     ->placeholder('-'),
                 ImageEntry::make('image')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('rating')
+                Text::make('rating')
                     ->numeric(),
-                TextEntry::make('reviews_count')
+                Text::make('reviews_count')
                     ->numeric(),
-                TextEntry::make('sold_count')
+                Text::make('sold_count')
                     ->numeric(),
-                TextEntry::make('status'),
+                Text::make('status'),
                 IconEntry::make('is_featured')
                     ->boolean(),
-                TextEntry::make('sort_order')
+                Text::make('sort_order')
                     ->numeric(),
-                TextEntry::make('created_at')
+                Text::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
-                TextEntry::make('updated_at')
+                Text::make('updated_at')
                     ->dateTime()
                     ->placeholder('-'),
             ]);

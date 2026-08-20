@@ -37,12 +37,17 @@ class Order extends Model
         'payment_status',
         'notes',
         'admin_notes',
+        'cancel_requested',
+        'cancel_reason',
     ];
 
     protected $casts = [
         'subtotal' => 'integer',
         'shipping_cost' => 'integer',
         'total' => 'integer',
+        'discount_amount' => 'integer',
+        'cashback_amount' => 'integer',
+        'cancel_requested' => 'boolean',
     ];
 
     public function getPaymentMethodLabelAttribute(): string

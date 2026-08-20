@@ -4,7 +4,7 @@ namespace App\Filament\Resources\ConsultationLogs\Schemas;
 
 use Filament\Schemas\Components\KeyValue;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\TextEntry;
+use Filament\Schemas\Components\Text;
 use Filament\Schemas\Schema;
 
 class ConsultationLogInfolist
@@ -16,14 +16,14 @@ class ConsultationLogInfolist
                 Section::make('Session Information')
                     ->columns(2)
                     ->schema([
-                        TextEntry::make('session_id')
+                        Text::make('session_id')
                             ->label('Session ID'),
-                        TextEntry::make('animal_type')
+                        Text::make('animal_type')
                             ->label('Animal Type')
                             ->badge(),
-                        TextEntry::make('ip_address')
+                        Text::make('ip_address')
                             ->label('IP Address'),
-                        TextEntry::make('created_at')
+                        Text::make('created_at')
                             ->label('Created At')
                             ->dateTime(),
                     ]),
@@ -38,7 +38,7 @@ class ConsultationLogInfolist
 
                 Section::make('Recommended Products')
                     ->schema([
-                        TextEntry::make('recommended_products')
+                        Text::make('recommended_products')
                             ->label('Products')
                             ->listWithLineBreaks()
                             ->bulleted()

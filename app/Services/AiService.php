@@ -355,6 +355,8 @@ PROMPT;
                 if ($msg['role'] === 'assistant') {
                     // Strip the [PRODUCT:...] markers so the AI doesn't learn and hallucinate them
                     $content = preg_replace('/\[PRODUCT:[^\]]+\]/i', '', $content);
+                    // Strip think blocks if they exist in old history
+                    $content = preg_replace('/<think>.*?<\/think>\s*/is', '', $content);
                 }
                 
                 $messages[] = [
@@ -378,6 +380,9 @@ PROMPT;
 
             $aiResponse = $response['choices'][0]['message']['content'] ?? 'Maaf, terjadi kesalahan saat memproses respons.';
             
+            // Hapus blok <think>...</think> jika ada (biasanya dihasilkan oleh model reasoning seperti Qwen)
+            $aiResponse = preg_replace('/<think>.*?<\/think>\s*/is', '', $aiResponse);
+            
             // Parse dan tambahkan link produk jika ada rekomendasi
             return $this->enrichWithProductLinks($aiResponse);
             
@@ -386,10 +391,10 @@ PROMPT;
             
             $msg = $e->getMessage();
             if (str_contains($msg, 'rate_limit') || str_contains($msg, '429') || str_contains($msg, 'quota') || str_contains($msg, 'insufficient')) {
-                return '[AI_UNAVAILABLE]Mohon maaf, layanan konsultasi AI sedang tidak tersedia untuk sementara karena batas pemakaian harian telah tercapai. Silakan coba lagi besok atau hubungi tim SADITA langsung melalui WhatsApp untuk konsultasi.';
+                return '[AI_UNAVAILABLE]Halo Sahabat Sadita! Untuk mendapatkan pelayanan dan konsultasi yang lebih maksimal saat ini, yuk langsung hubungi tim kami via WhatsApp.';
             }
             
-            return 'Maaf, tidak dapat terhubung ke AI. Silakan coba lagi atau hubungi tim SADITA langsung.';
+            return 'Halo Sahabat Sadita! Untuk mendapatkan pelayanan dan konsultasi yang lebih maksimal saat ini, yuk langsung hubungi tim kami via WhatsApp.';
         }
     }
     
@@ -436,43 +441,51 @@ PROMPT;
         $sections = [];
 
         if ($setting) {
-            $sections[] = "AGENT SPEC";
-            $sections[] = "Nama: " . ($setting->name ?: 'SaditaCare');
-            if ($setting->role) {
-                $sections[] = "Peran: {$setting->role}";
-            }
-            if ($setting->language) {
-                $sections[] = "Bahasa: {$setting->language}";
-            }
-            if ($setting->style) {
-                $sections[] = "Style: {$setting->style}";
-            }
-            if ($setting->tone) {
-                $sections[] = "Tone: {$setting->tone}";
-            }
-            if ($setting->addressing) {
-                $sections[] = "Panggilan user: {$setting->addressing}";
-            }
-            if ($setting->scope_rules) {
-                $sections[] = "";
-                $sections[] = "BATASAN SCOPE:";
-                $sections[] = trim($setting->scope_rules);
-            }
+            $sections[] = "<agent_behavior_spec>";
+            
+            // Business Information
+            $sections[] = "  <business_information>";
+            if ($setting->business_name) $sections[] = "    <business_name>{$setting->business_name}</business_name>";
+            if ($setting->business_address) $sections[] = "    <address>{$setting->business_address}</address>";
+            if ($setting->business_phone) $sections[] = "    <phone>{$setting->business_phone}</phone>";
+            if ($setting->business_email) $sections[] = "    <email>{$setting->business_email}</email>";
+            if ($setting->business_website) $sections[] = "    <website>{$setting->business_website}</website>";
+            if ($setting->business_hours) $sections[] = "    <operating_hours>{$setting->business_hours}</operating_hours>";
+            $sections[] = "  </business_information>";
+            
+            // Identity and Style
+            $sections[] = "  <identity_and_style>";
+            $sections[] = "    <agent_name>" . ($setting->name ?: 'SaditaCare') . "</agent_name>";
+            if ($setting->role) $sections[] = "    <agent_role>{$setting->role}</agent_role>";
+            if ($setting->language) $sections[] = "    <language>{$setting->language}</language>";
+            if ($setting->style) $sections[] = "    <communication_style>{$setting->style}</communication_style>";
+            if ($setting->tone) $sections[] = "    <tone>{$setting->tone}</tone>";
+            if ($setting->addressing) $sections[] = "    <address_user_with>{$setting->addressing}</address_user_with>";
+            if ($setting->allowed_emoji) $sections[] = "    <allowed_emoji>{$setting->allowed_emoji}</allowed_emoji>";
+            if ($setting->no_emoji) $sections[] = "    <no_emoji>{$setting->no_emoji}</no_emoji>";
+            if ($setting->number_format) $sections[] = "    <number_format>{$setting->number_format}</number_format>";
             if ($setting->instructions) {
-                $sections[] = "";
-                $sections[] = "INSTRUKSI WAJIB:";
-                $sections[] = trim($setting->instructions);
+                $sections[] = "    <additional_instruction>";
+                $sections[] = "      " . trim($setting->instructions);
+                $sections[] = "    </additional_instruction>";
             }
+            $sections[] = "  </identity_and_style>";
+
+            // Scope and Rules mapped as Guardrails
+            if ($setting->scope_rules) {
+                $sections[] = "  <global_guardrails>";
+                $sections[] = "    " . trim($setting->scope_rules);
+                $sections[] = "  </global_guardrails>";
+            }
+            
+            // Response Format
             if ($setting->response_format) {
-                $sections[] = "";
-                $sections[] = "FORMAT JAWABAN:";
-                $sections[] = trim($setting->response_format);
+                $sections[] = "  <response_format>";
+                $sections[] = "    " . trim($setting->response_format);
+                $sections[] = "  </response_format>";
             }
-            if ($setting->contact_label || $setting->contact_value) {
-                $sections[] = "";
-                $sections[] = "KONTAK:";
-                $sections[] = trim(($setting->contact_label ?: 'Kontak') . ': ' . ($setting->contact_value ?: '-'));
-            }
+            
+            $sections[] = "</agent_behavior_spec>";
         }
 
         if ($knowledgeItems->isNotEmpty()) {

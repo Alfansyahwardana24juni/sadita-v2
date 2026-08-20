@@ -97,6 +97,49 @@
                     </div>
                 </div>
 
+                @if ($order->status === 'pending')
+                    <div class="mt-5 pt-4 border-t border-line">
+                        <div class="flex gap-3">
+                            <a href="{{ route('toko.orders.edit', [$order->order_number, $order->success_token]) }}" class="flex-1 flex h-11 items-center justify-center gap-2 rounded-xl border border-primary text-sm font-bold text-primary bg-primary/5">
+                                <span class="material-symbols-outlined text-[17px]">edit</span>
+                                Edit Pesanan
+                            </a>
+                            
+                            @if(!$order->cancel_requested)
+                                <button type="button" onclick="document.getElementById('cancel-modal').classList.remove('hidden')" class="flex-1 flex h-11 items-center justify-center gap-2 rounded-xl border border-red-500 text-sm font-bold text-red-500 bg-red-50">
+                                    <span class="material-symbols-outlined text-[17px]">cancel</span>
+                                    Batalkan
+                                </button>
+                            @else
+                                <div class="flex-1 flex h-11 items-center justify-center gap-2 rounded-xl bg-orange-100 text-sm font-bold text-orange-600">
+                                    <span class="material-symbols-outlined text-[17px]">pending_actions</span>
+                                    Menunggu Batal
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    {{-- Cancel Modal --}}
+                    @if(!$order->cancel_requested)
+                        <div id="cancel-modal" class="fixed inset-0 z-50 hidden bg-black/50 px-5 backdrop-blur-sm transition-opacity flex items-center justify-center">
+                            <div class="w-full max-w-sm rounded-2xl bg-white p-5 shadow-2xl">
+                                <h3 class="text-lg font-black text-ink mb-2">Batalkan Pesanan?</h3>
+                                <p class="text-sm text-muted mb-4">Pesanan yang dibatalkan memerlukan persetujuan Admin. Berikan alasan pembatalan Anda:</p>
+                                
+                                <form action="{{ route('toko.orders.cancel', [$order->order_number, $order->success_token]) }}" method="POST">
+                                    @csrf
+                                    <textarea name="cancel_reason" required rows="3" placeholder="Contoh: Ingin ganti alamat / salah pesan barang..." class="w-full rounded-xl border border-line bg-surface/50 p-3 text-sm focus:border-primary outline-none mb-4"></textarea>
+                                    
+                                    <div class="flex gap-3">
+                                        <button type="button" onclick="document.getElementById('cancel-modal').classList.add('hidden')" class="flex-1 py-2.5 rounded-xl border border-line text-sm font-bold text-ink">Kembali</button>
+                                        <button type="submit" class="flex-1 py-2.5 rounded-xl bg-red-500 text-sm font-bold text-white shadow-lg shadow-red-500/30">Ya, Batalkan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+
                 @if($waPhone)
                     <div class="mt-5 pt-4 border-t border-line">
                         <p class="text-[11px] text-muted text-center mb-3">Punya kendala dengan pesanan ini?</p>
