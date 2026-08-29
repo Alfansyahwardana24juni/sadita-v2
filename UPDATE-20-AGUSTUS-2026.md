@@ -21,6 +21,7 @@ Berikut adalah rangkuman lengkap pembaruan sistem SADITA, meliputi penambahan fi
 
 ---
 
+
 ## 📊 2. Transformasi Admin Panel (Filament Dashboard)
 - **Lokalisasi Bahasa Indonesia:** Seluruh komponen tombol, tabel, dan peringatan di Admin Panel telah diterjemahkan secara paksa ke Bahasa Indonesia (`APP_LOCALE=id`) agar admin lebih mudah menggunakan sistem.
 - **Widget Dashboard Analytics:**

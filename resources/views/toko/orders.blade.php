@@ -1,14 +1,9 @@
 <x-layouts.toko title="Order Saya - SADITA Toko">
-    <section class="border-b border-line bg-white px-5 py-5 flex justify-between items-center gap-3">
+    <section class="border-b border-line bg-white px-5 py-5 flex items-center justify-between">
         <div>
-            <p class="text-xs font-bold uppercase tracking-[0.16em] text-moss">SADITA Toko</p>
-            <h1 class="mt-1 text-2xl font-black text-primary">Order Saya</h1>
-            <p class="mt-1 text-[11px] text-muted">Pesanan di perangkat ini.</p>
+            <h1 class="text-lg font-black text-primary">Pesanan Saya</h1>
+            <p class="text-xs text-muted mt-1">Status dan riwayat pesanan otomatis Anda</p>
         </div>
-        <a href="{{ route('toko.track-order') }}" class="shrink-0 flex flex-col items-center justify-center h-12 px-3 rounded-xl bg-surface border border-line text-primary hover:bg-primary/5 active:scale-95 transition-all">
-            <span class="material-symbols-outlined text-[20px]">search</span>
-            <span class="text-[9px] font-bold mt-0.5">Lacak Pesanan</span>
-        </a>
     </section>
 
     <section class="space-y-4 px-5 py-5 pb-24">

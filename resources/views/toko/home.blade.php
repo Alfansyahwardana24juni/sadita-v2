@@ -7,7 +7,7 @@
                 <h1 class="text-base font-black text-primary">Pilih Gudang</h1>
             </div>
             <div class="flex items-center gap-1">
-                <a href="{{ route('toko.track-order') }}" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary hover:bg-primary/5 transition-colors" aria-label="Riwayat Pesanan" title="Riwayat Pesanan">
+                <a href="{{ route('toko.orders') }}" class="flex h-10 w-10 items-center justify-center rounded-xl text-primary hover:bg-primary/5 transition-colors" aria-label="Riwayat Pesanan" title="Riwayat Pesanan">
                     <span class="material-symbols-outlined">receipt_long</span>
                 </a>
                 <a href="{{ route('cart.index') }}" class="relative flex h-10 w-10 items-center justify-center rounded-xl text-primary hover:bg-primary/5 transition-colors" aria-label="Keranjang">

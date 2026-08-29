@@ -5,8 +5,8 @@
                 <span class="material-symbols-outlined">arrow_back</span>
             </a>
             <div>
-                <h1 class="text-lg font-black text-primary">Lacak Pesanan Publik</h1>
-                <p class="text-xs text-muted">Pantau pesanan Anda tanpa perlu login</p>
+                <h1 class="text-lg font-black text-primary">Pencarian Pesanan</h1>
+                <p class="text-xs text-muted">Cari pesanan jika riwayat tidak muncul otomatis</p>
             </div>
         </div>
     </section>
