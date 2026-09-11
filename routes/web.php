@@ -37,6 +37,39 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::delete('/remove/{key}', [CartController::class, 'remove'])->name('remove');
 });
 
+// =========================================================
+// ROUTE RAHASIA UNTUK CPANEL (TANPA TERMINAL)
+// =========================================================
+// Cara pakai: buka di browser -> namadomain.com/sys-cmd/migrate/super-secret-key-123
+// Ganti 'super-secret-key-123' dengan password/token rahasia yang aman.
+Route::get('/sys-cmd/{command}/{token}', function ($command, $token) {
+    // GANTI TOKEN INI DENGAN PASSWORD RAHASIA ANDA SENDIRI!
+    $secretToken = 'sadita-rahasia-2026'; 
+
+    if ($token !== $secretToken) {
+        abort(403, 'Akses Ditolak. Token salah!');
+    }
+
+    $allowedCommands = [
+        'migrate' => 'migrate --force', // --force wajib untuk production
+        'optimize' => 'optimize:clear',
+        'storage-link' => 'storage:link',
+    ];
+
+    if (!array_key_exists($command, $allowedCommands)) {
+        return response('Perintah tidak dikenali atau tidak diizinkan.', 400);
+    }
+
+    try {
+        // Jalankan perintah artisan
+        \Illuminate\Support\Facades\Artisan::call($allowedCommands[$command]);
+        $output = \Illuminate\Support\Facades\Artisan::output();
+        
+        return response("<pre>Berhasil menjalankan: {$command}\n\nOutput:\n{$output}</pre>");
+    } catch (\Exception $e) {
+        return response("<pre>Gagal menjalankan: {$command}\n\nError:\n{$e->getMessage()}</pre>", 500);
+    }
+});
 // Checkout Routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
