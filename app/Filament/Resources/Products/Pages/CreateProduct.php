@@ -11,7 +11,7 @@ class CreateProduct extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $translatableFields = ['name', 'description', 'short_description', 'composition', 'indication', 'usage_instruction', 'dosage'];
+        $translatableFields = ['name', 'description', 'short_description', 'composition', 'pharmacology', 'indication', 'usage_instruction', 'dosage', 'storage_instruction'];
 
         foreach ($translatableFields as $field) {
             $data[$field] = [

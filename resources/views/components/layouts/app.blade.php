@@ -41,9 +41,11 @@
     <div id="offline-indicator" class="fixed left-1/2 top-3 z-[110] hidden w-[calc(100%-24px)] max-w-[488px] -translate-x-1/2 rounded-xl bg-amber px-4 py-2 text-center text-xs font-bold text-white shadow-lg">
         Anda sedang offline. Beberapa fitur mungkin tidak tersedia.
     </div>
-    <div id="global-toast" class="fixed left-1/2 top-14 z-[120] hidden w-[calc(100%-24px)] max-w-[488px] -translate-x-1/2 rounded-xl bg-ink px-4 py-3 text-sm font-semibold text-white opacity-0 transition-opacity duration-300 shadow-xl"></div>
+    @include('partials.toast')
 
     <div class="main-container-responsive bg-white">
+        <x-header />
+
         <main class="page-container">
             {{ $slot }}
         </main>
@@ -58,42 +60,18 @@
 
     <script>
         (() => {
-            const toast = document.getElementById('global-toast');
             const offlineIndicator = document.getElementById('offline-indicator');
-            let toastTimer = null;
-
-            window.saditaNotify = function(message, type = 'info') {
-                if (!toast || !message) return;
-                toast.textContent = message;
-                toast.className = 'fixed left-1/2 top-14 z-[120] w-[calc(100%-24px)] max-w-[488px] -translate-x-1/2 rounded-xl px-4 py-3 text-sm font-semibold text-white opacity-0 transition-opacity duration-300 shadow-xl';
-                toast.classList.add(type === 'error' ? 'bg-red-600' : (type === 'success' ? 'bg-moss' : 'bg-ink'));
-                toast.classList.remove('hidden');
-                requestAnimationFrame(() => toast.classList.add('opacity-100'));
-                if (toastTimer) clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => {
-                    toast.classList.remove('opacity-100');
-                    setTimeout(() => toast.classList.add('hidden'), 300);
-                }, 2200);
-            };
-
             function updateOfflineState() {
                 if (!offlineIndicator) return;
                 offlineIndicator.classList.toggle('hidden', navigator.onLine);
             }
-
             window.addEventListener('online', updateOfflineState);
             window.addEventListener('offline', updateOfflineState);
             updateOfflineState();
-
-            @if(session('success'))
-                window.saditaNotify(@json(session('success')), 'success');
-            @endif
-            @if(session('error'))
-                window.saditaNotify(@json(session('error')), 'error');
-            @endif
         })();
     </script>
     @livewireScripts
+    @include('partials.google-translate')
     @stack('scripts')
 </body>
 </html>

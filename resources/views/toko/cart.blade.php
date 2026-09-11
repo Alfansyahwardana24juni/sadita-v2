@@ -26,9 +26,17 @@
             </a>
         </div>
     @else
-        <section class="px-5 py-4 space-y-3">
+        <section class="px-5 py-2 flex items-center justify-between">
+            <label class="flex items-center gap-2 text-sm font-bold text-ink cursor-pointer">
+                <input type="checkbox" id="select-all" class="w-5 h-5 text-primary rounded border-line focus:ring-primary" checked onchange="toggleAll(this)">
+                Pilih Semua
+            </label>
+        </section>
+        <section class="px-5 pb-4 space-y-3">
             @foreach($items as $item)
-                <div class="flex gap-3 rounded-2xl border border-line bg-white p-3" id="cart-item-{{ $item['product_id'] }}">
+                @php($itemKey = $item['product_unit_id'])
+                <div class="flex gap-3 rounded-2xl border border-line bg-white p-3 items-center" id="cart-item-{{ $itemKey }}">
+                    <input type="checkbox" name="selected_items[]" value="{{ $itemKey }}" data-price="{{ $item['price'] }}" class="cart-item-checkbox w-5 h-5 text-primary rounded border-line focus:ring-primary shrink-0" checked onchange="updateTotalClientSide()">
                     @if($item['image'])
                         @php
                             $imageSrc = str_starts_with($item['image'], 'http')
@@ -46,18 +54,18 @@
                         <p class="mt-1 text-sm font-black text-primary">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
                         <div class="mt-2 flex items-center gap-3">
                             <div class="flex items-center gap-2 rounded-xl border border-line bg-surface px-2">
-                                <button onclick="updateQty({{ $item['product_id'] }}, {{ $item['quantity'] - 1 }})" class="flex h-7 w-7 items-center justify-center text-primary hover:bg-primary/10 rounded-lg active:scale-90 transition-all">
+                                <button onclick="updateQty({{ $itemKey }}, {{ $item['quantity'] - 1 }})" class="flex h-7 w-7 items-center justify-center text-primary hover:bg-primary/10 rounded-lg active:scale-90 transition-all">
                                     <span class="material-symbols-outlined text-[18px]">remove</span>
                                 </button>
-                                <span class="text-sm font-bold w-6 text-center" id="qty-{{ $item['product_id'] }}">{{ $item['quantity'] }}</span>
-                                <button onclick="updateQty({{ $item['product_id'] }}, {{ $item['quantity'] + 1 }})" class="flex h-7 w-7 items-center justify-center text-primary hover:bg-primary/10 rounded-lg active:scale-90 transition-all">
+                                <span class="text-sm font-bold w-6 text-center" id="qty-{{ $itemKey }}">{{ $item['quantity'] }}</span>
+                                <button onclick="updateQty({{ $itemKey }}, {{ $item['quantity'] + 1 }})" class="flex h-7 w-7 items-center justify-center text-primary hover:bg-primary/10 rounded-lg active:scale-90 transition-all">
                                     <span class="material-symbols-outlined text-[18px]">add</span>
                                 </button>
                             </div>
-                            <button onclick="removeItem({{ $item['product_id'] }})" class="text-xs text-red-500 font-semibold hover:text-red-700 active:scale-95 transition-all">Hapus</button>
+                            <button onclick="removeItem({{ $itemKey }})" class="text-xs text-red-500 font-semibold hover:text-red-700 active:scale-95 transition-all">Hapus</button>
                         </div>
                     </div>
-                    <p class="text-sm font-black text-ink shrink-0" id="subtotal-{{ $item['product_id'] }}">
+                    <p class="text-sm font-black text-ink shrink-0" id="subtotal-{{ $itemKey }}">
                         Rp {{ number_format($item['subtotal'], 0, ',', '.') }}
                     </p>
                 </div>
@@ -69,14 +77,47 @@
                 <span class="text-sm text-muted">Total</span>
                 <span class="text-lg font-black text-primary" id="total-price">Rp {{ number_format($subtotal, 0, ',', '.') }}</span>
             </div>
-            <a href="{{ route('checkout') }}" class="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-bold text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all">
+            <button onclick="processCheckout()" class="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-bold text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all">
                 <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
                 Proses Pesanan
-            </a>
+            </button>
         </section>
     @endif
 
     <script>
+        function toggleAll(source) {
+            const checkboxes = document.querySelectorAll('.cart-item-checkbox');
+            checkboxes.forEach(cb => cb.checked = source.checked);
+            updateTotalClientSide();
+        }
+
+        function updateTotalClientSide() {
+            let total = 0;
+            document.querySelectorAll('.cart-item-checkbox:checked').forEach(cb => {
+                const itemKey = cb.value;
+                const qtyText = document.getElementById('qty-' + itemKey).textContent;
+                const price = parseFloat(cb.getAttribute('data-price'));
+                total += price * parseInt(qtyText);
+            });
+            document.getElementById('total-price').textContent = 'Rp ' + total.toLocaleString('id-ID');
+            
+            const allCheckboxes = document.querySelectorAll('.cart-item-checkbox');
+            const checkedCheckboxes = document.querySelectorAll('.cart-item-checkbox:checked');
+            document.getElementById('select-all').checked = (allCheckboxes.length > 0 && allCheckboxes.length === checkedCheckboxes.length);
+        }
+
+        function processCheckout() {
+            const checked = Array.from(document.querySelectorAll('.cart-item-checkbox:checked')).map(cb => cb.value);
+            if (checked.length === 0) {
+                if (typeof Swal !== 'undefined') {
+                    Swal.fire('Pilih Produk', 'Silakan pilih minimal satu produk untuk di-checkout.', 'warning');
+                } else {
+                    alert('Silakan pilih minimal satu produk untuk di-checkout.');
+                }
+                return;
+            }
+            window.location.href = "{{ route('checkout') }}?items=" + checked.join(',');
+        }
         async function saditaFetchWithRetry(url, options, retries = 1) {
             try {
                 return await fetch(url, options);
@@ -100,14 +141,14 @@
                 if (qty <= 0) {
                     document.getElementById(`cart-item-${productId}`)?.remove();
                 } else {
-                    const item = data.items?.find(i => i.product_id == productId);
+                    const item = data.items?.find(i => i.product_unit_id == productId);
                     if (item) {
                         document.getElementById(`qty-${productId}`).textContent = item.quantity;
                         document.getElementById(`subtotal-${productId}`).textContent = 'Rp ' + Number(item.subtotal).toLocaleString('id-ID');
                     }
                 }
 
-                document.getElementById('total-price').textContent = 'Rp ' + Number(data.subtotal || 0).toLocaleString('id-ID');
+                updateTotalClientSide();
             } catch (err) {
                 if (typeof window.saditaNotify === 'function') {
                     window.saditaNotify(err.message || 'Koneksi bermasalah. Coba lagi.', 'error');
@@ -149,7 +190,7 @@
 
                 document.getElementById(`cart-item-${productId}`)?.remove();
                 if (typeof window.saditaNotify === 'function') {
-                    window.saditaNotify('Produk dihapus dari keranjang', 'success');
+                    window.saditaNotify('Produk dihapus dari keranjang', 'remove');
                 }
                 
                 setTimeout(() => location.reload(), 800);

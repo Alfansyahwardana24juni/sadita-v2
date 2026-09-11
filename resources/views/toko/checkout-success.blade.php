@@ -99,4 +99,14 @@
             Lihat Order
         </a>
     </div>
+
+    @push('scripts')
+        <script>
+            window.addEventListener('load', () => {
+                if (typeof window.saditaNotify === 'function') {
+                    window.saditaNotify('Pesanan berhasil dibuat!', 'checkout');
+                }
+            });
+        </script>
+    @endpush
 </x-layouts.toko>

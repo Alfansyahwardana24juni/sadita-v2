@@ -30,7 +30,7 @@ return [
     | da API Groq. Esse modelo será usado se nenhum for especificado na requisição.
     |
     */
-    'model' => env('GROQ_MODEL', 'llama-3.1-8b-instant'),
+    'model' => env('GROQ_MODEL', 'openai/gpt-oss-20b'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ return [
     'api_base' => env('GROQ_API_BASE', 'https://api.groq.com/openai/v1'),
 
     'options' => [
-        'model' => env('GROQ_MODEL', 'llama-3.1-8b-instant'), // Modelo LLM padrão
+        'model' => env('GROQ_MODEL', 'openai/gpt-oss-20b'), // Modelo LLM padrão
         'max_tokens' => env('GROQ_MAX_TOKENS', 150), // Número máximo de tokens
         'stop_sequence' => env('GROQ_STOP_SEQUENCE', null), // Sequência de parada
         'temperature' => env('GROQ_TEMPERATURE', 0.7), // Controle de aleatoriedade

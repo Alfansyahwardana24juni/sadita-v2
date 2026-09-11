@@ -12,8 +12,12 @@ class ProductStockForm
     {
         return $schema
             ->components([
-                Select::make('product_id')
-                    ->relationship('product', 'name')
+                Select::make('product_unit_id')
+                    ->label('Produk / Unit')
+                    ->relationship('productUnit', 'name')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => trim(($record->product?->name ? $record->product->name . ' — ' : '') . $record->name))
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 Select::make('warehouse_id')
                     ->relationship('warehouse', 'name')

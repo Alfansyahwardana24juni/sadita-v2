@@ -31,10 +31,10 @@ Route::get('/toko/produk/{product:slug}', [ProductController::class, 'show'])->n
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::get('/count', [CartController::class, 'count'])->name('count');
-    Route::post('/add/{product}', [CartController::class, 'add'])->name('add');
-    Route::post('/add-by-slug/{product:slug}', [CartController::class, 'add'])->name('add.slug');
-    Route::patch('/update/{productId}', [CartController::class, 'update'])->name('update');
-    Route::delete('/remove/{productId}', [CartController::class, 'remove'])->name('remove');
+    Route::post('/add/{productUnit}', [CartController::class, 'add'])->name('add');
+    Route::post('/add-by-slug/{productUnit:slug}', [CartController::class, 'add'])->name('add.slug');
+    Route::patch('/update/{key}', [CartController::class, 'update'])->name('update');
+    Route::delete('/remove/{key}', [CartController::class, 'remove'])->name('remove');
 });
 
 // Checkout Routes

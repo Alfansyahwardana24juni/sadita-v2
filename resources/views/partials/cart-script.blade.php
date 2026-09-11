@@ -34,7 +34,7 @@
         .then(data => {
             saditaUpdateCartCount();
             if (typeof window.saditaNotify === 'function') {
-                window.saditaNotify(data.message || 'Ditambahkan ke keranjang', 'success');
+                window.saditaNotify(data.message || 'Ditambahkan ke keranjang', 'cart');
                 return data;
             }
             const toast = document.getElementById('cart-toast');

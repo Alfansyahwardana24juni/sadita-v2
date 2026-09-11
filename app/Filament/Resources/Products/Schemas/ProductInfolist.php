@@ -52,10 +52,10 @@ class ProductInfolist
                 ImageEntry::make('image')
                     ->placeholder('-')
                     ->columnSpanFull(),
-                TextEntry::make('rating')
-                    ->numeric(),
-                TextEntry::make('reviews_count')
-                    ->numeric(),
+                TextEntry::make('brochure_image')
+                    ->label('URL Brosur')
+                    ->placeholder('-')
+                    ->columnSpanFull(),
                 TextEntry::make('sold_count')
                     ->numeric(),
                 TextEntry::make('status'),

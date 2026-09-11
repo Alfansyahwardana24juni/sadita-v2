@@ -17,11 +17,6 @@
             </button>
         </form>
 
-        <a href="{{ route('toko.katalog') }}"
-            class="mt-4 inline-flex h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-bold text-white">
-            <span class="material-symbols-outlined text-[18px]">grid_view</span>
-            Lihat Semua Produk di Toko
-        </a>
     </section>
 
     @if(!empty($search) && isset($products))
@@ -42,12 +37,12 @@
                 @foreach($products as $product)
                     <a href="{{ route('produk.detail', ['category' => $product->category, 'product' => $product]) }}" class="overflow-hidden rounded-2xl border border-line bg-white shadow-sm">
                         <div class="aspect-square bg-surface">
-                            <img src="{{ str_starts_with($product->image, 'http') ? $product->image : Storage::url($product->image) }}" alt="{{ $product->name }}" class="h-full w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F8FAFC/94A3B8?text=?';" loading="lazy">
+                            <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="h-full w-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F8FAFC/94A3B8?text=?';" loading="lazy">
                         </div>
                         <div class="p-3">
                             <h3 class="line-clamp-2 text-sm font-bold leading-5 text-ink">{{ $product->name }}</h3>
-                            <p class="mt-1 text-xs font-semibold text-muted">{{ $product->pack }}</p>
-                            <p class="mt-2 text-sm font-black text-primary">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                            <p class="mt-1 text-xs font-semibold text-muted">{{ $product->units->count() }} pilihan unit</p>
+                            <p class="mt-2 text-sm font-black text-primary">Mulai dari Rp {{ number_format($product->price_from, 0, ',', '.') }}</p>
                         </div>
                     </a>
                 @endforeach
@@ -63,7 +58,7 @@
     @else
     <section class="px-5 py-8">
         <h2 class="mb-5 text-lg font-black text-primary">Kategori Produk</h2>
-        <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
             @foreach($categories as $category)
                 @php
                     $slug = strtolower((string) $category->slug);
@@ -71,31 +66,29 @@
                         str_contains($slug, 'antibiotik') => 'medication',
                         str_contains($slug, 'vitamin') => 'nutrition',
                         str_contains($slug, 'coccidia') => 'vaccines',
-                        str_contains($slug, 'antiparasit') => 'bug_report',
+                        str_contains($slug, 'parasit') => 'bug_report',
                         str_contains($slug, 'disinfektan') => 'cleaning_services',
                         str_contains($slug, 'premix') => 'science',
+                        str_contains($slug, 'akuatik') => 'water_drop',
+                        str_contains($slug, 'pmk') => 'health_and_safety',
                         default => 'inventory_2',
                     };
                 @endphp
-                <a href="{{ route('produk.category', $category) }}" class="group block rounded-2xl border border-line bg-white p-4 shadow-sm active:scale-[0.99]">
-                    <div class="flex items-start gap-4">
-                        @if($category->image)
-                            <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-transparent">
-                                <img src="{{ str_starts_with($category->image, 'http') ? $category->image : Storage::url($category->image) }}" class="h-full w-full object-cover" alt="{{ $category->name }}" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F1F5F9/94A3B8?text=?';" loading="lazy" />
-                            </div>
+                <a href="{{ route('produk.category', $category) }}" class="group flex flex-col rounded-2xl border border-line bg-white p-4 shadow-sm transition-transform active:scale-[0.98]">
+                    <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm">
+                        @if($category->image_url)
+                            <img src="{{ $category->image_url }}" class="h-12 w-12 object-contain" alt="{{ $category->name }}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/100x100/F1F5F9/94A3B8?text=?';" />
                         @else
-                            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                                <span class="material-symbols-outlined text-[28px]">{{ $icon }}</span>
-                            </div>
+                            <span class="material-symbols-outlined text-[30px] text-primary">{{ $icon }}</span>
                         @endif
-                        <div class="min-w-0 flex-1">
-                            <h3 class="text-base font-black text-primary">{{ $category->name }}</h3>
-                            <p class="mt-1 text-sm leading-5 text-muted">{{ $category->description }}</p>
-                            <div class="mt-3 flex items-center gap-1 text-xs font-bold text-moss">
-                                <span class="material-symbols-outlined text-[16px]">check_circle</span>
-                                {{ number_format($category->active_products_count ?? 0, 0, ',', '.') }} produk tersedia
-                            </div>
-                        </div>
+                    </div>
+                    <h3 class="mt-3 text-sm font-black text-primary">{{ $category->name }}</h3>
+                    @if($category->description)
+                        <p class="mt-1 line-clamp-2 text-xs leading-5 text-muted">{{ $category->description }}</p>
+                    @endif
+                    <div class="mt-3 flex items-center gap-1 text-[11px] font-bold text-moss">
+                        <span class="material-symbols-outlined text-[15px]">check_circle</span>
+                        {{ number_format($category->active_products_count ?? 0, 0, ',', '.') }} produk
                     </div>
                 </a>
             @endforeach

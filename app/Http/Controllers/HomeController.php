@@ -19,14 +19,7 @@ class HomeController extends Controller
             'categories' => Category::query()
                 ->where('is_active', true)
                 ->orderBy('sort_order')
-                ->take(6)
-                ->get(),
-            'featuredProducts' => Product::query()
-                ->with(['category', 'stocks'])
-                ->where('status', 'active')
-                ->where('is_featured', true)
-                ->orderBy('sort_order')
-                ->take(4)
+                ->take(8)
                 ->get(),
             'activeProductCount' => Product::query()
                 ->where('status', 'active')
@@ -34,7 +27,7 @@ class HomeController extends Controller
             'latestArticles' => Article::published()
                 ->with('category')
                 ->orderByDesc('published_at')
-                ->take(2)
+                ->take(6)
                 ->get(),
         ]);
     }

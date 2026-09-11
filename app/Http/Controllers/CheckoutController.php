@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\ProductStock;
+use App\Models\ProductUnit;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\Village;
@@ -94,7 +94,7 @@ class CheckoutController extends Controller
         }
 
         try {
-            $cartItems = $this->cartItemsFromProducts();
+            $cartItems = $this->cartItemsFromUnits();
             $successToken = Str::random(40);
             $subtotal = (int) $cartItems->sum('subtotal');
             $regency = Regency::query()
@@ -122,17 +122,17 @@ class CheckoutController extends Controller
             $shippingLabel = $this->shippingLabel($shippingMethod);
 
             $order = DB::transaction(function () use ($request, $warehouse, $cartItems, $successToken, $shippingCost, $shippingLabel, $shippingMethod, $subtotal, $regency, $village) {
-                $productIds = $cartItems->pluck('product_id')->all();
+                $unitIds = $cartItems->pluck('product_unit_id')->all();
 
                 $stocks = ProductStock::query()
                     ->where('warehouse_id', $warehouse->id)
-                    ->whereIn('product_id', $productIds)
+                    ->whereIn('product_unit_id', $unitIds)
                     ->lockForUpdate()
                     ->get()
-                    ->keyBy('product_id');
+                    ->keyBy('product_unit_id');
 
                 foreach ($cartItems as $item) {
-                    $stock = $stocks->get($item['product_id']);
+                    $stock = $stocks->get($item['product_unit_id']);
 
                     if (! $stock) {
                         throw new \RuntimeException("Stok produk {$item['name']} tidak tersedia di gudang terpilih.");
@@ -187,13 +187,15 @@ class CheckoutController extends Controller
                 foreach ($cartItems as $item) {
                     $order->items()->create([
                         'product_id' => $item['product_id'],
+                        'product_unit_id' => $item['product_unit_id'],
                         'product_name' => $item['name'],
+                        'product_sku' => $item['sku'] ?? null,
                         'quantity' => $item['quantity'],
                         'price' => $item['price'],
                         'subtotal' => $item['subtotal'],
                     ]);
 
-                    $stock = $stocks->get($item['product_id']);
+                    $stock = $stocks->get($item['product_unit_id']);
                     $stock->increment('reserved_stock', (int) $item['quantity']);
                 }
 
@@ -231,7 +233,8 @@ class CheckoutController extends Controller
             'checkout_last_order_id' => $order->id,
             'recent_order_ids' => $recentOrderIds,
         ]);
-        $this->cart->clear();
+        // USER REQUEST: Jangan clear cart meskipun sudah checkout (sifatnya tersimpan sampai dihapus)
+        // $this->cart->clear();
 
         return redirect()->route('checkout.success', [
             'orderNumber' => $order->order_number,
@@ -280,40 +283,38 @@ class CheckoutController extends Controller
         ]);
     }
 
-    private function cartItemsFromProducts()
+    private function cartItemsFromUnits()
     {
         $sessionItems = $this->cart->items()->values();
         $quantities = $sessionItems
-            ->mapWithKeys(fn (array $item) => [(int) $item['product_id'] => max(1, (int) $item['quantity'])]);
+            ->mapWithKeys(fn (array $item) => [(int) $item['product_unit_id'] => max(1, (int) $item['quantity'])]);
 
-        $products = Product::query()
+        $units = ProductUnit::query()
+            ->with('product')
             ->whereIn('id', $quantities->keys()->all())
-            ->where('status', 'active')
+            ->where('is_active', true)
+            ->whereHas('product', fn ($query) => $query->where('status', 'active'))
             ->get()
             ->keyBy('id');
 
-        if ($products->count() !== $quantities->count()) {
+        if ($units->count() !== $quantities->count()) {
             throw new \RuntimeException('Sebagian produk di keranjang sudah tidak tersedia. Perbarui keranjang Anda.');
         }
 
-        return $products
-            ->map(function (Product $product) use ($quantities) {
-                $quantity = (int) $quantities->get($product->id);
-                $price = (int) $product->price;
-
-                $actualWeight = (int) ($product->weight ?? 500);
-                $volumetricWeight = ($product->length > 0 && $product->width > 0 && $product->height > 0) 
-                    ? (int) round(($product->length * $product->width * $product->height) / 6)
-                    : 0;
-                $chargeableWeight = max($actualWeight, $volumetricWeight);
+        return $units
+            ->map(function (ProductUnit $unit) use ($quantities) {
+                $quantity = (int) $quantities->get($unit->id);
+                $price = (int) $unit->price;
 
                 return [
-                    'product_id' => $product->id,
-                    'name' => $product->name,
+                    'product_id' => $unit->product_id,
+                    'product_unit_id' => $unit->id,
+                    'sku' => $unit->sku,
+                    'name' => $unit->fullName(),
                     'quantity' => $quantity,
                     'price' => $price,
                     'subtotal' => $price * $quantity,
-                    'unit_weight' => $chargeableWeight,
+                    'unit_weight' => $unit->chargeableWeight(),
                 ];
             })
             ->values();

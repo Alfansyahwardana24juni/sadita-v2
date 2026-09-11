@@ -13,6 +13,8 @@ class ProductStockInfolist
             ->components([
                 TextEntry::make('product.name')
                     ->label('Product'),
+                TextEntry::make('productUnit.name')
+                    ->label('Unit'),
                 TextEntry::make('warehouse.name')
                     ->label('Warehouse'),
                 TextEntry::make('stock')

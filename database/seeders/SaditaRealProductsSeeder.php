@@ -149,7 +149,7 @@ class SaditaRealProductsSeeder extends Seeder
                 'stocks' => [250, 150],
             ],
             [
-                'category' => 'Sanitasi',
+                'category' => 'Disinfektan',
                 'name' => 'Formades Spray',
                 'slug' => 'formades-spray',
                 'pack' => 'Jerigen 5 Liter',
@@ -163,7 +163,7 @@ class SaditaRealProductsSeeder extends Seeder
                 'stocks' => [150, 80],
             ],
             [
-                'category' => 'Sanitasi',
+                'category' => 'Disinfektan',
                 'name' => 'Virkon S',
                 'slug' => 'virkon-s',
                 'pack' => 'Ember 1 Kg',
@@ -177,7 +177,7 @@ class SaditaRealProductsSeeder extends Seeder
                 'stocks' => [50, 20],
             ],
             [
-                'category' => 'Pernapasan',
+                'category' => 'Antibiotik',
                 'name' => 'Tilmicosin Injection',
                 'slug' => 'tilmicosin-injection',
                 'pack' => 'Vial 100 ml',
@@ -207,8 +207,6 @@ class SaditaRealProductsSeeder extends Seeder
                     'symptom_tags' => $prod['symptom_tags'],
                     'price' => $prod['price'],
                     'image' => $prod['image'],
-                    'rating' => 4.8,
-                    'reviews_count' => rand(10, 150),
                     'sold_count' => rand(50, 1000),
                     'status' => 'active',
                     'is_featured' => true,
@@ -216,11 +214,23 @@ class SaditaRealProductsSeeder extends Seeder
                 ]
             );
 
+            $unit = \App\Models\ProductUnit::updateOrCreate(
+                ['slug' => $prod['slug']],
+                [
+                    'product_id' => $product->id,
+                    'name' => $prod['pack'],
+                    'price' => $prod['price'],
+                    'is_default' => true,
+                    'is_active' => true,
+                    'sort_order' => 0,
+                ]
+            );
+
             foreach ($warehouses as $warehouseIndex => $warehouse) {
                 $stockVal = $prod['stocks'][$warehouseIndex] ?? 0;
                 ProductStock::updateOrCreate(
-                    ['product_id' => $product->id, 'warehouse_id' => $warehouse->id],
-                    ['stock' => $stockVal, 'reserved_stock' => 0]
+                    ['product_unit_id' => $unit->id, 'warehouse_id' => $warehouse->id],
+                    ['product_id' => $product->id, 'stock' => $stockVal, 'reserved_stock' => 0]
                 );
             }
         }

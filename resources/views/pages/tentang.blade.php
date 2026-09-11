@@ -14,8 +14,8 @@
         <p class="mt-3 text-sm leading-6 text-muted">
             PT Satwa Medika Utama adalah perusahaan yang bergerak di industry Obat Hewan. PT Satwa Medika Utama atau yang juga dikenal dengan Scafha berfokus pada produksi dan juga distributor Obat Hewan. PT Satwa Medika Utama menawarkan berbagai macam produk untuk spesies unggas, numinasia, dan akuatik.</p>
         <div class="mt-5 flex flex-col sm:flex-row gap-3">
-            <a href="{{ route('toko.home') }}" class="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition-all hover:bg-primary/90">
-                Kunjungi Toko
+            <a href="{{ route('produk') }}" class="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition-all hover:bg-primary/90">
+                Lihat Produk
             </a>
             <a href="https://wa.me/6281234567890" class="inline-flex items-center justify-center rounded-xl border border-line bg-surface px-4 py-2.5 text-sm font-bold text-primary transition-all hover:bg-slate-50">
                 Hubungi Kami
@@ -26,30 +26,7 @@
     <!-- 3. Statistik Perusahaan -->
     <section class="mt-8 px-5">
         <h2 class="text-xl font-black text-primary">Statistik Kami</h2>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-            <div class="flex flex-col items-center justify-center rounded-2xl border border-line bg-white p-5 text-center shadow-sm">
-                <span class="material-symbols-outlined text-4xl text-moss">work_history</span>
-                <p class="mt-3 text-2xl font-black text-primary">10+</p>
-                <p class="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted">Tahun Pengalaman</p>
-            </div>
-            <div class="flex flex-col items-center justify-center rounded-2xl border border-line bg-white p-5 text-center shadow-sm">
-                <span class="material-symbols-outlined text-4xl text-moss">inventory_2</span>
-                <p class="mt-3 text-2xl font-black text-primary">200+</p>
-                <p class="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted">200+ Berbagai Produk Untuk Unggas, Hewan Besar, & Satwa Akuatik</p>
-            </div>
-            <div class="flex flex-col items-center justify-center rounded-2xl border border-line bg-white p-5 text-center shadow-sm">
-                <span class="material-symbols-outlined text-4xl text-moss">handshake</span>
-                <p class="mt-3 text-2xl font-black text-primary">500+</p>
-                <p class="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted">500+ Mitra & Klien Tersebar diseluruh Indonesia
-
-</p>
-            </div>
-            <div class="flex flex-col items-center justify-center rounded-2xl border border-line bg-white p-5 text-center shadow-sm">
-                <span class="material-symbols-outlined text-4xl text-moss">factory</span>
-                <p class="mt-3 text-2xl font-black text-primary">100</p>
-                <p class="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted">Ton Produksi/Bulan</p>
-            </div>
-        </div>
+        <x-about-stats class="mt-4" />
     </section>
 
     <!-- 4. Video Perusahaan -->
@@ -82,14 +59,6 @@
                 <p class="text-xs font-bold uppercase tracking-wide text-moss">2014</p>
                 <h3 class="mt-1 text-sm font-black text-ink">Registrasi Produk</h3>
                 <p class="mt-1 text-[12px] text-muted">Melakukan registrasi produk secara resmi sesuai regulasi pemerintah.</p>
-            </div>
-            <div class="relative">
-                <span class="absolute -left-[35px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-white border-2 border-primary">
-                    <span class="h-2 w-2 rounded-full bg-primary"></span>
-                </span>
-                <p class="text-xs font-bold uppercase tracking-wide text-moss">2015</p>
-                <h3 class="mt-1 text-sm font-black text-ink">Pabrik Berdiri</h3>
-                <p class="mt-1 text-[12px] text-muted">Pembangunan fasilitas produksi mandiri untuk meningkatkan kapasitas pasokan.</p>
             </div>
             <div class="relative">
                 <span class="absolute -left-[35px] top-0 flex h-6 w-6 items-center justify-center rounded-full bg-white border-2 border-primary">
@@ -232,10 +201,6 @@
                 <a href="{{ route('produk') }}" class="flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-bold text-primary transition-all hover:bg-slate-50">
                     <span class="material-symbols-outlined text-[18px]">inventory_2</span>
                     Lihat Produk
-                </a>
-                <a href="{{ route('toko.home') }}" class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#600000] px-4 py-3 text-sm font-bold text-white transition-all hover:bg-[#500000]">
-                    <span class="material-symbols-outlined text-[18px]">storefront</span>
-                    Kunjungi Toko
                 </a>
                 <a href="{{ route('saditacare') }}" class="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-transparent px-4 py-3 text-sm font-bold text-white transition-all hover:bg-white/10">
                     <span class="material-symbols-outlined text-[18px]">support_agent</span>

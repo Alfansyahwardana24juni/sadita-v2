@@ -10,8 +10,18 @@ class ProductStock extends Model
 {
     use HasFactory;
 
+    protected static function booted(): void
+    {
+        static::saving(function (ProductStock $stock) {
+            if ($stock->product_unit_id && ! $stock->product_id) {
+                $stock->product_id = ProductUnit::whereKey($stock->product_unit_id)->value('product_id');
+            }
+        });
+    }
+
     protected $fillable = [
         'product_id',
+        'product_unit_id',
         'warehouse_id',
         'stock',
         'reserved_stock',
@@ -30,6 +40,11 @@ class ProductStock extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function productUnit(): BelongsTo
+    {
+        return $this->belongsTo(ProductUnit::class);
     }
 
     public function warehouse(): BelongsTo

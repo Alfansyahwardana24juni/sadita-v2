@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\DisplaySetting;
 use App\Models\Product;
+use App\Models\ProductUnit;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,19 @@ class ProductController extends Controller
         $categories = Category::query()->where('is_active', true)->orderBy('sort_order')->get();
         $sort = $request->string('sort')->toString() ?: 'popular';
 
+        $unitPriceSubquery = ProductUnit::query()
+            ->select('price')
+            ->whereColumn('product_units.product_id', 'products.id')
+            ->where('is_active', true)
+            ->orderBy('price')
+            ->limit(1);
+
         $productsQuery = Product::query()
-            ->with(['category', 'stocks' => fn ($query) => $query->where('warehouse_id', $warehouse?->id)])
+            ->with([
+                'category',
+                'units',
+                'stocks' => fn ($query) => $query->where('warehouse_id', $warehouse?->id),
+            ])
             ->where('status', 'active')
             ->when($request->filled('category'), function ($query) use ($request) {
                 $query->whereHas('category', fn ($categoryQuery) => $categoryQuery->where('slug', $request->string('category')));
@@ -32,9 +44,9 @@ class ProductController extends Controller
                         ->orWhereRaw('LOWER(indication) LIKE ?', [$keyword]);
                 });
             })
-            ->when($sort === 'price-low', fn ($query) => $query->orderBy('price'))
-            ->when($sort === 'price-high', fn ($query) => $query->orderByDesc('price'))
-            ->when($sort === 'popular', fn ($query) => $query->orderByDesc('reviews_count'))
+            ->when($sort === 'price-low', fn ($query) => $query->orderBy($unitPriceSubquery))
+            ->when($sort === 'price-high', fn ($query) => $query->orderByDesc($unitPriceSubquery))
+            ->when($sort === 'popular', fn ($query) => $query->orderByDesc('sold_count'))
             ->when(! in_array($sort, ['price-low', 'price-high', 'popular', 'stock-high'], true), fn ($query) => $query->orderBy('sort_order'));
 
         if ($sort === 'stock-high') {
@@ -68,14 +80,14 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['category', 'reviews', 'stocks.warehouse']);
+        $product->load(['category', 'units.stocks.warehouse', 'stocks.warehouse']);
 
         $relatedProducts = Product::query()
-            ->with('category')
+            ->with(['category', 'units'])
             ->where('status', 'active')
             ->where('id', '!=', $product->id)
             ->where('category_id', $product->category_id)
-            ->orderByDesc('reviews_count')
+            ->orderByDesc('sold_count')
             ->take(4)
             ->get();
 

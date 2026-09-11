@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\ProductUnit;
 use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -14,17 +14,24 @@ class CartController extends Controller
 
     public function __construct(private CartService $cart) {}
 
-    public function add(Request $request, Product $product): JsonResponse|RedirectResponse
+    public function add(Request $request, ProductUnit $productUnit): JsonResponse|RedirectResponse
     {
         $quantity = (int) $request->input('quantity', 1);
         $quantity = min(self::MAX_QTY, max(1, $quantity));
 
+        if (! $productUnit->is_active) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Unit produk tidak tersedia'], 422);
+            }
+            return back()->with('error', 'Unit produk tidak tersedia');
+        }
+
         $warehouseId = session('warehouse_id');
         if ($warehouseId) {
-            $stock = \App\Models\ProductStock::where('product_id', $product->id)
+            $stock = \App\Models\ProductStock::where('product_unit_id', $productUnit->id)
                 ->where('warehouse_id', $warehouseId)
                 ->first();
-                
+
             $available = $stock ? max(0, (int) $stock->stock - (int) $stock->reserved_stock) : 0;
             if ($available < $quantity) {
                 if ($request->expectsJson()) {
@@ -34,7 +41,7 @@ class CartController extends Controller
             }
         }
 
-        $this->cart->add($product, $quantity);
+        $this->cart->add($productUnit, $quantity);
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -46,13 +53,13 @@ class CartController extends Controller
         return back()->with('success', 'Produk ditambahkan ke keranjang');
     }
 
-    public function update(Request $request, int $productId): JsonResponse
+    public function update(Request $request, int $key): JsonResponse
     {
         $quantity = (int) $request->input('quantity', 1);
         if ($quantity > 0) {
             $quantity = min(self::MAX_QTY, $quantity);
         }
-        $this->cart->update($productId, $quantity);
+        $this->cart->update($key, $quantity);
 
         return response()->json([
             'count' => $this->cart->count(),
@@ -62,9 +69,9 @@ class CartController extends Controller
         ]);
     }
 
-    public function remove(int $productId): JsonResponse
+    public function remove(int $key): JsonResponse
     {
-        $this->cart->remove($productId);
+        $this->cart->remove($key);
 
         return response()->json([
             'count' => $this->cart->count(),

@@ -38,12 +38,9 @@ class ProductsTable
                 TextColumn::make('compare_at_price')
                     ->money()
                     ->sortable(),
-                TextColumn::make('rating')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('reviews_count')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('units_count')
+                    ->counts('units')
+                    ->label('Units'),
                 TextColumn::make('sold_count')
                     ->numeric()
                     ->sortable(),

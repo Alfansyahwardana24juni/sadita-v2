@@ -31,6 +31,13 @@ class CategoryForm
                 TextInput::make('slug')
                     ->required(),
                 FileUpload::make('image')
+                    ->label('Ikon Kategori (kecil)')
+                    ->image()
+                    ->directory('categories')
+                    ->disk('public')
+                    ->columnSpanFull(),
+                FileUpload::make('banner_image')
+                    ->label('Foto Banner (halaman detail kategori)')
                     ->image()
                     ->directory('categories')
                     ->disk('public')

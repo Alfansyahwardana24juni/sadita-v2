@@ -11,7 +11,7 @@ class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
-        $translatableFields = ['name', 'description', 'short_description', 'composition', 'indication', 'usage_instruction', 'dosage'];
+        $translatableFields = ['name', 'description', 'short_description', 'composition', 'pharmacology', 'indication', 'usage_instruction', 'dosage', 'storage_instruction'];
 
         foreach ($translatableFields as $field) {
             $data[$field . '_id'] = $this->record->getTranslation($field, 'id', false);
@@ -23,7 +23,7 @@ class EditProduct extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        $translatableFields = ['name', 'description', 'short_description', 'composition', 'indication', 'usage_instruction', 'dosage'];
+        $translatableFields = ['name', 'description', 'short_description', 'composition', 'pharmacology', 'indication', 'usage_instruction', 'dosage', 'storage_instruction'];
 
         foreach ($translatableFields as $field) {
             $data[$field] = [

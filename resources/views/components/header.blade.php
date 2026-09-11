@@ -16,20 +16,7 @@
         {{-- Right Menu --}}
         <div class="flex items-center gap-3">
 
-            <div class="flex items-center gap-2">
-                <a
-                    href="{{ route('locale.switch', 'id') }}"
-                    class="{{ app()->getLocale() == 'id' ? 'rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold text-white' : 'text-[11px] font-semibold text-slate-700 hover:text-primary' }}"
-                >
-                    ID
-                </a>
-                <a
-                    href="{{ route('locale.switch', 'en') }}"
-                    class="{{ app()->getLocale() == 'en' ? 'rounded-full bg-primary px-2.5 py-1 text-[11px] font-bold text-white' : 'text-[11px] font-semibold text-slate-700 hover:text-primary' }}"
-                >
-                    EN
-                </a>
-            </div>
+            <x-language-switcher />
 
            {{-- Toko / Gudang --}}
 <a
@@ -79,7 +66,7 @@
                     $menus = [
                         ['label' => __('Beranda'), 'icon' => 'home', 'route' => 'home'],
                         ['label' => __('Tentang'), 'icon' => 'apartment', 'route' => 'tentang'],
-                        ['label' => __('Produk'), 'icon' => 'inventory_2', 'route' => 'toko.katalog'],
+                        ['label' => __('Produk'), 'icon' => 'inventory_2', 'route' => 'produk'],
                         ['label' => __('Artikel'), 'icon' => 'article', 'route' => 'artikel'],
                         ['label' => __('AI Konsultasi'), 'icon' => 'forum', 'route' => 'saditacare'],
                         ['label' => __('Gudang'), 'icon' => 'warehouse', 'route' => 'toko.home'],

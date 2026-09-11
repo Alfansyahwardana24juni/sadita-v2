@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Product;
+use App\Models\ProductUnit;
 use Illuminate\Support\Collection;
 
 class CartService
@@ -11,31 +11,30 @@ class CartService
 
     public function items(): Collection
     {
-        return collect(session(self::SESSION_KEY, []));
+        // Abaikan entri lama (pra unit/SKU) yang tidak punya product_unit_id.
+        return collect(session(self::SESSION_KEY, []))
+            ->filter(fn ($item) => ! empty($item['product_unit_id']));
     }
 
-    public function add(Product $product, int $quantity = 1): void
+    public function add(ProductUnit $unit, int $quantity = 1): void
     {
         $cart = session(self::SESSION_KEY, []);
-        $id = $product->id;
+        $id = $unit->id;
 
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += $quantity;
         } else {
-            $actualWeight = (int) ($product->weight ?? 500);
-            $volumetricWeight = ($product->length > 0 && $product->width > 0 && $product->height > 0) 
-                ? (int) round(($product->length * $product->width * $product->height) / 6)
-                : 0;
-            $chargeableWeight = max($actualWeight, $volumetricWeight);
+            $unit->loadMissing('product');
 
             $cart[$id] = [
-                'product_id' => $product->id,
-                'name' => $product->name,
-                'slug' => $product->slug,
-                'price' => $product->price,
-                'image' => $product->image,
+                'product_unit_id' => $unit->id,
+                'product_id' => $unit->product_id,
+                'name' => $unit->fullName(),
+                'slug' => $unit->slug,
+                'price' => (int) $unit->price,
+                'image' => $unit->product?->image,
                 'quantity' => $quantity,
-                'unit_weight' => $chargeableWeight,
+                'unit_weight' => $unit->chargeableWeight(),
             ];
         }
 
@@ -43,25 +42,25 @@ class CartService
         session([self::SESSION_KEY => $cart]);
     }
 
-    public function update(int $productId, int $quantity): void
+    public function update(int $key, int $quantity): void
     {
         $cart = session(self::SESSION_KEY, []);
 
-        if (isset($cart[$productId])) {
+        if (isset($cart[$key])) {
             if ($quantity <= 0) {
-                $this->remove($productId);
+                $this->remove($key);
                 return;
             }
-            $cart[$productId]['quantity'] = $quantity;
-            $cart[$productId]['subtotal'] = $cart[$productId]['price'] * $quantity;
+            $cart[$key]['quantity'] = $quantity;
+            $cart[$key]['subtotal'] = $cart[$key]['price'] * $quantity;
             session([self::SESSION_KEY => $cart]);
         }
     }
 
-    public function remove(int $productId): void
+    public function remove(int $key): void
     {
         $cart = session(self::SESSION_KEY, []);
-        unset($cart[$productId]);
+        unset($cart[$key]);
         session([self::SESSION_KEY => $cart]);
     }
 

@@ -63,3 +63,39 @@
         scrollbar-width: none;
     }
 }
+
+/* Google Website Translator: sembunyikan seluruh UI bawaan Google.
+   Kombinasi <select.goog-te-combo> tetap ada di DOM sehingga pemilih bahasa
+   kustom tetap bisa memicu terjemahan lewat event "change". */
+#google_translate_element,
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-combo,
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-menu-frame,
+.goog-te-menu-value,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+iframe.skiptranslate,
+.skiptranslate > iframe {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+    position: static !important;
+    min-height: 100% !important;
+}
+
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Ikon Material Symbols memakai teks-ligatur — jangan diterjemahkan. */
+.material-symbols-outlined {
+    speak: never;
+}

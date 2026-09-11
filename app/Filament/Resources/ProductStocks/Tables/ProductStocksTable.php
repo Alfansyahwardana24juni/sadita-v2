@@ -16,6 +16,10 @@ class ProductStocksTable
         return $table
             ->columns([
                 TextColumn::make('product.name')
+                    ->label('Produk')
+                    ->searchable(),
+                TextColumn::make('productUnit.name')
+                    ->label('Unit')
                     ->searchable(),
                 TextColumn::make('warehouse.name')
                     ->searchable(),

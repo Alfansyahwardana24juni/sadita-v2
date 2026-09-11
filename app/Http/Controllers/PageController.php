@@ -36,7 +36,7 @@ class PageController extends Controller
             $keyword = '%' . mb_strtolower($search) . '%';
             $products = Product::query()
                 ->where('status', 'active')
-                ->with('category')
+                ->with(['category', 'units'])
                 ->where(function ($query) use ($keyword) {
                     $query->whereRaw('LOWER(name) LIKE ?', [$keyword])
                         ->orWhereRaw('LOWER(short_description) LIKE ?', [$keyword])
@@ -55,7 +55,7 @@ class PageController extends Controller
     public function produkKategori(Category $category): View
     {
         $products = Product::query()
-            ->with('category')
+            ->with(['category', 'units'])
             ->where('status', 'active')
             ->where('category_id', $category->id)
             ->orderByDesc('is_featured')
@@ -72,15 +72,15 @@ class PageController extends Controller
     {
         abort_if($product->category_id !== $category->id, 404);
 
-        $product->load(['category', 'reviews', 'stocks']);
+        $product->load(['category', 'units', 'stocks']);
 
         $relatedProducts = Product::query()
-            ->with('category')
+            ->with(['category', 'units'])
             ->where('status', 'active')
             ->where('category_id', $category->id)
             ->where('id', '!=', $product->id)
             ->orderByDesc('is_featured')
-            ->orderByDesc('reviews_count')
+            ->orderByDesc('sold_count')
             ->take(4)
             ->get();
 

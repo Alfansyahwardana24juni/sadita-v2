@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory, HasTranslations;
 
-    public $translatable = ['name', 'description', 'short_description', 'composition', 'indication', 'usage_instruction', 'dosage'];
+    public $translatable = ['name', 'description', 'short_description', 'composition', 'pharmacology', 'indication', 'usage_instruction', 'dosage', 'storage_instruction'];
 
     protected $fillable = [
         'category_id',
@@ -22,9 +22,11 @@ class Product extends Model
         'description',
         'short_description',
         'composition',
+        'pharmacology',
         'indication',
         'usage_instruction',
         'dosage',
+        'storage_instruction',
         'withdrawal_time',
         'registration_number',
         'pack',
@@ -37,12 +39,13 @@ class Product extends Model
         'width',
         'height',
         'image',
-        'rating',
-        'reviews_count',
+        'brochure_image',
+        'brochures',
         'sold_count',
         'status',
         'is_featured',
         'sort_order',
+        'extra_specifications',
     ];
 
     protected function casts(): array
@@ -50,10 +53,10 @@ class Product extends Model
         return [
             'price' => 'integer',
             'compare_at_price' => 'integer',
-            'rating' => 'decimal:1',
-            'reviews_count' => 'integer',
             'sold_count' => 'integer',
             'is_featured' => 'boolean',
+            'extra_specifications' => 'array',
+            'brochures' => 'array',
         ];
     }
 
@@ -67,9 +70,51 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function reviews(): HasMany
+    public function units(): HasMany
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(ProductUnit::class);
+    }
+
+    /**
+     * Unit aktif, terurut (dipakai untuk tampilan & harga "mulai dari").
+     */
+    public function activeUnits()
+    {
+        return $this->units
+            ->where('is_active', true)
+            ->sortBy([['sort_order', 'asc'], ['price', 'asc']])
+            ->values();
+    }
+
+    public function getDefaultUnitAttribute(): ?ProductUnit
+    {
+        return $this->units->firstWhere('is_default', true)
+            ?? $this->activeUnits()->first()
+            ?? $this->units->first();
+    }
+
+    /**
+     * Harga terendah dari unit aktif; fallback ke kolom price produk.
+     */
+    public function getPriceFromAttribute(): int
+    {
+        $min = $this->activeUnits()->min('price');
+
+        return (int) ($min ?? $this->price);
+    }
+
+    /**
+     * @return array{min:int,max:int}
+     */
+    public function priceRange(): array
+    {
+        $units = $this->activeUnits();
+
+        if ($units->isEmpty()) {
+            return ['min' => (int) $this->price, 'max' => (int) $this->price];
+        }
+
+        return ['min' => (int) $units->min('price'), 'max' => (int) $units->max('price')];
     }
 
     public function getImageUrlAttribute(): string
@@ -83,6 +128,19 @@ class Product extends Model
         }
 
         return \Illuminate\Support\Facades\Storage::url($this->image);
+    }
+
+    public function getBrochureUrlAttribute(): ?string
+    {
+        if (! $this->brochure_image) {
+            return null;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($this->brochure_image, ['http://', 'https://'])) {
+            return $this->brochure_image;
+        }
+
+        return \Illuminate\Support\Facades\Storage::url($this->brochure_image);
     }
 
     public function stocks(): HasMany

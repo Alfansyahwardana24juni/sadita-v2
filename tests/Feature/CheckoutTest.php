@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Product;
 use App\Models\ProductStock;
+use App\Models\ProductUnit;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\District;
@@ -33,9 +34,20 @@ class CheckoutTest extends TestCase
             'weight' => 500,
         ]);
 
+        $unit = ProductUnit::create([
+            'product_id' => $product->id,
+            'name' => 'Produk A 100 g',
+            'slug' => 'produk-a-100-g',
+            'price' => 100000,
+            'weight' => 500,
+            'is_default' => true,
+            'is_active' => true,
+        ]);
+
         ProductStock::factory()->create([
             'warehouse_id' => $warehouse->id,
             'product_id' => $product->id,
+            'product_unit_id' => $unit->id,
             'stock' => 100,
             'reserved_stock' => 0,
         ]);
@@ -47,12 +59,15 @@ class CheckoutTest extends TestCase
 
         // 2. Add to Cart (using CartService implicitly via endpoint if possible, but let's just use session)
         $this->withSession([
-            'cart.items' => [
-                $product->id => [
+            'sadita_cart' => [
+                $unit->id => [
+                    'product_unit_id' => $unit->id,
                     'product_id' => $product->id,
-                    'name' => $product->name,
-                    'price' => $product->price,
+                    'name' => $product->name . ' — ' . $unit->name,
+                    'slug' => $unit->slug,
+                    'price' => $unit->price,
                     'quantity' => 2,
+                    'unit_weight' => 500,
                     'subtotal' => 200000,
                 ]
             ],
@@ -92,13 +107,14 @@ class CheckoutTest extends TestCase
 
         $this->assertDatabaseHas('order_items', [
             'product_id' => $product->id,
+            'product_unit_id' => $unit->id,
             'quantity' => 2,
             'price' => 100000,
             'subtotal' => 200000,
         ]);
 
         $this->assertDatabaseHas('product_stocks', [
-            'product_id' => $product->id,
+            'product_unit_id' => $unit->id,
             'warehouse_id' => $warehouse->id,
             'reserved_stock' => 2, // Check if stock is reserved
         ]);
