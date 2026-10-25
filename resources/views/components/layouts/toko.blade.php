@@ -60,6 +60,7 @@
             updateOfflineState();
         })();
     </script>
+    @include('partials.variant-modal')
     @include('partials.cart-script')
     @stack('scripts')
     @livewireScripts

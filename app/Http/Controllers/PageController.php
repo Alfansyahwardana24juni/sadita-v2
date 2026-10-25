@@ -89,6 +89,7 @@ class PageController extends Controller
             'product' => $product,
             'relatedProducts' => $relatedProducts,
             'stock' => $product->stocks->sum('stock'),
+            'displaySetting' => DisplaySetting::active(),
         ]);
     }
 

@@ -1,5 +1,12 @@
 {{-- Widget Google Website Translator (tersembunyi) + helper pemilih bahasa. --}}
-<div id="google_translate_element" aria-hidden="true" class="notranslate"></div>
+<style>
+    .skiptranslate > iframe.skiptranslate { display: none !important; visibility: hidden !important; }
+    body { top: 0 !important; }
+    #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+    .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
+    #google_translate_element { display: none !important; }
+</style>
+<div id="google_translate_element" aria-hidden="true" class="notranslate" style="display: none;"></div>
 
 <script>
 (function () {

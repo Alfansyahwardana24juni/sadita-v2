@@ -25,7 +25,7 @@
                 <div class="hero-slide-content absolute bottom-10 left-6 right-6 transition-all duration-700 ease-out {{ $loop->first ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none' }}"
                     data-index="{{ $loop->index }}">
                     @if($slide->subtitle)
-                        <p class="mb-3 w-fit rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] line-clamp-2 backdrop-blur-sm">
+                        <p class="mb-3 w-fit rounded-2xl border border-white/25 bg-white/10 px-4 py-2 text-[11px] md:text-xs font-bold uppercase tracking-widest leading-relaxed backdrop-blur-sm">
                             {{ $slide->subtitle }}
                         </p>
                     @endif

@@ -112,8 +112,11 @@
                             <span class="material-symbols-outlined text-[18px]">forum</span>
                             SaditaCare
                         </a>
-                        <a href="{{ route('chat') }}"
-                            class="flex h-11 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-bold text-white">
+                        @php
+                            $waChatUrl = \App\Models\DisplaySetting::active()->whatsapp_chat_url;
+                        @endphp
+                        <a href="{{ $waChatUrl }}" target="_blank" rel="noopener noreferrer"
+                            class="flex h-11 items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 text-sm font-bold text-white shadow-sm hover:bg-[#22c55e] transition-all">
                             <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
                             Chat Kami
                         </a>

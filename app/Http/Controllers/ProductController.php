@@ -27,7 +27,8 @@ class ProductController extends Controller
         $productsQuery = Product::query()
             ->with([
                 'category',
-                'units',
+                'units' => fn ($query) => $query->where('is_active', true)->orderBy('sort_order'),
+                'units.stocks' => fn ($query) => $query->where('warehouse_id', $warehouse?->id),
                 'stocks' => fn ($query) => $query->where('warehouse_id', $warehouse?->id),
             ])
             ->where('status', 'active')
@@ -95,6 +96,7 @@ class ProductController extends Controller
             'product' => $product,
             'warehouse' => $this->selectedWarehouse(),
             'relatedProducts' => $relatedProducts,
+            'displaySetting' => DisplaySetting::active(),
         ]);
     }
 

@@ -108,4 +108,17 @@ class ProductUnit extends Model
 
         return max($actualWeight, $volumetricWeight);
     }
+
+    /**
+     * Stok yang tersedia untuk unit ini (berdasarkan gudang jika ada).
+     */
+    public function availableStock(?int $warehouseId = null): int
+    {
+        $warehouseId = $warehouseId ?? session('warehouse_id');
+        if ($warehouseId) {
+            $row = $this->stocks->firstWhere('warehouse_id', $warehouseId);
+            return $row ? max(0, (int) $row->stock - (int) $row->reserved_stock) : 0;
+        }
+        return (int) $this->stocks->sum(fn ($s) => max(0, (int) $s->stock - (int) $s->reserved_stock));
+    }
 }

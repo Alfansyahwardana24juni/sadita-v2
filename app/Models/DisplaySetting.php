@@ -33,6 +33,8 @@ class DisplaySetting extends Model
         'store_home_info_description',
         'store_katalog_title',
         'store_katalog_subtitle',
+        'store_whatsapp_number',
+        'store_whatsapp_message',
         'about_company_title',
         'about_company_description',
         'about_vision',
@@ -44,8 +46,60 @@ class DisplaySetting extends Model
     {
         return static::query()->firstOrCreate(
             ['id' => 1],
-            ['name' => 'Default']
+            [
+                'name' => 'Default',
+                'store_whatsapp_number' => '6285161018507',
+                'store_whatsapp_message' => 'Halo admin, saya ingin konsultasi',
+            ]
         );
+    }
+
+    public function getWhatsappNumberAttribute(): string
+    {
+        $num = preg_replace('/\D/', '', $this->store_whatsapp_number ?? '');
+
+        if (empty($num)) {
+            return '6285161018507';
+        }
+
+        if (str_starts_with($num, '0')) {
+            $num = '62' . substr($num, 1);
+        }
+
+        return $num;
+    }
+
+    public function getWhatsappMessageAttribute(): string
+    {
+        return $this->store_whatsapp_message ?: 'Halo admin, saya ingin konsultasi';
+    }
+
+    public function getWhatsappChatUrlAttribute(): string
+    {
+        return 'https://wa.me/' . $this->whatsapp_number . '?text=' . rawurlencode($this->whatsapp_message);
+    }
+
+    /**
+     * Generate a WhatsApp URL with pre-filled message.
+     *
+     * @param  string|null  $productName  Product name to include in the message.
+     */
+    public function whatsappUrl(?string $productName = null): string
+    {
+        $number = $this->whatsapp_number;
+        $baseMessage = $this->whatsapp_message;
+
+        if ($productName) {
+            if (str_contains($baseMessage, '{product}')) {
+                $message = str_replace('{product}', $productName, $baseMessage);
+            } else {
+                $message = $baseMessage . ' mengenai produk ' . $productName;
+            }
+        } else {
+            $message = $baseMessage;
+        }
+
+        return 'https://wa.me/' . $number . '?text=' . rawurlencode($message);
     }
 }
 

@@ -6,7 +6,7 @@
                 <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-muted">Toko SADITA</p>
                 <h1 class="text-base font-black text-primary">Pilih Gudang</h1>
             </div>
-            <a href="{{ route('checkout') }}" class="relative flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Keranjang">
+            <a href="{{ route('cart.index') }}" class="relative flex h-10 w-10 items-center justify-center rounded-xl text-primary" aria-label="Keranjang">
                 <span class="material-symbols-outlined">shopping_cart</span>
                 <span data-cart-count class="absolute right-1 top-1 rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold text-white">0</span>
             </a>

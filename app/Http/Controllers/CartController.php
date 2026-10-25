@@ -80,6 +80,13 @@ class CartController extends Controller
         ]);
     }
 
+    public function count(): JsonResponse
+    {
+        return response()->json([
+            'count' => $this->cart->count(),
+        ]);
+    }
+
     public function index(CartService $cart)
     {
         return view('toko.cart', [
@@ -89,8 +96,18 @@ class CartController extends Controller
         ]);
     }
 
-    public function count(CartService $cart): JsonResponse
+    public function sync(Request $request): JsonResponse
     {
-        return response()->json(['count' => $cart->count()]);
+        $items = $request->input('items', []);
+        if (is_array($items) && ! empty($items)) {
+            $this->cart->syncFromClient($items);
+        }
+
+        return response()->json([
+            'count' => $this->cart->count(),
+            'subtotal' => $this->cart->subtotal(),
+            'totalWeight' => $this->cart->totalWeight(),
+            'items' => $this->cart->items()->values(),
+        ]);
     }
 }

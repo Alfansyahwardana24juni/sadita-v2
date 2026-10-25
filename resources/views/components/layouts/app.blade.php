@@ -71,6 +71,8 @@
         })();
     </script>
     @livewireScripts
+    @include('partials.variant-modal')
+    @include('partials.cart-script')
     @include('partials.google-translate')
     @stack('scripts')
 </body>

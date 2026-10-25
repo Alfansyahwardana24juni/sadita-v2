@@ -1,3 +1,10 @@
+@php
+    $displaySetting = \App\Models\DisplaySetting::active();
+    $waNumber = $displaySetting->whatsapp_number ?? '6285161018507';
+    $waText = urlencode($displaySetting->whatsapp_message ?? 'Halo admin, saya ingin konsultasi');
+    $waUrl = "https://wa.me/{$waNumber}?text={$waText}";
+@endphp
+
 <nav class="relative z-50 flex h-[72px] w-full items-center justify-between rounded-t-3xl bg-white px-2 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] border-t border-slate-100">
     
     <div class="flex flex-1 items-center justify-around">
@@ -25,9 +32,9 @@
             <span class="material-symbols-outlined text-[26px] {{ request()->routeIs('artikel*') ? 'text-[#800000]' : 'text-slate-400 group-hover:text-slate-600' }}" @if(request()->routeIs('artikel*')) style="font-variation-settings:'FILL' 1" @endif>article</span>
             <span class="text-[10px] font-semibold {{ request()->routeIs('artikel*') ? 'text-[#800000]' : 'text-slate-400 group-hover:text-slate-600' }}">{{ __('Artikel') }}</span>
         </a>
-        <a href="{{ route('chat') }}" class="group flex flex-col items-center gap-1 p-2 transition-colors active:scale-95">
-            <span class="material-symbols-outlined text-[26px] {{ request()->routeIs('chat') ? 'text-[#800000]' : 'text-slate-400 group-hover:text-slate-600' }}" @if(request()->routeIs('chat')) style="font-variation-settings:'FILL' 1" @endif>chat_bubble</span>
-            <span class="text-[10px] font-semibold {{ request()->routeIs('chat') ? 'text-[#800000]' : 'text-slate-400 group-hover:text-slate-600' }}">{{ __('Chat') }}</span>
+        <a href="{{ $waUrl }}" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-1 p-2 transition-colors active:scale-95">
+            <span class="material-symbols-outlined text-[26px] text-slate-400 group-hover:text-[#25D366]">chat_bubble</span>
+            <span class="text-[10px] font-semibold text-slate-400 group-hover:text-[#25D366]">{{ __('Chat') }}</span>
         </a>
     </div>
 </nav>

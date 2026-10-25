@@ -57,6 +57,39 @@ class CartService
         }
     }
 
+    public function syncFromClient(array $clientItems): void
+    {
+        $cart = session(self::SESSION_KEY, []);
+
+        foreach ($clientItems as $cItem) {
+            $unitId = (int) ($cItem['product_unit_id'] ?? $cItem['id'] ?? 0);
+            $qty = max(1, min(20, (int) ($cItem['quantity'] ?? 1)));
+
+            if ($unitId <= 0) {
+                continue;
+            }
+
+            if (! isset($cart[$unitId])) {
+                $unit = ProductUnit::with('product')->find($unitId);
+                if ($unit && $unit->is_active && $unit->product?->status === 'active') {
+                    $cart[$unitId] = [
+                        'product_unit_id' => $unit->id,
+                        'product_id' => $unit->product_id,
+                        'name' => $unit->fullName(),
+                        'slug' => $unit->slug,
+                        'price' => (int) $unit->price,
+                        'image' => $unit->product?->image,
+                        'quantity' => $qty,
+                        'unit_weight' => $unit->chargeableWeight(),
+                        'subtotal' => (int) $unit->price * $qty,
+                    ];
+                }
+            }
+        }
+
+        session([self::SESSION_KEY => $cart]);
+    }
+
     public function remove(int $key): void
     {
         $cart = session(self::SESSION_KEY, []);

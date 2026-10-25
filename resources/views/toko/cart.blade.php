@@ -34,15 +34,15 @@
         </section>
         <section class="px-5 pb-4 space-y-3">
             @foreach($items as $item)
-                @php($itemKey = $item['product_unit_id'])
+                @php
+                    $itemKey = $item['product_unit_id'];
+                    $imageSrc = !empty($item['image'])
+                        ? (str_starts_with($item['image'], 'http') ? $item['image'] : Storage::url($item['image']))
+                        : null;
+                @endphp
                 <div class="flex gap-3 rounded-2xl border border-line bg-white p-3 items-center" id="cart-item-{{ $itemKey }}">
                     <input type="checkbox" name="selected_items[]" value="{{ $itemKey }}" data-price="{{ $item['price'] }}" class="cart-item-checkbox w-5 h-5 text-primary rounded border-line focus:ring-primary shrink-0" checked onchange="updateTotalClientSide()">
-                    @if($item['image'])
-                        @php
-                            $imageSrc = str_starts_with($item['image'], 'http')
-                                ? $item['image']
-                                : Storage::url($item['image']);
-                        @endphp
+                    @if($imageSrc)
                         <img src="{{ $imageSrc }}" alt="{{ $item['name'] }}" class="h-16 w-16 rounded-xl object-cover shrink-0 bg-surface" onerror="this.onerror=null;this.src='https://placehold.co/400x400/F1F5F9/94A3B8?text=No+Image';" />
                     @else
                         <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-surface">
@@ -148,6 +148,13 @@
                     }
                 }
 
+                if (Array.isArray(data.items) && typeof window.saditaSaveLocalCart === 'function') {
+                    window.saditaSaveLocalCart(data.items);
+                }
+                if (typeof data.count === 'number' && typeof window.saditaUpdateCartCount === 'function') {
+                    window.saditaUpdateCartCount(data.count);
+                }
+
                 updateTotalClientSide();
             } catch (err) {
                 if (typeof window.saditaNotify === 'function') {
@@ -189,6 +196,13 @@
                 if (!res.ok) throw new Error(data.message || 'Gagal menghapus produk dari keranjang.');
 
                 document.getElementById(`cart-item-${productId}`)?.remove();
+                if (typeof window.saditaGetLocalCart === 'function' && typeof window.saditaSaveLocalCart === 'function') {
+                    const local = window.saditaGetLocalCart().filter(i => (i.product_unit_id != productId && i.id != productId));
+                    window.saditaSaveLocalCart(local);
+                }
+                if (typeof data.count === 'number' && typeof window.saditaUpdateCartCount === 'function') {
+                    window.saditaUpdateCartCount(data.count);
+                }
                 if (typeof window.saditaNotify === 'function') {
                     window.saditaNotify('Produk dihapus dari keranjang', 'remove');
                 }

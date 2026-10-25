@@ -28,7 +28,7 @@ class CheckoutController extends Controller
         private ApiCoIdService $apiCoId
     ) {}
 
-    public function index(): View|RedirectResponse
+    public function index(Request $request): View|RedirectResponse
     {
         if ($this->cart->isEmpty()) {
             return redirect()->route('toko.katalog')->with('error', 'Keranjang belanja kosong');
@@ -45,12 +45,32 @@ class CheckoutController extends Controller
             return redirect()->route('toko.home')->with('error', 'Silakan pilih gudang terlebih dahulu sebelum checkout.');
         }
 
+        $selectedItemIds = $request->filled('items')
+            ? array_filter(array_map('intval', explode(',', $request->query('items'))))
+            : session('checkout_selected_items', []);
+
+        if (! empty($selectedItemIds)) {
+            session(['checkout_selected_items' => $selectedItemIds]);
+        }
+
+        $items = $this->cart->items();
+        if (! empty($selectedItemIds)) {
+            $items = $items->filter(fn ($item) => in_array((int) $item['product_unit_id'], $selectedItemIds, true));
+        }
+
+        if ($items->isEmpty()) {
+            return redirect()->route('cart.index')->with('error', 'Silakan pilih produk yang ingin dicheckout.');
+        }
+
+        $subtotal = (int) $items->sum('subtotal');
+        $totalWeight = (int) $items->sum(fn ($item) => ($item['unit_weight'] ?? 500) * $item['quantity']);
+
         $provinces = Province::query()->orderBy('name')->get(['id', 'name']);
 
         return view('toko.checkout', [
-            'items' => $this->cart->items(),
-            'subtotal' => $this->cart->subtotal(),
-            'totalWeight' => $this->cart->totalWeight(),
+            'items' => $items,
+            'subtotal' => $subtotal,
+            'totalWeight' => $totalWeight,
             'warehouse' => $warehouse,
             'provinces' => $provinces,
             'cities' => collect(),
@@ -286,6 +306,11 @@ class CheckoutController extends Controller
     private function cartItemsFromUnits()
     {
         $sessionItems = $this->cart->items()->values();
+        $selectedItemIds = session('checkout_selected_items', []);
+        if (! empty($selectedItemIds)) {
+            $sessionItems = $sessionItems->filter(fn ($item) => in_array((int) $item['product_unit_id'], $selectedItemIds, true))->values();
+        }
+
         $quantities = $sessionItems
             ->mapWithKeys(fn (array $item) => [(int) $item['product_unit_id'] => max(1, (int) $item['quantity'])]);
 

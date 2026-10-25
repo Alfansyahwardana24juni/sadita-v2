@@ -23,7 +23,7 @@ Route::get('/saditacare', [PageController::class, 'saditacare'])->name('saditaca
 
 // Toko Routes
 Route::get('/toko', [StoreController::class, 'index'])->name('toko.home');
-Route::post('/toko/select-warehouse/{warehouse:slug}', [StoreController::class, 'select'])->name('toko.select-warehouse');
+Route::match(['get', 'post'], '/toko/select-warehouse/{warehouse:slug}', [StoreController::class, 'select'])->name('toko.select-warehouse');
 Route::get('/toko/katalog', [ProductController::class, 'index'])->name('toko.katalog');
 Route::get('/toko/produk/{product:slug}', [ProductController::class, 'show'])->name('toko.produk.show');
 
@@ -31,6 +31,7 @@ Route::get('/toko/produk/{product:slug}', [ProductController::class, 'show'])->n
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::get('/count', [CartController::class, 'count'])->name('count');
+    Route::post('/sync', [CartController::class, 'sync'])->name('sync');
     Route::post('/add/{productUnit}', [CartController::class, 'add'])->name('add');
     Route::post('/add-by-slug/{productUnit:slug}', [CartController::class, 'add'])->name('add.slug');
     Route::patch('/update/{key}', [CartController::class, 'update'])->name('update');

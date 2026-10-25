@@ -1,21 +1,42 @@
 @props(['product'])
 
 @php
-    $stock = $product->stocks->first()?->stock ?? $product->stocks->sum('stock');
+    $activeUnits = $product->activeUnits();
+    $hasMultipleUnits = $activeUnits->count() > 1;
     $defaultUnit = $product->default_unit;
-    $priceFrom = $product->price_from;
+    $stock = $defaultUnit ? $defaultUnit->availableStock() : ($product->stocks->first()?->stock ?? $product->stocks->sum('stock'));
+    $totalStock = $activeUnits->isNotEmpty() ? $activeUnits->sum(fn($u) => $u->availableStock()) : $stock;
     $range = $product->priceRange();
     $hasRange = $range['min'] !== $range['max'];
-    $productPayload = $defaultUnit ? json_encode([
+
+    $singlePayload = $defaultUnit ? json_encode([
         'id' => $defaultUnit->slug,
-        'name' => $product->name,
+        'product_unit_id' => $defaultUnit->id,
+        'name' => $defaultUnit->fullName(),
         'category' => $product->category->name,
         'pack' => $defaultUnit->name,
         'price' => $defaultUnit->price,
         'stock' => $stock,
-        'image' => $product->image,
+        'image' => $product->image_url,
         'href' => route('toko.produk.show', $product),
     ], JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_TAG | JSON_HEX_QUOT) : null;
+
+    $variantsPayload = json_encode([
+        'id' => $product->slug,
+        'name' => $product->name,
+        'category' => $product->category->name,
+        'image' => $product->image_url,
+        'href' => route('toko.produk.show', $product),
+        'units' => $activeUnits->map(fn($u) => [
+            'id' => $u->slug,
+            'unit_id' => $u->id,
+            'name' => $u->name,
+            'full_name' => $u->fullName(),
+            'price' => (int) $u->price,
+            'compare_at_price' => $u->compare_at_price ? (int) $u->compare_at_price : null,
+            'stock' => $u->availableStock(),
+        ])->values()->all(),
+    ], JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_TAG | JSON_HEX_QUOT);
 @endphp
 
 <article class="flex flex-col overflow-hidden rounded-xl border border-line/50 bg-white shadow-sm transition-transform active:scale-[0.98]">
@@ -34,7 +55,7 @@
 
             <div class="mt-1 flex flex-wrap items-baseline gap-x-1">
                 <p class="text-sm font-extrabold text-primary">
-                    @if($hasRange)Mulai @endif Rp{{ number_format($priceFrom, 0, ',', '.') }}
+                    Rp{{ number_format($range['min'], 0, ',', '.') }}@if($hasRange) - Rp{{ number_format($range['max'], 0, ',', '.') }}@endif
                 </p>
             </div>
 
@@ -46,9 +67,18 @@
         </a>
 
         <div class="mt-2.5">
-            @if($defaultUnit && $stock > 0)
+            @if($hasMultipleUnits && $totalStock > 0)
+                <button type="button" class="flex h-7 w-full items-center justify-center gap-1 rounded border border-primary text-[10px] font-bold text-primary transition-all hover:bg-primary/5 active:scale-95"
+                    data-open-variant-modal='{{ $variantsPayload }}'>
+                    + Keranjang
+                </button>
+            @elseif($hasMultipleUnits)
+                <button type="button" disabled class="flex h-7 w-full items-center justify-center gap-1 rounded bg-surface text-[10px] font-bold text-muted cursor-not-allowed">
+                    Habis
+                </button>
+            @elseif($defaultUnit && $stock > 0)
                 <button type="button" class="add-cart flex h-7 w-full items-center justify-center gap-1 rounded border border-primary text-[10px] font-bold text-primary transition-all hover:bg-primary/5 active:scale-95"
-                    data-product='{{ $productPayload }}'>
+                    data-product='{{ $singlePayload }}'>
                     + Keranjang
                 </button>
             @elseif($defaultUnit)
